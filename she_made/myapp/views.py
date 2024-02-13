@@ -29,6 +29,9 @@ def contact(request):
 def cart(request):
     return render(request, 'cart.html')
 
+def dummy(request):
+    return render(request, 'dummy.html')
+
 
 class ShopView(ListView):
     model = ProductItem
