@@ -12,6 +12,7 @@ import decimal
 from django.views.generic.list import ListView
 from products.serializers import ProductItemSerializer
 from fuzzywuzzy import fuzz 
+from django.db.models import F
 from rest_framework.pagination import PageNumberPagination
 from django.views.generic import TemplateView
 
@@ -20,10 +21,13 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 def blogs(request):
-    return render(request, 'blogs.html')
+    return render(request, '/templates/blogs.html')
 
 def contact(request):
     return render(request, 'contact_us.html')
+
+def cart(request):
+    return render(request, 'cart.html')
 
 
 class ShopView(ListView):
@@ -38,6 +42,7 @@ class ShopView(ListView):
         sub_category = request.GET.get('filter.p.sub_category')
         min_price = request.GET.get('filter.p.min_price')
         max_price = request.GET.get('filter.p.max_price')
+        sort_by = self.request.GET.get('sort_by')
 
         if category:
             queryset = queryset.filter(category=category)
@@ -49,6 +54,10 @@ class ShopView(ListView):
         if max_price:
             max_price = decimal.Decimal(max_price)
             queryset = queryset.filter(price__lte=max_price)
+        if sort_by == 'low_to_high':
+            queryset = queryset.order_by('price')
+        elif sort_by == 'high_to_low':
+            queryset = queryset.order_by(F('price').desc())
 
         return render(request, self.template_name, {'products': queryset})
 

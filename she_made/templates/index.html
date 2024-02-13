@@ -2,6 +2,21 @@
 {% block content %}
 {% load static%}
 
+<style>
+    .headline {
+    color: white;
+    background-color: rgb(209, 120, 120);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.headline h2 {
+    text-align: center;
+
+}
+</style>
+
 
 <link rel="stylesheet" href="/static/css/home.css">
 <link rel="stylesheet" href="/static/css/home_section.css">
@@ -28,10 +43,10 @@
             <h3 class="product_cat">FRAGRANCES</h3>
             <div class="popup-card-overlay" id="popup-card-overlay"></div>
 
-            <div class="row ">
-                    <div class="product_slider slider" >
+            <div class="row " >
+                    <div class="product_slider slider"  >
                         {% for product in fragrances %}
-                        <div class="slider_box" >
+                        <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}">
                             <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                                 <div class="product__images">
                                     {% for image in product.images.all %}
@@ -72,7 +87,7 @@
             <div class="row ">
                 <div class="product_slider slider" >
                     {% for product in body_bath %}
-                    <div class="slider_box" >
+                    <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
                         <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                             <div class="product__images">
                                 {% for image in product.images.all %}
@@ -113,7 +128,7 @@
         <div class="row ">
             <div class="product_slider slider" >
                 {% for product in skin %}
-                <div class="slider_box" >
+                <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
                     <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                         <div class="product__images">
                             {% for image in product.images.all %}
@@ -149,17 +164,76 @@
         </div>
 
             <div class="popup-card" id="popup-card">
-                <div class="popup-card-content">
-                    <!-- Quick view details go here -->
-                    <h2>Quick View</h2>
-                    <p>{{ product.description}}</p>
-                    <p>Price: ₹ {{ product.price}}</p>
-                    <button class="close-popup-btn">Close</button>
-                </div>
-            </div>
+    <div class="popup-card-content">
+        <!-- Quick view details go here -->
+        <h2 id="popup-product-title"></h2>
+        <p id="popup-product-price"></p>
+        <p id="popup-product-description"></p>
+        <p id="popup-product-content"></p>
+        <p id="popup-product-stock"></p>
+        <p id="popup-product-life"></p>
+        <p id="popup-product-ingredients"></p>
+        <p id="popup-product-direction"></p>
+        <button class="close-popup-btn">Close</button>
+    </div>
+</div>
 
 </section>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const quickViewBtns = document.querySelectorAll(".quick-view-btn");
+    const popupCardOverlay = document.querySelector("#popup-card-overlay");
+    const popupCard = document.querySelector(".popup-card");
+
+    function openPopup(productData) {
+        const popupCardContent = popupCard.querySelector(".popup-card-content");
+        popupCardContent.innerHTML = `
+            <h2>${productData.title}</h2>
+            <p>Price: ₹ ${productData.price}</p>
+            <p>Description: ${productData.description}</p>
+            <p>Content: ${productData.content}</p>
+            <p>Stock: ${productData.stock}</p>
+            <p>Life: ${productData.life}</p>
+            <p>Ingredients: ${productData.ingredients}</p>
+            <p>Direction: ${productData.direction}</p>
+            <button class="close-popup-btn">Close</button>
+        `;
+
+        popupCardOverlay.style.display = "block";
+        popupCard.style.display = "block";
+
+        // Add event listener to the dynamically created close button
+        const closePopupBtn = popupCard.querySelector(".close-popup-btn");
+        closePopupBtn.addEventListener("click", closePopup);
+    }
+
+    function closePopup() {
+        popupCardOverlay.style.display = "none";
+        popupCard.style.display = "none";
+    }
+
+    quickViewBtns.forEach((button) => {
+        button.addEventListener("click", function(e) {
+            e.preventDefault(); // Prevent default behavior of the link
+            const container = this.closest(".slider_box");
+            const productData = {
+                title: container.dataset.title,
+                price: container.dataset.price,
+                description: container.dataset.description,
+                content: container.dataset.content,
+                stock: container.dataset.stock,
+                life: container.dataset.life,
+                ingredients: container.dataset.ingredients,
+                direction: container.dataset.direction
+            };
+            openPopup(productData);
+        });
+    });
+});
+
+
+</script>
 
 <script src="/static/js/popup.js"></script>
 

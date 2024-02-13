@@ -16,7 +16,58 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
+    <style>
+        body {
+            background-color:#f2f5ff ;
+        }
+        
+
+nav {
     
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e1f0da;
+    height: 70px;
+    margin-top: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navbar-header {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 30px;
+}
+
+.navbar-header a {
+    text-decoration: none;
+    color: #1c1c1c;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-family: 'Roboto',Arial, sans-serif;
+    font-weight: 500;
+    font-style: bold;
+}
+
+.navbar-header i {
+    font-size: 20px;
+
+}
+
+.footer_column li, a {
+    text-decoration: none;
+}
+
+    </style>
     
 </head>
 <body>
@@ -38,7 +89,7 @@
                 <a href="{% url 'about_us' %}">ABOUT US</a>
             </div>
         </div>
-        <div class="navbar-header logo" >SHE  MADE</div>
+        <div class="navbar-header logo" ><a href="{% url 'index' %}" style="font-size: 22px;">SHE  MADE</a></div>
         <div class="navbar-header">
             <div>
                 <a href="{% url 'search' %}"><i class="fa-light fa-magnifying-glass"></i></a>
@@ -50,7 +101,14 @@
                 <i class="fa-light fa-heart"></i>
             </div>
             <div>
-                <a href="{% url 'view_cart' %}"><i class="fa-light fa-bag-shopping"></i></a>
+                <a href="{% url 'view_cart' %}" style="position: relative;"><small id="cart-length" style="position: absolute;
+                    top: -10px;
+                    right: 10px;
+                    background-color: red;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 3px 6px;
+                    font-size: 12px;">{{ request.session.cart|length }}</small><i class="fa-light fa-bag-shopping"></i></a>
             </div>
         </div>
     </nav>
