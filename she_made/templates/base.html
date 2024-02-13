@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/static/images/logo-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Font Awesome Pro CSS -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    
+    
+</head>
+<body>
+
+    
+    <nav>
+
+        <div class="navbar-header">
+            <div>
+                <a href="{% url 'shop' %}">OUR SHOP</a>
+            </div>
+            <div>
+                <a href="{% url 'contact' %}">CONTACT US</a>
+            </div>
+            <div>
+                <a href="{% url 'blogs' %}">BLOGS</a>
+            </div>
+            <div>
+                <a href="{% url 'about_us' %}">ABOUT US</a>
+            </div>
+        </div>
+        <div class="navbar-header logo" >SHE  MADE</div>
+        <div class="navbar-header">
+            <div>
+                <a href="{% url 'search' %}"><i class="fa-light fa-magnifying-glass"></i></a>
+            </div>
+            <div>
+                <i class="fa-light fa-user"></i>
+            </div>
+            <div>
+                <i class="fa-light fa-heart"></i>
+            </div>
+            <div>
+                <a href="{% url 'view_cart' %}"><i class="fa-light fa-bag-shopping"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- END nav -->
+    {% block content %}
+    <!-- Your content goes here -->
+    {% endblock %}
+
+    <footer class="custom-footer" style="background-color: #e7f0f5; margin-top: 40px;">
+        
+            <div class="footer_01" style="display: flex; justify-content: space-evenly; padding-top: 20px; padding-bottom: 20px;">
+                <div class="footer_column" >
+                    
+                        <h1>SheMade</h1>
+                    
+                    <div class="subscribe_section" style="margin-top: -20px;">
+                        <h3>Subscribe to our e-mail alerts!</h3>
+                        <form action="" style="display: flex; flex-direction: column; gap: 10px; margin-top: -10px;">
+                            <input placeholder="enter your email" type="email" style="height: 40px; width: 100pxt; border: none; border-radius: 5px;">
+                            <button style="font-size: 20px; width: fit-content; background-color: inherit; border: none; cursor: pointer;"><i class="fa-light fa-circle-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer_column" >
+                    <h3>Shop</h3>
+                    <div style="display: flex; margin-top: -20px; margin-left: -40px; " >
+                            <ul style="list-style-type: none; ">
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'dhuni' %}" style="text-decoration: none; color: black; ">Dhuni</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'perfumes' %}" style="text-decoration: none; color: black;">Perfumes</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'attars' %}" style="text-decoration: none; color: black;">Attars</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'soaps' %}" style="text-decoration: none; color: black;">Soaps</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'shower_gel' %}" style="text-decoration: none; color: black;">Shower Gel</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'facewash' %}" style="text-decoration: none; color: black;">Face Wash</a></li>
+                            </ul>
+                        
+                        
+                            <ul style="list-style-type: none;">
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'shampoo' %}" style="text-decoration: none; color: black;">Shampoo</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'conditioner' %}" style="text-decoration: none; color: black;">Conditioner</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'facetoner' %}" style="text-decoration: none; color: black;">Face Toner</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'aleo_gel' %}" style="text-decoration: none; color: black;">Aleo Gel</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'lip_care' %}" style="text-decoration: none; color: black;">Lip Care</a></li>
+                                <li style="margin-bottom: 10px; "><a href="{% url 'subcategory_products' 'scrubs' %}" style="text-decoration: none; color: black;">Scrubs</a></li>
+                            </ul>
+                        
+                    </div>
+                </div>
+                <div class="footer_column">
+                    <h3>Help</h3>
+                    <div class="help_links" style="display: flex; margin-top: -20px; margin-left: -40px;">
+                        <ul style="list-style-type: none;">
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Support & Waranty</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Return Policy</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Service Center</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">FAQs</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Why buy direct</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Bulk Orders</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer_column">
+                    <h3>Company</h3>
+                    <div class="company_links" style="display: flex; margin-top: -20px; margin-left: -40px;">
+                        <ul style="list-style-type: none;">
+                            <li style="margin-bottom: 10px; "><a href="{% url 'blogs' %}" style="text-decoration: none; color: black;">About SheMade</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">News</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Read Our Blog</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Investor Relations</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Social Responsibility</a></li>
+                            <li style="margin-bottom: 10px; "><a href="" style="text-decoration: none; color: black;">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+    </footer>
+    
+
+</body>
+</html>

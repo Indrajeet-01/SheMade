@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+
+    <link rel="stylesheet" href="/static/css/image_slider.css">
+    <style>
+        .add-to-cart-form {
+            margin-top: 40px;
+            margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    padding: 5px 10px;
+    height: 50px;
+    width: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.quantity-input {
+    outline: none;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.add-to-cart-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    </style>
+
+<section>
+    <div class="product-detail" style="display: flex; margin: 0 100px 0 100px; gap: 30px;">
+        <div class="images" style="flex: 1; margin-top: 30px;">
+            <div class="container">
+                {% if product.images.all %}
+                    {% for image in product.images.all %}
+                        <div class="mySlides">
+                            <div class="numbertext">{{ forloop.counter }} / {{ product.images.count }}</div>
+                            <img src="{{ image.image_url }}" style="width:100%">
+                        </div>
+                    {% endfor %}
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    <div class="row">
+                        {% for image in product.images.all %}
+                            <div class="column">
+                                <img class="demo cursor" src="{{ image.image_url }}" style="width:100%" onclick="currentSlide({{ forloop.counter0|add:1 }})">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No images available for this product.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="product_info" style="flex: 1; margin: 20px 20px 0 0 ; ">
+            <h1>{{ product.description }}</h1>
+            <div class="size" >
+                <p style="font-size: 20px;">SIZE : {{ product.content}}</p>
+
+            </div>
+            <div class="price" style="position: relative; margin-top: 30px;">
+                <span style="position: relative; top: -0.6em; margin-right: 0.1em;">₹ </span><span style="font-size: 30px;">{{ product.price}}</span>
+                <p style="margin-top: -5px;">(MRP Inclusive of all Taxes)</p>
+            </div>
+            
+            <div class="add-to-cart-form">
+                <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                    {% csrf_token %}
+                    <div class="quantity-controls">
+                        <button type="button" class="decrease-quantity" data-field="quantity{{ product.id }}"><i class="fa-regular fa-minus"></i></button>
+                        <input type="number" class="quantity-input" name="quantity" value="1" min="1" id="quantity{{ product.id }}" name="quantity">
+                        <button type="button" class="increase-quantity" data-field="quantity{{ product.id }}"><i class="fa-regular fa-plus"></i></button>
+                    </div>
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+            </div>
+
+            <hr/>
+            <div class="services" style="display: flex; justify-content: space-around; margin-top: 10px;">
+                <div style="align-items: center;">
+                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
+                        <i class="fa-light fa-box" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+                    </div>
+                    <p style="margin-bottom: -15px;">7 Days Service </p>
+                    <p>Center Replacement</p>
+                </div>
+                <div>
+                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
+                        <i class="fa-light fa-truck" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+                    </div>
+                    <p>Free & Fast Delivery</p>
+                </div>
+                <div>
+                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
+                        <i class="fa-light fa-shield-check" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+
+                    </div>
+                    
+                    <p>1 Year Warranty</p>
+                </div>
+                <div>
+                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
+                        <i class="fa-light fa-hand-holding-dollar" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+
+                    </div>
+                    
+                    <p>Pay on Delivery</p>
+                </div>
+                
+            </div>
+            <hr/>
+            <div class="ingredients" style="margin-top: 40px;">
+                <h3>Ingredients</h3>
+                <p >
+                    {{ product.ingredients}}
+                </p>
+
+            </div>
+            <div class="direction" style="margin-top: 40px;">
+                <h3>How to Use ?</h3>
+                <p >
+                    {{ product.direction}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const decreaseButton = document.querySelector('.decrease-quantity');
+    const increaseButton = document.querySelector('.increase-quantity');
+    const quantityInput = document.querySelector('.quantity-input');
+
+    decreaseButton.addEventListener('click', function() {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    increaseButton.addEventListener('click', function() {
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+});
+
+</script>
+
+<script src="/static/js/image_slider.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+<link rel="stylesheet" href="/static/css/product.css">
+<style>
+    .search_result {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+</style>
+
+
+<section class="search_result">
+    <div class="sub_cat">
+        {% for product in products %}
+        <div class="slider_box">
+            <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
+                <div class="product__images">
+                    {% for image in product.images.all %}
+                    {% if forloop.first %}
+                    <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
+                    {% elif forloop.last %}
+                    <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="name">
+                    <h3 class="product__title">{{ product.name }}</h3>
+                </div>
+            </a>
+            <div class="price">
+                <span style="font-size: 20px;">₹ {{ product.price }}</span>
+            </div>
+            <div class="btns">
+                <form method="post" action="">
+                    <button type="submit">
+                        <span>ADD TO CART</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+
+{% endblock %}

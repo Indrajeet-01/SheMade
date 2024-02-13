@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+<link rel="stylesheet" href="/static/css/shop.css">
+<link rel="stylesheet" href="/static/css/product.css">
+
+
+<section class="shop">
+    <div class="filters">
+        <h5>Filter By</h5>
+        <div class="by_cat">
+            <h5>Categories</h5>
+            <ul>
+                <li><button class="category-filter" data-category="fragrances">Fragrances</button></li>
+                <li><button class="category-filter" data-category="body_bath">Body Bath</button></li>
+                <li><button class="category-filter" data-category="skin">Skin</button></li>
+            </ul>
+        </div>
+        <div class="by_subcat">
+            <h5>Sub Categories</h5>
+            <ul>
+                <li><button class="sub-category-filter" data-category="dhuni">Dhuni</button></li>
+                <li>Perfumes</li>
+                <li>Attars</li>
+                <li>Soaps</li>
+                <li>Shower Gel</li>
+                <li>Face Wash</li>
+                <li>Shampoo</li>
+                <li>Conditioner</li>
+                <li>Face Toner</li>
+                <li>Aleo Gel</li>
+                <li>Lip Care</li>
+                <li>Scrubs</li>
+            </ul>
+        </div>
+        <div class="price">
+            <h5>Price</h5>
+            <input type="range" id="priceRange" min="100" max="3000" value="100">
+            <span id="minPrice">Min: $0</span>
+            <span id="maxPrice">Max: $100</span>
+        </div>
+    </div>
+    
+    <div class="products">
+
+        <div class="sub_cat">
+            {% for product in products %}
+            <div class="slider_box">
+                <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
+                    <div class="product__images">
+                        {% for image in product.images.all %}
+                        {% if forloop.first %}
+                        <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
+                        {% elif forloop.last %}
+                        <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="name">
+                        <h3 class="product__title">{{ product.name }}</h3>
+                    </div>
+                </a>
+                <div class="price">
+                    <span style="font-size: 20px;">₹ {{ product.price }}</span>
+                </div>
+                <div class="btns">
+                    <form method="post" action="">
+                        <button type="submit">
+                            <span>ADD TO CART</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <form id="filterForm" method="get" action="{% url 'shop' %}">
+        
+        <input type="hidden" name="filter.p.category" value="{{ category }}">
+        <input type="hidden" name="filter.p.sub_category" value="{{ sub_category }}">
+        <input type="hidden" name="filter.p.min_price" value="{{ min_price }}">
+        <input type="hidden" name="filter.p.max_price" value="{{ max_price }}">
+    </form>
+
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.category-filter');
+    const subCategoryButtons = document.querySelectorAll('.sub-category-filter');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            document.querySelector('input[name="filter.p.category"]').value = category;
+            document.querySelector('input[name="filter.p.sub_category"]').value = '';
+            document.querySelector('#filterForm').submit();
+        });
+    });
+
+    subCategoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            
+            const subCategory = this.dataset.sub_category;
+            document.querySelector('input[name="filter.p.category"]').value = ' ';
+            document.querySelector('input[name="filter.p.sub_category"]').value = subCategory;
+            document.querySelector('#filterForm').submit();
+        });
+    });
+});
+
+</script>
+
+
+
+{% endblock %}
