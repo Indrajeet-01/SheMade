@@ -2,8 +2,47 @@
 {% block content %}
 {% load static%}
 
-<link rel="stylesheet" href="/static/css/shop.css">
+
 <link rel="stylesheet" href="/static/css/product.css">
+
+<style>
+    .shop {
+    display: flex;
+    gap: 20px;
+    margin: 30px 3% 30px 3%;
+}
+
+.filters {
+    flex: 1;
+    padding: 15px;
+    height: fit-content;
+    justify-content: center;
+    background-color: #e1f05b;
+}
+
+.filters h5 {
+    font-size: 24px;
+}
+
+.filters ul {
+    list-style-type: none;
+}
+
+.filters li {
+    margin-bottom: 5px;
+}
+
+.products {
+    flex: 3;
+}
+    .category-filter, .sub-category-filter {
+        border: none;
+        background-color: #e1f05b;
+        cursor: pointer;
+    }
+
+    
+</style>
 
 
 <section class="shop">
@@ -21,17 +60,17 @@
             <h5>Sub Categories</h5>
             <ul>
                 <li><button class="sub-category-filter" data-category="dhuni">Dhuni</button></li>
-                <li>Perfumes</li>
-                <li>Attars</li>
-                <li>Soaps</li>
-                <li>Shower Gel</li>
-                <li>Face Wash</li>
-                <li>Shampoo</li>
-                <li>Conditioner</li>
-                <li>Face Toner</li>
-                <li>Aleo Gel</li>
-                <li>Lip Care</li>
-                <li>Scrubs</li>
+                <li><button class="sub-category-filter" data-category="perfumes">Perfumes</button></li>
+                <li><button class="sub-category-filter" data-category="attars">Attars</button></li>
+                <li><button class="sub-category-filter" data-category="soaps">Soaps</button></li>
+                <li><button class="sub-category-filter" data-category="shower_gel">Shower_Gel</button></li>
+                <li><button class="sub-category-filter" data-category="facewash">FaceWash</button></li>
+                <li><button class="sub-category-filter" data-category="shampoo">Shampoo</button></li>
+                <li><button class="sub-category-filter" data-category="conditioner">Conditioner</button></li>
+                <li><button class="sub-category-filter" data-category="facetoner">FaceToner</button></li>
+                <li><button class="sub-category-filter" data-category="aleo_gel">Aleo_Gel</button></li>
+                <li><button class="sub-category-filter" data-category="lip_care">Lip_Care</button></li>
+                <li><button class="sub-category-filter" data-category="scrubs">Scrubs</button></li>
             </ul>
         </div>
         <div class="price">
@@ -89,31 +128,43 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const categoryButtons = document.querySelectorAll('.category-filter');
-    const subCategoryButtons = document.querySelectorAll('.sub-category-filter');
+        const categoryButtons = document.querySelectorAll('.category-filter');
+        const subCategoryButtons = document.querySelectorAll('.sub-category-filter');
+        const minPriceInput = document.getElementById('minPrice');
+        const maxPriceInput = document.getElementById('maxPrice');
+        const priceRangeInput = document.getElementById('priceRange');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.dataset.category;
+                document.querySelector('input[name="filter.p.category"]').value = category;
+                document.querySelector('input[name="filter.p.sub_category"]').value = '';
+                document.querySelector('#filterForm').submit();
+            });
+        });
+        
+        subCategoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                
+                const subCategory = this.textContent.trim(); // Get the text content of the button
+                document.querySelector('input[name="filter.p.category"]').value = '';
+                document.querySelector('input[name="filter.p.sub_category"]').value = subCategory;
+                document.querySelector('#filterForm').submit();
+            });
+        });
 
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.dataset.category;
-            document.querySelector('input[name="filter.p.category"]').value = category;
-            document.querySelector('input[name="filter.p.sub_category"]').value = '';
+        // Update min_price and max_price values based on price range input
+        priceRangeInput.addEventListener('input', function() {
+            const minPrice = this.min;
+            const maxPrice = this.value;
+            minPriceInput.textContent = `Min: ₹ ${minPrice}`;
+            maxPriceInput.textContent = `Max: ₹ ${maxPrice}`;
+            document.querySelector('input[name="filter.p.min_price"]').value = minPrice;
+            document.querySelector('input[name="filter.p.max_price"]').value = maxPrice;
             document.querySelector('#filterForm').submit();
         });
     });
-
-    subCategoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            
-            const subCategory = this.dataset.sub_category;
-            document.querySelector('input[name="filter.p.category"]').value = ' ';
-            document.querySelector('input[name="filter.p.sub_category"]').value = subCategory;
-            document.querySelector('#filterForm').submit();
-        });
-    });
-});
-
 </script>
-
 
 
 {% endblock %}

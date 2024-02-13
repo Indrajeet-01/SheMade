@@ -11,6 +11,7 @@ from .filters import ProductItemFilter
 import decimal
 from django.views.generic.list import ListView
 from products.serializers import ProductItemSerializer
+from fuzzywuzzy import fuzz 
 from rest_framework.pagination import PageNumberPagination
 from django.views.generic import TemplateView
 
@@ -52,6 +53,7 @@ class ShopView(ListView):
         return render(request, self.template_name, {'products': queryset})
 
 
+# product handling
 class ProductListView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = ProductItemSerializer
@@ -105,49 +107,54 @@ def subcategory_products(request, sub_category):
     return render(request, 'product_subcat.html', context)
 
 
-
+# search handling
 def search_view(request):
-    queryset = ProductItem.objects.all()
+    # Get the search query from the request GET parameters
     query = request.GET.get('key')
+
+    # Perform the search query on the ProductItem model
     if query:
-        queryset = ProductItemFilter(request.GET, queryset=queryset).qs
-    return render(request, 'search.html', {'products': queryset})
+        # Split the search query into separate words
+        query_parts = query.split()
 
-def search_results_view(request):
-    query = request.GET.get('key')
-    queryset = ProductItem.objects.filter(name__icontains=query)
-    return render(request, 'search_result.html', {'products': queryset, 'query': query})
+        # Initialize a queryset to store the search results
+        products = ProductItem.objects.all()
+
+        # Initialize an empty set to store the matching products
+        matching_products = set()
+
+        # Filter products based on each word in the query
+        for part in query_parts:
+            # Filter based on exact match first
+            exact_matches = products.filter(
+                Q(name__icontains=part) |
+                Q(category__icontains=part) |
+                Q(sub_category__icontains=part)
+            )
+
+            # If no exact match found, search for approximate matches using fuzzy matching
+            if not exact_matches.exists():
+                # Perform fuzzy matching against product name, category, and subcategory
+                for product in products:
+                    if (fuzz.partial_ratio(part, product.name) > 65 or
+                        fuzz.partial_ratio(part, product.category) > 65 or
+                        fuzz.partial_ratio(part, product.sub_category) > 65):
+                        matching_products.add(product)
+
+        # Combine exact and approximate matches
+        matching_products |= set(exact_matches)
+
+        # Convert the set to a queryset and remove duplicates
+        products = ProductItem.objects.filter(pk__in=[product.pk for product in matching_products])
+
+        # Render the search template with the search results
+        return render(request, 'search.html', {'products': products, 'query': query})
+    else:
+        # If no query provided, render the search template without results
+        return render(request, 'search.html')
 
 
-class SearchProduct(generics.ListAPIView):
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = ProductItemSerializer
-    pagination_class = PageNumberPagination
-
-    def get_queryset(self):
-        queryset = ProductItem.objects.all()
-
-        # Get query parameters from the request
-        category = self.request.query_params.get('category')
-        sub_category = self.request.query_params.get('sub_category')
-        content = self.request.query_params.get('content')
-        product_name = self.request.query_params.get('name')
-
-        # Apply filters based on query parameters
-        if category:
-            queryset = queryset.filter(category=category)
-        if sub_category:
-            queryset = queryset.filter(sub_category=sub_category)
-        if content:
-            queryset = queryset.filter(content__icontains=content)
-        if product_name:
-            queryset = queryset.filter(name__icontains=product_name)
-
-        queryset = queryset.order_by('id')
-
-        return queryset
-
-
+# cart handling
 def add_to_cart(request, item_id):
     # Ensure the 'cart' key is initialized in the session
     if 'cart' not in request.session:
