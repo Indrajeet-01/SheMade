@@ -4,8 +4,7 @@
 
 
 <link rel="stylesheet" href="/static/css/product.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
+
 
 <style>
     .shop {
@@ -43,102 +42,6 @@
         cursor: pointer;
     }
 
-    .wrapper {
-  width: fit-content;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px 25px 40px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-}
-header h2 {
-  font-size: 24px;
-  font-weight: 600;
-}
-header p {
-  margin-top: 5px;
-  font-size: 16px;
-}
-.price-input {
-  width: 100%;
-  display: flex;
-  margin: 30px 0 35px;
-}
-.price-input .field {
-  display: flex;
-  width: 100%;
-  height: 45px;
-  align-items: center;
-}
-.field input {
-  width: 100%;
-  height: 100%;
-  outline: none;
-  font-size: 19px;
-  margin-left: 12px;
-  border-radius: 5px;
-  text-align: center;
-  border: 1px solid #999;
-  -moz-appearance: textfield;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-.price-input .separator {
-  width: 130px;
-  display: flex;
-  font-size: 19px;
-  align-items: center;
-  justify-content: center;
-}
-.slider {
-  height: 5px;
-  position: relative;
-  background: #ddd;
-  border-radius: 5px;
-}
-.slider .progress {
-  height: 100%;
-  left: 25%;
-  right: 25%;
-  position: absolute;
-  border-radius: 5px;
-  background: #17a2b8;
-}
-.range-input {
-  position: relative;
-}
-.range-input input {
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  top: -5px;
-  background: none;
-  pointer-events: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-  height: 17px;
-  width: 17px;
-  border-radius: 50%;
-  background: #17a2b8;
-  pointer-events: auto;
-  -webkit-appearance: none;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-}
-input[type="range"]::-moz-range-thumb {
-  height: 17px;
-  width: 17px;
-  border: none;
-  border-radius: 50%;
-  background: #17a2b8;
-  pointer-events: auto;
-  -moz-appearance: none;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-}
-
-
     
 </style>
 
@@ -171,30 +74,7 @@ input[type="range"]::-moz-range-thumb {
                 <li><button class="sub-category-filter" data-category="scrubs">Scrubs</button></li>
             </ul>
         </div>
-        <div class="wrapper">
-            <header>
-              <h2>Price Range</h2>
-              <p>Use slider or enter min and max price</p>
-            </header>
-            <div class="price-input">
-              <div class="field">
-                <span>Min</span>
-                <input type="number" class="input-min" value="2500">
-              </div>
-              <div class="separator">-</div>
-              <div class="field">
-                <span>Max</span>
-                <input type="number" class="input-max" value="7500">
-              </div>
-            </div>
-            <div class="slider">
-              <div class="progress"></div>
-            </div>
-            <div class="range-input">
-              <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-              <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-            </div>
-        </div>
+        
         <div class="order-filter">
             <h5>Sort By</h5>
             <select id="sortSelect">
@@ -254,9 +134,7 @@ input[type="range"]::-moz-range-thumb {
     document.addEventListener('DOMContentLoaded', function() {
         const categoryButtons = document.querySelectorAll('.category-filter');
         const subCategoryButtons = document.querySelectorAll('.sub-category-filter');
-        const minPriceInput = document.getElementById('minPrice');
-        const maxPriceInput = document.getElementById('maxPrice');
-        const slider = document.querySelector('.slider');
+        
         
         const sortSelect = document.getElementById('sortSelect');
         
@@ -280,30 +158,7 @@ input[type="range"]::-moz-range-thumb {
         });
 
         
-        const rangeMin = document.querySelector('.range-min');
-    const rangeMax = document.querySelector('.range-max');
-    const priceInputMin = document.querySelector('.input-min');
-    const priceInputMax = document.querySelector('.input-max');
-    const sliderProgress = document.querySelector('.slider .progress');
-
-    function updatePriceRange() {
-        const minPrice = parseInt(rangeMin.value);
-        const maxPrice = parseInt(rangeMax.value);
-        priceInputMin.value = minPrice;
-        priceInputMax.value = maxPrice;
-        minPriceInput.textContent = `Min: ₹ ${minPrice}`;
-        maxPriceInput.textContent = `Max: ₹ ${maxPrice}`;
-        const rangeTotal = parseInt(rangeMax.max) - parseInt(rangeMin.min);
-        const rangeValue = parseInt(rangeMin.value) - parseInt(rangeMin.min);
-        const progress = (rangeValue / rangeTotal) * 100;
-        sliderProgress.style.left = `${progress}%`;
-        document.querySelector('input[name="filter.p.min_price"]').value = minPrice;
-        document.querySelector('input[name="filter.p.max_price"]').value = maxPrice;
-        document.querySelector('#filterForm').submit();
-    }
-
-    rangeMin.addEventListener('input', updatePriceRange);
-    rangeMax.addEventListener('input', updatePriceRange);
+        
 
         sortSelect.addEventListener('change', function() {
             const selectedSort = this.value;

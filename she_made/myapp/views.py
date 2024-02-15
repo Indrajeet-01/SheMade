@@ -21,19 +21,23 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 def blogs(request):
-    return render(request, '/templates/blogs.html')
+    print("hey from blogs")
+    return render(request, 'blogs.html')
 
 def contact(request):
+    
+    print("hey from contact")
     return render(request, 'contact_us.html')
 
 def cart(request):
+    
     return render(request, 'cart.html')
 
 def dummy(request):
     return render(request, 'dummy.html')
 
-
 class ShopView(ListView):
+    print('hey from shop')
     model = ProductItem
     template_name = 'shop.html'
     context_object_name = 'products'
@@ -168,6 +172,7 @@ def search_view(request):
 
 # cart handling
 def add_to_cart(request, item_id):
+    
     # Ensure the 'cart' key is initialized in the session
     if 'cart' not in request.session:
         request.session['cart'] = {}
@@ -204,6 +209,7 @@ def add_to_cart(request, item_id):
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 def view_cart(request):
+    print('from cart ')
     cart = request.session.get('cart', {})
     # Convert the Decimal to float when calculating the total
     for item_data in cart.values():

@@ -49,8 +49,8 @@
     </style>
 
 <section>
-    <div class="product-detail" style="display: flex; margin: 0 100px 0 100px; gap: 30px;">
-        <div class="images" style="flex: 1; margin-top: 30px;">
+    <div class="product-detail" style="display: flex; margin: 0 100px 0 100px; gap: 30px; position: relative;">
+        <div class="images" style="flex: 1; margin-top: 30px; position: sticky;">
             <div class="container">
                 {% if product.images.all %}
                     {% for image in product.images.all %}
