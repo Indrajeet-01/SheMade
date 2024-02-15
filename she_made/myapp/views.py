@@ -17,20 +17,25 @@ from rest_framework.pagination import PageNumberPagination
 from django.views.generic import TemplateView
 
 
-def about_us(request):
+def aboutus(request):
     print('hey from about')
-    return render(request, 'about_us.html')
+    context = {
 
+    }
+    return render(request, 'about_us.html', context)
 
 
 def contact(request): 
     print('hey from contact')
     return render(request, 'contact_us.html')
 
+def blogs(request):
+    print("hey from blogs")
+    return render(request, 'blogs.html')
+
 def cart(request):
     print('hey from cart')
     return render(request, 'cart.html')
-
 
 class ShopView(ListView):
     print('hey from shop')
@@ -64,9 +69,6 @@ class ShopView(ListView):
 
         return render(request, self.template_name, {'products': queryset})
 
-def blogs(request):
-    print("hey from blogs")
-    return render(request, 'blogs.html')
 
 # product handling
 class ProductListView(generics.ListAPIView):
@@ -174,27 +176,18 @@ def search_view(request):
 
 # cart handling
 def add_to_cart(request, item_id):
-    
-    # Ensure the 'cart' key is initialized in the session
     if 'cart' not in request.session:
         request.session['cart'] = {}
-    
+
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity', 1))
-        item = get_object_or_404(ProductItem, pk=item_id)  # Get the item
+        item = get_object_or_404(ProductItem, pk=item_id)
         cart = request.session['cart']
-        
-        # Retrieve the related images queryset or objects
         images = item.images.all()
-
-        # Check if there are any images related to the item
-        if images.exists():
-            # Access the first image URL
-            first_image_url = images.first().image_url
-        else:
-            # Handle the case where there are no images related to the item
-            # You can set a default image URL or handle it based on your requirements
-            first_image_url = "default_image_url.jpg"  # Replace with your default image URL
+        
+        # Access the first image URL if available, otherwise provide a default image URL
+        first_image_url = images.first().image_url
+        print(first_image_url)
 
         if item_id in cart:
             cart[item_id]['quantity'] += quantity
@@ -203,7 +196,7 @@ def add_to_cart(request, item_id):
                 'image': first_image_url,
                 'name': item.name,
                 'quantity': quantity,
-                'price': float(item.price)
+                'price': float(item.price)  # Convert Decimal to float for arithmetic
             }
         request.session.modified = True
         print('item is added')
@@ -215,10 +208,15 @@ def add_to_cart(request, item_id):
 def view_cart(request):
     print('hey from cart ')
     cart = request.session.get('cart', {})
+    
     # Convert the Decimal to float when calculating the total
     for item_data in cart.values():
         item_data['total'] = float(item_data['quantity']) * float(item_data['price'])
+    
+    # Calculate the total with two decimal places
     total = sum(item_data['total'] for item_data in cart.values())
+    total = "{:.2f}".format(total)  # Format the total with two decimal places
+    
     request.session['cart_total'] = total
     return render(request, 'cart.html', {'cart': cart, 'total': total})
 

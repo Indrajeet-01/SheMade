@@ -2,16 +2,108 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    /* Custom CSS for Cart */
+
+/* Table styles */
+.cart {
+    
+    margin: 30px 5% 30px 5%;
+    padding: 10px;
+}
+.container {
+    background-color: antiquewhite;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+    
+}
+.table th,
+.table td {
+    padding: 0.75rem;
+    font-size: 20px;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.cart_item_image {
+    height: 50px;
+    width: 50px;
+}
+#cart-table-body {
+    text-align: center;
+}
+.table tbody+tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.price {
+    text-align: center;
+}
+
+
+/* Button styles */
+.btn-link {
+    font-weight: 400;
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+}
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Image styles */
+.img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+/* Form styles */
+form {
+    display: inline;
+}
+
+
+.lower_sec {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 30px;
+}
+
+.checkout_btn {
+    padding: 10px 30px; 
+cursor: pointer;
+color: white; 
+border: none; 
+background-color: #007bff;
+border-radius: 10px;
+}
+
+</style>
+
 
 {% endblock %}
 
 
 
 {% block content %}
-<section class="ftco-section ftco-cart">
+<section class="cart">
     
-    <h1 class="mb-3 mt-5 bread text-center">Cart</h1>
+    <h1 class="mb-3 mt-5 bread text-center" style="text-align: center;">Cart</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
@@ -27,17 +119,16 @@
                                 <th>Remove</th>
                             </tr>
                         </thead>
-                        <tbody id="cart-table-body">
+                        <tbody id="cart-table-body" style="text-align: center;">
                             {% for item_id, item_data in request.session.cart.items %}
-                                <tr>
+                                <tr >
                                     
                                     <td class="image-prod">
-                                        {% if item_data.image %}
-                                            <div class="img" style="background-image:url('{{ item_data.image }}');"></div>
-                                        {% else %}
-                                            <p>No Image</p>
-                                        {% endif %}
+                                        <img  class="cart_item_image"
+                                        src="{{ item_data.image }}" alt="">
+                                        
                                     </td>
+                                    
                                     <td class="product-name">
                                         {% if item_data.name %}
                                             <h3>{{ item_data.name }}</h3>
@@ -45,7 +136,7 @@
                                             <p>No Name</p>
                                         {% endif %}
                                     </td>
-                                    <td class="price">₹{{ item_data.price }}</td>
+                                    <td class="price" style="text-align: center;">₹{{ item_data.price }}</td>
                                     <td class="quantity">{{ item_data.quantity }}</td>
                                     <td>
                                       {% if item_data.total %}
@@ -58,8 +149,8 @@
                                       {% csrf_token %}
                                       <input type="hidden" name="item_id" value="{{ item_id }}">
                                       <td class="product-remove" style="width: 50px; text-align: center;">
-                                          <button type="submit" class="btn-link" style="border: none;  background-color: rgb(225, 60, 60); cursor: pointer; line-height: 50px;">
-                                              <span class="ion-ios-close" style="font-size: 50px; "></span>
+                                          <button type="submit" class="btn-link" style="border: none;   cursor: pointer; line-height: 50px;">
+                                            <i class="fa-solid fa-trash"></i>
                                           </button>
                                       </td>
                                   </form>
@@ -70,24 +161,18 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-end">
-            <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
+        <div class="lower_sec">
+                <div class="cart_total">
                     <h3>Cart Totals</h3>
                     
-                    <p class="d-flex total-price">
-                      
-                      <h5 id="total" style="color: rgb(19, 148, 47);"> ₹ {{ total}}</h5>
-                  </p>
+                    <p id="total" style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{ total}}</p>
+                    
                 </div>
-                
-                  {% if request.session.cart|length > 0 %}
-                  <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-                  {% endif %}
-
-                
-                
-            </div>
+                <div class="">
+                    {% if request.session.cart|length > 0 %}
+                        <p class="checkout_btn"><a href="" class="">Proceed to Checkout</a></p>
+                    {% endif %}
+                </div>
         </div>
     </div>
 </section>

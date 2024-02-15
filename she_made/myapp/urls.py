@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import subcategory_products, about_us,  blogs, contact,search_view, add_to_cart, view_cart, cart, remove_from_cart,product_detail,ShopView, ProductListView
+from .views import subcategory_products, aboutus,  blogs, contact,search_view, add_to_cart, view_cart, cart, remove_from_cart,product_detail,ShopView, ProductListView
 
 urlpatterns = [
     # for home page
@@ -7,6 +7,16 @@ urlpatterns = [
 
     # for search page
     path('search/', search_view, name='search'),
+
+    path('about-us/', aboutus, name='aboutus'),
+
+    path('blogs/', blogs, name='blogs'),
+
+    path('contact-us/', contact, name='contact'),
+
+    path('cart/', view_cart, name='view_cart'),
+
+    path('remove_from_cart/', remove_from_cart, name='remove_from_cart'),
 
     # for shop page
     path('shop/', ShopView.as_view(), name='shop'),  
@@ -17,13 +27,12 @@ urlpatterns = [
     
     # user cart handling pages
     path('add_to_cart/<int:item_id>/', add_to_cart, name='add_to_cart'),
-    path('cart/', view_cart, name='view_cart'), # for cart page
-    path('remove_from_cart/', remove_from_cart, name='remove_from_cart'),
+
 
     # our static content pages
-    path('about-us/', about_us, name='about_us'), # for about us page
-    path('blogs/', blogs, name='blogs'),         # for blogs page
-    path('contact-us/', contact, name='contact'), # for contact us page
+    # path('abc/', aboutus, name='aboutus'),
+           # for blogs page
+    
 
 
     
