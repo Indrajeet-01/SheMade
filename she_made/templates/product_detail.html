@@ -1,56 +1,91 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static%}
 
 
-    <link rel="stylesheet" href="/static/css/image_slider.css">
-    <style>
-        .add-to-cart-form {
-            margin-top: 40px;
-            margin-bottom: 40px;
-    display: flex;
-    align-items: center;
+{% block css %}
+<link rel="stylesheet" href="/static/css/image_slider.css">
+<style>
+    .product-detail {
+        display: flex; margin: 0 100px 0 100px; gap: 30px; position: relative;
+    }
+    .images {
+        flex: 1; margin-top: 30px; position: sticky;
+    }
+    .product_info {
+        flex: 1; margin: 20px 20px 0 0 ;
+    }
+    .size p {
+        font-size: 20px;
+    }
+    .price {
+        position: relative; margin-top: 30px;
+    }
+    .add-to-cart-form {
+        margin-top: 40px;
+        margin-bottom: 40px;
+display: flex;
+align-items: center;
 }
 
 .quantity-controls {
-    display: flex;
-    align-items: center;
+display: flex;
+align-items: center;
 }
 
 .quantity-controls button {
-    padding: 5px 10px;
-    height: 50px;
-    width: 40px;
-    font-size: 16px;
-    cursor: pointer;
+padding: 5px 10px;
+height: 50px;
+width: 40px;
+font-size: 16px;
+cursor: pointer;
 }
 
 .quantity-input {
-    outline: none;
-    height: 45px;
-    width: 45px;
-    text-align: center;
-    margin: 0 10px;
-    font-size: 16px;
+outline: none;
+height: 45px;
+width: 45px;
+text-align: center;
+margin: 0 10px;
+font-size: 16px;
 }
 
 .add-to-cart-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+margin-top: 10px;
+margin-bottom: 10px;
+padding: 10px 20px;
+font-size: 16px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
 }
 
-    </style>
+.services {
+display: flex; justify-content: space-around; margin-top: 10px;
+}
+.service_info {
+align-items: center;
+}
+.service_icon{
+background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;
+}
 
+.service_icon i {
+font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;
+}
+
+.ingredients, .direction {
+margin-top: 40px;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
 <section>
-    <div class="product-detail" style="display: flex; margin: 0 100px 0 100px; gap: 30px; position: relative;">
-        <div class="images" style="flex: 1; margin-top: 30px; position: sticky;">
+    <div class="product-detail" >
+        <div class="images">
             <div class="container">
                 {% if product.images.all %}
                     {% for image in product.images.all %}
@@ -74,10 +109,10 @@
             </div>
         </div>
 
-        <div class="product_info" style="flex: 1; margin: 20px 20px 0 0 ; ">
+        <div class="product_info" >
             <h1>{{ product.description }}</h1>
             <div class="size" >
-                <p style="font-size: 20px;">SIZE : {{ product.content}}</p>
+                <p >SIZE : {{ product.content}}</p>
 
             </div>
             <div class="price" style="position: relative; margin-top: 30px;">
@@ -98,31 +133,31 @@
             </div>
 
             <hr/>
-            <div class="services" style="display: flex; justify-content: space-around; margin-top: 10px;">
-                <div style="align-items: center;">
-                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
-                        <i class="fa-light fa-box" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+            <div class="services" >
+                <div class="service_info">
+                    <div class="service_icon">
+                        <i class="fa-light fa-box"></i>
                     </div>
                     <p style="margin-bottom: -15px;">7 Days Service </p>
                     <p>Center Replacement</p>
                 </div>
                 <div>
-                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
-                        <i class="fa-light fa-truck" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+                    <div class="service_icon">
+                        <i class="fa-light fa-truck"></i>
                     </div>
                     <p>Free & Fast Delivery</p>
                 </div>
                 <div>
-                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
-                        <i class="fa-light fa-shield-check" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+                    <div class="service_icon">
+                        <i class="fa-light fa-shield-check"></i>
 
                     </div>
                     
                     <p>1 Year Warranty</p>
                 </div>
                 <div>
-                    <div style="background-color: aqua; height: 40px; width: 40px; position: relative; border-radius: 50%;">
-                        <i class="fa-light fa-hand-holding-dollar" style="font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%) ;"></i>
+                    <div class="service_icon">
+                        <i class="fa-light fa-hand-holding-dollar"></i>
 
                     </div>
                     
@@ -148,7 +183,10 @@
         </div>
     </div>
 </section>
+{% endblock %}
 
+
+{% block js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const decreaseButton = document.querySelector('.decrease-quantity');
@@ -173,6 +211,5 @@
 <script src="/static/js/image_slider.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
 
 {% endblock %}

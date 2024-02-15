@@ -1,135 +1,138 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
 
+{% block css %}
+
 <style>
-  
 
-.blogs {
-    margin: 20px 5% 20px 5%;
+  .blogs {
+      margin: 20px 5% 20px 5%;
+      
+  }
+  
+  h2 {
+      background-color: antiquewhite;
+      text-align: center;
+      font-size: 28px;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .blog-posts-wrap {
+    width: 100%;
+    display: flex;
     
-}
-
-h2 {
-    background-color: antiquewhite;
-    text-align: center;
-    font-size: 28px;
-}
-
-a {
-  text-decoration: none;
-}
-
-.blog-posts-wrap {
-  width: 100%;
-  display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
   
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-
-.post-link {
+  
+  .post-link {
+      
+    margin: 20px 20px 20px 20px;
+  }
+  
+  .post-wrap {
+    display: flex;
+    flex-direction: column;
+    position: relative;
     
-  margin: 20px 20px 20px 20px;
-}
-
-.post-wrap {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+    background-color: #fff;
+    box-shadow: 0px 2px 20px rgba(0,0,0,.25);
+    transition: all .25s;
+    top: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
   
-  background-color: #fff;
-  box-shadow: 0px 2px 20px rgba(0,0,0,.25);
-  transition: all .25s;
-  top: 0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.post-wrap:hover {
-  top: 2px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,.25);
-}
-
-.post-image {
-  height: 200px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.post-body {
-  width: 370px;
-  padding: 10px;
-  margin: 0 auto;
-}
-
-.post-body-primary {
-  margin: 40px 0 40px 0;
-}
-
-.post-meta {
-  color: #7B7B7B;
-}
-
-.post-meta b {
-  font-weight: 500;
-}
-
-.post-title {
-  color: #444;
-  font-size: 20px;
-  padding: 5px 0 10px 0;
-}
-
-.post-text,span {
-  color: #7B7B7B;
-}
-
-
-.post-body-secondary {
-  border-top: 1px solid #ECECEC;
-}
-
-#text{
-    display:none;
-    }
-
-.post-category {
-  color: #7B7B7B;
-  padding: 15px 0 10px 0;
-}
-
-/* Button Styling */
-.button-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0 20px 0;
-}
-
-.button {
-  position: relative;
-  background-color: #3089DB;
-  padding: 20px 60px 20px 60px;
-  box-shadow: 0px 6px 20px rgba(48,137,219,.60);
-  transition: all .25s;
-  top: 0;  
-  border-radius: 10px;
+  .post-wrap:hover {
+    top: 2px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.25);
+  }
   
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
+  .post-image {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .post-body {
+    width: 370px;
+    padding: 10px;
+    margin: 0 auto;
+  }
+  
+  .post-body-primary {
+    margin: 40px 0 40px 0;
+  }
+  
+  .post-meta {
+    color: #7B7B7B;
+  }
+  
+  .post-meta b {
+    font-weight: 500;
+  }
+  
+  .post-title {
+    color: #444;
+    font-size: 20px;
+    padding: 5px 0 10px 0;
+  }
+  
+  .post-text,span {
+    color: #7B7B7B;
+  }
+  
+  
+  .post-body-secondary {
+    border-top: 1px solid #ECECEC;
+  }
+  
+  #text{
+      display:none;
+      }
+  
+  .post-category {
+    color: #7B7B7B;
+    padding: 15px 0 10px 0;
+  }
+  
+  /* Button Styling */
+  .button-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 20px 0;
+  }
+  
+  .button {
+    position: relative;
+    background-color: #3089DB;
+    padding: 20px 60px 20px 60px;
+    box-shadow: 0px 6px 20px rgba(48,137,219,.60);
+    transition: all .25s;
+    top: 0;  
+    border-radius: 10px;
+    
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .button:hover {
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(48,137,219,.60);
+    top: 2px;
+  }
+  </style>
 
-.button:hover {
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(48,137,219,.60);
-  top: 2px;
-}
-</style>
+{% endblock %}
 
+{% block content %}
 <section class="blogs">
     <h2>Our Blogs</h2>
     <div class='blog-posts-wrap'>
@@ -234,26 +237,27 @@ a {
       
       
 </section>
+{% endblock %}
 
+
+{% block js %}
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const readMoreButtons = document.querySelectorAll('.read-more-btn');
+  document.addEventListener('DOMContentLoaded', function() {
+const readMoreButtons = document.querySelectorAll('.read-more-btn');
 
-    readMoreButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const content = this.parentNode.querySelector('.additional-content');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                this.textContent = 'Read Less';
-            } else {
-                content.style.display = 'none';
-                this.textContent = 'Read More';
-            }
-        });
-    });
+readMoreButtons.forEach(button => {
+  button.addEventListener('click', function() {
+      const content = this.parentNode.querySelector('.additional-content');
+      if (content.style.display === 'none' || content.style.display === '') {
+          content.style.display = 'block';
+          this.textContent = 'Read Less';
+      } else {
+          content.style.display = 'none';
+          this.textContent = 'Read More';
+      }
+  });
+});
 });
 
 </script>
-
-
 {% endblock %}

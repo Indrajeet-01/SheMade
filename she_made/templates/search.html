@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static%}
 
-
+{% block css %}
+<link rel="stylesheet" href="/static/css/product.css">
 <style>
-
     section {
         display: flex;
         flex-direction: column;
@@ -51,15 +50,13 @@
   font-size: 20px;
 }
 
-/*Resize the wrap to see the search bar change!*/
-
 </style>
+{% endblock %}
 
-<link rel="stylesheet" href="/static/css/product.css">
 
 
+{% block content %}
 <section>
-
     <div class="wrap">
         <form id="searchForm" action=" " method="GET" class="search">
             <input id="searchInput" type="text" class="searchTerm" name="key" placeholder="What are you looking for?">
@@ -107,6 +104,5 @@
     </div>
 
 </section>
-
 
 {% endblock %}
