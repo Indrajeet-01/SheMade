@@ -18,23 +18,19 @@ from django.views.generic import TemplateView
 
 
 def about_us(request):
+    print('hey from about')
     return render(request, 'about_us.html')
 
-def blogs(request):
-    print("hey from blogs")
-    return render(request, 'blogs.html')
 
-def contact(request):
-    
-    print("hey from contact")
+
+def contact(request): 
+    print('hey from contact')
     return render(request, 'contact_us.html')
 
 def cart(request):
-    
+    print('hey from cart')
     return render(request, 'cart.html')
 
-def dummy(request):
-    return render(request, 'dummy.html')
 
 class ShopView(ListView):
     print('hey from shop')
@@ -68,9 +64,13 @@ class ShopView(ListView):
 
         return render(request, self.template_name, {'products': queryset})
 
+def blogs(request):
+    print("hey from blogs")
+    return render(request, 'blogs.html')
 
 # product handling
 class ProductListView(generics.ListAPIView):
+    print('hey from home')
     permission_classes = (permissions.AllowAny, )
     serializer_class = ProductItemSerializer
 
@@ -95,6 +95,7 @@ class ProductListView(generics.ListAPIView):
         return render(request, 'index.html', context)
     
 def product_detail(request, product_id, product_description):
+    print('hey from product detail')
     # Retrieve the product from the database
     product = get_object_or_404(ProductItem, id=product_id)
 
@@ -125,6 +126,7 @@ def subcategory_products(request, sub_category):
 
 # search handling
 def search_view(request):
+    print('hey from search')
     # Get the search query from the request GET parameters
     query = request.GET.get('key')
 
@@ -204,12 +206,14 @@ def add_to_cart(request, item_id):
                 'price': float(item.price)
             }
         request.session.modified = True
+        print('item is added')
         return redirect('view_cart')
+
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 def view_cart(request):
-    print('from cart ')
+    print('hey from cart ')
     cart = request.session.get('cart', {})
     # Convert the Decimal to float when calculating the total
     for item_data in cart.values():
