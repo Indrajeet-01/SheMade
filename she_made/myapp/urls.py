@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import subcategory_products, aboutus,  blogs, contact,search_view, add_to_cart, view_cart, cart, remove_from_cart,product_detail,ShopView, ProductListView
+from .views import subcategory_products, aboutus,  blogs, contact,search_view, add_to_cart, view_cart, add_to_wishlist, view_wishlist, remove_from_wishlist, cart, remove_from_cart,product_detail,ShopView, ProductListView
 
 urlpatterns = [
     # for home page
@@ -18,6 +18,10 @@ urlpatterns = [
 
     path('remove_from_cart/', remove_from_cart, name='remove_from_cart'),
 
+    path('wishlist/', view_wishlist, name='view_wishlist'),
+
+    path('remove_from_wishlist/', remove_from_wishlist, name='remove_from_wishlist'),
+
     # for shop page
     path('shop/', ShopView.as_view(), name='shop'),  
 
@@ -28,7 +32,8 @@ urlpatterns = [
     # user cart handling pages
     path('add_to_cart/<int:item_id>/', add_to_cart, name='add_to_cart'),
 
-
+    path('add_to_wishlist/<int:item_id>/', add_to_wishlist, name='add_to_wishlist'),
+    
     # our static content pages
     # path('abc/', aboutus, name='aboutus'),
            # for blogs page

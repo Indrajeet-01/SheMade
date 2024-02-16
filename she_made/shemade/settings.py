@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'myapp.middleware.CartMiddleware',
+    'myapp.middleware.WishlistMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
 

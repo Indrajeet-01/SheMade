@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+    .wishlist {
+        margin: 30px 5% 30px 5%;
+    }
+    .wishlist-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .wishlist-item {
+        width: 200px;
+        height: 220px;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 3px 6px 4px 6px #888888;
+    }
+
+    button {
+        font-weight: 400;
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    align-content: first baseline;
+    }
+    
+    .product-image img {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<section class="wishlist">
+    <h2 style="text-align: center;">Your Wishlist</h2>
+    <div class="wishlist-container">
+        
+        {% if wishlist %}
+            <div class="wishlist-items">
+                {% for item_id, item_data in wishlist.items %}
+                    <div class="wishlist-item">
+                        
+                        <a href="{% url 'product_detail' item_data.product_id item_data.description %}">
+                            <div class="product-image">
+                                <img src="{{  item_data.image }}" alt="Product Image">
+                            </div>
+                            <h3>{{ item_data.name }}</h3>
+                        </a>
+                        
+                        <div class="product-details">
+                            
+                            <p>Price: ₹{{ item_data.price }}</p>
+                            <!-- Add more details here if needed -->
+                        </div>
+                        <div class="action-buttons">
+                            <form method="post" action="{% url 'remove_from_wishlist' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="item_id" value="{{ item_id }}">
+                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                            <!-- You can add more action buttons here -->
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Your wishlist is empty.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

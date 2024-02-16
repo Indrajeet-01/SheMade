@@ -37,6 +37,9 @@ def cart(request):
     print('hey from cart')
     return render(request, 'cart.html')
 
+def wishlist(request):
+    return render(request, 'wishlist.html')
+
 class ShopView(ListView):
     print('hey from shop')
     model = ProductItem
@@ -229,4 +232,53 @@ def remove_from_cart(request):
                 del cart[item_id]
                 request.session.modified = True
                 return redirect('view_cart')
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+def add_to_wishlist(request, item_id):
+    if 'wishlist' not in request.session:
+        request.session['wishlist'] = {}
+
+    if request.method == 'POST':
+        item = get_object_or_404(ProductItem, pk=item_id)
+        wishlist = request.session['wishlist']
+        images = item.images.all()
+
+        # Access the first image URL if available, otherwise provide a default image URL
+        first_image_url = images.first().image_url if images.exists() else 'default_image_url.jpg'
+        print(first_image_url)
+
+        if item_id in wishlist:
+            # If the item is already in the wishlist, you may want to handle this differently, such as updating the quantity
+            pass
+        else:
+            print("Product ID:", item_id)
+            print("Description:", item.description)
+            wishlist[item_id] = {
+                'product_id': item_id,
+                'image': first_image_url,
+                'name': item.name,
+                'description': item.description,  # Ensure description is set here
+                'price': float(item.price),
+                # Add more details as needed
+            }
+        
+        request.session.modified = True
+        return redirect('view_wishlist')
+
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+def view_wishlist(request):
+    wishlist = request.session.get('wishlist', {})
+    print(wishlist)
+    return render(request, 'wishlist.html', {'wishlist': wishlist})
+
+def remove_from_wishlist(request):
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        wishlist = request.session.get('wishlist', {})
+        if item_id in wishlist:
+            del wishlist[item_id]
+            request.session['wishlist'] = wishlist
+            return redirect('view_wishlist')
     return JsonResponse({'success': False, 'error': 'Invalid request'})

@@ -12,7 +12,7 @@
         <h2>{{ subcategory|title }}</h2>
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box">
+            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6;">
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                     <div class="product__images">
                         {% for image in product.images.all %}
@@ -32,7 +32,7 @@
                 </div>
                 <div class="btns">
                     <form method="post" action="">
-                        <button type="submit">
+                        <button type="submit" style="background-color: #82AAE3;">
                             <span>ADD TO CART</span>
                         </button>
                     </form>
