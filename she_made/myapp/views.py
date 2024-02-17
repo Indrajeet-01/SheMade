@@ -40,6 +40,12 @@ def cart(request):
 def wishlist(request):
     return render(request, 'wishlist.html')
 
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+def checkout(request):
+    return render(request, 'checkout.html')
+
 class ShopView(ListView):
     print('hey from shop')
     model = ProductItem
@@ -245,14 +251,13 @@ def add_to_wishlist(request, item_id):
 
         # Access the first image URL if available, otherwise provide a default image URL
         first_image_url = images.first().image_url if images.exists() else 'default_image_url.jpg'
-        print(first_image_url)
+        
 
         if item_id in wishlist:
             # If the item is already in the wishlist, you may want to handle this differently, such as updating the quantity
             pass
         else:
-            print("Product ID:", item_id)
-            print("Description:", item.description)
+            
             wishlist[item_id] = {
                 'product_id': item_id,
                 'image': first_image_url,
@@ -270,7 +275,7 @@ def add_to_wishlist(request, item_id):
 
 def view_wishlist(request):
     wishlist = request.session.get('wishlist', {})
-    print(wishlist)
+    
     return render(request, 'wishlist.html', {'wishlist': wishlist})
 
 def remove_from_wishlist(request):

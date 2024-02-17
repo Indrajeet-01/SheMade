@@ -130,11 +130,12 @@
                 <div class="price">
                     <span style="font-size: 20px;">₹ {{ product.price }}</span>
                 </div>
-                <div class="btns">
-                    <form method="post" action="">
-                        <button type="submit" style="background-color: #82AAE3;">
-                            <span>ADD TO CART</span>
-                        </button>
+                <div class="add-to-cart-form">
+                    <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                        {% csrf_token %}
+                            <button type="submit" class="add-to-cart-button" style="background-color: #82AAE3;">
+                                Add to Cart
+                            </button>
                     </form>
                 </div>
             </div>

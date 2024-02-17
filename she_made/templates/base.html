@@ -147,7 +147,7 @@ text-decoration: none;
                 <a href="{% url 'aboutus' %}">ABOUT US</a>
             </div>
         </div>
-        <div class="navbar-header logo" ><a href="{% url 'index' %}">SHE  MADE</a></div>
+        <div class="navbar-header logo"  ><a href="{% url 'index' %}" style="font-size: 20px;">SHE  MADE</a></div>
         <div class="navbar-header">
             <div>
                 <a href="{% url 'search' %}"><i class="fa-light fa-magnifying-glass"></i></a>
@@ -231,12 +231,12 @@ text-decoration: none;
                     <h3>Company</h3>
                     <div class="footer_container" >
                         <ul >
-                            <li ><a href="{% url 'blogs' %}" >About SheMade</a></li>
+                            <li ><a href="{% url 'aboutus' %}" >About SheMade</a></li>
                             <li ><a href="" >News</a></li>
-                            <li ><a href="" >Read Our Blog</a></li>
+                            <li ><a href="{% url 'blogs' %}" >Read Our Blog</a></li>
                             <li ><a href="" >Investor Relations</a></li>
                             <li ><a href="" >Social Responsibility</a></li>
-                            <li ><a href="" >Security</a></li>
+                            <li ><a href="{% url 'privacy_policy' %}" >Privacy & Policy</a></li>
                         </ul>
                     </div>
                 </div>

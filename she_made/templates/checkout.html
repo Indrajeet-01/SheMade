@@ -1,0 +1,358 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+  .checkout {
+    margin: 20px 10% 20px 10%;
+    padding: 20px;
+  }
+
+  .col-75 {
+    background-color: #BA90C6;
+    padding: 20px;
+  }
+
+  .container {
+    display: flex;
+    gap: 50px;
+  }
+
+  .billing-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .personal-info {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .personal-info > div {
+    display: flex;
+    flex-direction: column;
+
+  }
+  .billing-address {
+    
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .billing-address > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .address-basic {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-size: 20px;
+  }
+  input {
+    line-height: 24px;
+    font-size: 10px;
+  }
+  input,textarea {
+    border: none;
+    
+  }
+  
+  .checkout h3 {
+    text-align: center;
+    font-size: 24px;
+  }
+  .container i {
+    margin-right: 10px;
+  }
+  .street-area {
+    
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+  }
+
+  select {
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .payment-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .payment-info h3 {
+    margin-bottom: 8%;
+  }
+
+  .card-details{
+    
+    background: #fff;
+    color: #555;
+    
+    padding: 10px;
+}
+.card-details p{
+    font-size: 18px;
+}
+
+
+.card-details label{
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.card-num-field-group{
+    margin-top: 10px;  
+}
+
+.date-field-group{
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.cvc-field-group{
+    margin-top: 10px;
+    display: inline-block;
+    float: right;
+}
+
+
+.name-field-group{
+    margin-top: 10px;
+}
+
+.card-num-field, .name-field{
+    width: 260px;
+    
+}
+
+.date-field, .cvc-field{
+    width: 70px;
+}
+
+.card-details input{
+    border: 1px solid #ccc;
+    height: 22px;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.card-details input::placeholder{
+    color: #ccc;
+}
+
+.proceed-checkout {
+  margin-top: 80px;
+  align-self: flex-end;
+}
+
+button {
+  padding: 10px 30px; 
+cursor: pointer;
+color: green; 
+border: none; 
+background-color: #FDF4F5;
+}
+button:hover {
+  background-color: #C0DBEA;
+}
+
+  
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 800px ) {
+  .row {
+    flex-direction: column;
+  }
+  .billing-address {
+    flex-direction: column;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 1000px) {
+  .row {
+    flex-direction: column;
+  }
+  .billing-address {
+    flex-direction: column;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<section class="checkout">
+    <h3>Checkout</h3>
+
+    <div class="row">
+      <div class="col-75">
+        
+          <form>
+            
+            <div class="container">
+              <div class="billing-info">
+                <div class="row personal-info">
+                  <h3>Billing Address</h3>
+                  
+                    
+                    
+                      <div>
+                        <label for="name"><i class="fa-regular fa-user"></i>Name<span class="required" style="color: red;">*</span></label>
+                        <input type="text" name="name" class="form-control" placeholder="your full name" required>
+                      </div>
+                      <div>
+                        <label for="phone"><i class="fa-regular fa-phone"></i>Phone<span class="required" style="color: red;">*</span></label>
+                        <input type="text" name="phone" class="form-control" placeholder="your phone number" required>
+    
+                      </div>
+                      <div>
+                        <label for="email"><i class="fa-regular fa-envelope"></i>Email<span class="required" style="color: red;">*</span></label>
+                        <input type="email" name="email" class="form-control" placeholder="your email" required>
+                      </div>
+                  
+                </div>
+                <div class="billing-address">
+                  <div class="form-group col-md-4 ">
+                    <label for="inputState"><i class="fa-regular fa-globe"></i>State</label>
+                    <select class="form-control" id="inputState">
+                                        <option value="SelectState" >Select State</option>
+                                        <option value="Andra Pradesh">Andra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madya Pradesh">Madya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Orissa">Orissa</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttaranchal">Uttaranchal</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                        <option value="Daman and Diu">Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadeep">Lakshadeep</option>
+                                        <option value="Pondicherry">Pondicherry</option>
+                                      </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputDistrict"><i class="fa-regular fa-city"></i>District</label>
+                    <select class="form-control" id="inputDistrict">
+                        <option value="">-- select one -- </option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="pincode">Pincode<span class="required" style="color: red;">*</span></label>
+                    <input type="text" name="pincode" class="form-control" placeholder="enter pincode" required>
+                  </div>
+                </div>
+                  <div>
+                    <div class="street-area">
+                      <label for="street"><i class="fa-regular fa-location-dot"></i>Street/Area</label>
+                      <textarea type="textarea" name="street" class="form-control" rows="4" cols="50" placeholder="your street area" required></textarea>
+                    </div>
+                    
+                  </div>
+                  </div>
+
+                  
+              
+                <div class="payment-info">
+                  <h3>Payment Details</h3>
+                  <div class="card-details">
+                    <p>Pay using credit or debit card</p>
+                    <div class="card-num-field-group">
+                    <label>Card Number</label><br>
+                    <input type="text" class="card-num-field" placeholder="xxxx-xxxx-xxxx-xxxx">
+                    </div>
+                    
+                    <div class="date-field-group">
+                    <label>Expiry Date</label><br>
+                    <input type="text" class="date-field" placeholder="mm">
+                    <input type="text" class="date-field" placeholder="yyyy">
+                    </div>
+                    
+                    <div class="cvc-field-group">
+                    <label>CVC</label><br>
+                    <input type="password" class="cvc-field" placeholder="xxx">
+                    </div>
+                        
+                    <div class="name-field-group">
+                    <label>Card Holder Name</label><br>
+                    <input type="text" class="name-field" placeholder="Full Name">
+                    </div>
+
+                </div>
+                <div class="proceed-checkout">
+                  <p>Cart Total:<p style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{request.session.cart_total }}</p></p>
+                  <button>Proceed to Checkout</button>
+                </div>
+              </div>
+
+
+            </div>
+            
+              
+            </form>
+
+
+
+        </div>
+      </div>
+    </div>
+    
+
+</section>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="/static/js/address.js"></script>
+{% endblock %}

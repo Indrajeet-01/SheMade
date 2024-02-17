@@ -14,10 +14,13 @@
     }
     .wishlist-item {
         width: 200px;
-        height: 220px;
+        height: 250px;
         padding: 15px;
         border-radius: 5px;
         box-shadow: 3px 6px 4px 6px #888888;
+    }
+    .wishlist-item a {
+        text-decoration: none;
     }
 
     button {
@@ -30,9 +33,15 @@
     }
     
     .product-image img {
-        height: 100px;
-        width: 100px;
+        height: 120px;
+        width: 170px;
     }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    
 </style>
 
 {% endblock %}
@@ -61,12 +70,20 @@
                             <!-- Add more details here if needed -->
                         </div>
                         <div class="action-buttons">
+                            <div class="add-to-cart-form">
+                                <form method="post" action="{% url 'add_to_cart' item_id=item_data.product_id %}">
+                                    {% csrf_token %}
+                                        <button type="submit" class="add-to-cart-button" style="background-color: #82AAE3; padding: 5px 10px 5px 10px; border-radius: 10px;" >
+                                            <span style="color: white;">Add to Cart</span>
+                                        </button>
+                                </form>
+                            </div>
                             <form method="post" action="{% url 'remove_from_wishlist' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="item_id" value="{{ item_id }}">
                                 <button type="submit"><i class="fa-solid fa-trash"></i></button>
                             </form>
-                            <!-- You can add more action buttons here -->
+                            
                         </div>
                     </div>
                 {% endfor %}

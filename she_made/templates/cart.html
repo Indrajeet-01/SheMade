@@ -9,7 +9,7 @@
 /* Table styles */
 .cart {
     
-    margin: 30px 5% 30px 5%;
+    margin: 10px 5% 30px 5%;
     padding: 10px;
 }
 .container {
@@ -93,6 +93,10 @@ background-color: #007bff;
 border-radius: 10px;
 }
 
+.checkout_btn p:hover {
+    background-color: white;
+}
+
 </style>
 
 
@@ -130,6 +134,7 @@ border-radius: 10px;
                                     </td>
                                     
                                     <td class="product-name">
+                                        
                                         {% if item_data.name %}
                                             <h3>{{ item_data.name }}</h3>
                                         {% else %}
@@ -170,7 +175,7 @@ border-radius: 10px;
                 </div>
                 <div class="">
                     {% if request.session.cart|length > 0 %}
-                        <p class="checkout_btn"><a href="" class="">Proceed to Checkout</a></p>
+                        <p class="checkout_btn" style="background-color: #C0DBEA; "><a href="{% url 'checkout' %}" style="color: #BA90C6; font-size: 18px;" class="" >Proceed to Checkout</a></p>
                     {% endif %}
                 </div>
         </div>
