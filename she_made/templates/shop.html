@@ -64,11 +64,13 @@
 
 
 {% block content %}
+
 <section class="shop">
+    
     <div class="filters">
-        <h5>Filter By</h5>
+        <p><strong>Filter By</strong></p>
         <div class="by_cat">
-            <h5>Categories</h5>
+            <p><strong>Categories</strong></p>
             <ul>
                 <li><button class="category-filter" data-category="fragrances">Fragrances</button></li>
                 <li><button class="category-filter" data-category="body_bath">Body Bath</button></li>
@@ -76,7 +78,7 @@
             </ul>
         </div>
         <div class="by_subcat">
-            <h5>Sub Categories</h5>
+            <p><strong>Sub Categories</strong></p>
             <ul>
                 <li><button class="sub-category-filter" data-category="dhuni">Dhuni</button></li>
                 <li><button class="sub-category-filter" data-category="perfumes">Perfumes</button></li>
@@ -94,7 +96,7 @@
         </div>
         
         <div class="order-filter">
-            <h5>Sort By</h5>
+            <p><strong>Sort By</strong></p>
             <select id="sortSelect">
                 <option value="low_to_high">Price Low to High</option>
                 <option value="high_to_low">Price High to Low</option>
@@ -106,9 +108,9 @@
 
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6;" >
+            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6; margin-bottom: 10px;" >
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
-                    <div class="product__images">
+                    <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}
                         <img src="{{ image.image_url }}" alt="Product Image" class="default-image">

@@ -8,13 +8,13 @@
 
 {% block content %}
 <section>
-    <div class="container">
-        <h2>{{ subcategory|title }}</h2>
+    <div class="container" style="margin: 30px 5% 0px 5%;">
+        
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6;">
+            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6; height: 400px; margin-bottom: 10px;">
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
-                    <div class="product__images">
+                    <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}
                         <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
@@ -24,7 +24,7 @@
                         {% endfor %}
                     </div>
                     <div class="name">
-                        <h3 class="product__title">{{ product.name }}</h3>
+                        <h2 class="product__title">{{ product.name }}</h2>
                     </div>
                 </a>
                 <div class="price">

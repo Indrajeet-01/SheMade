@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+    section {
+        margin: 30px 5% 30px 5%;
+    }
+    .profile-info {
+            margin-bottom: 20px;
+        }
+    .logout-btn, #login-btn {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<section class="profile-container">
+    <h2>Your Profile</h2>
+    <div class="profile-info" id="profile-info">
+        <!-- Placeholder for user information -->
+    </div>
+    <div id="login-section">
+        <p>You are not logged in. <button id="login-btn">Login</button></p>
+    </div>
+    <div id="logout-section" style="display: none;">
+        <form id="logout-form">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const profileInfo = document.getElementById('profile-info');
+        const loginSection = document.getElementById('login-section');
+        const logoutSection = document.getElementById('logout-section');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutForm = document.getElementById('logout-form');
+
+        // Function to display user profile information
+        function displayProfile(username, email, phone, orders, address) {
+            profileInfo.innerHTML = `
+                <p><strong>Name:</strong> ${username}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                ${orders.length > 0 ?
+                    `<h3>Orders:</h3>
+                    <ul>${orders.map(order => `<li>${order}</li>`).join('')}</ul>
+                    <p><strong>Address:</strong> ${address}</p>` :
+                    `<p>You have not ordered any products yet.</p>`
+                }
+            `;
+        }
+
+        // Function to handle login
+        function handleLogin() {
+            // Assume user data (replace with actual data from backend)
+            const userData = {
+                username: 'John Doe',
+                email: 'john.doe@example.com',
+                phone: '+1234567890',
+                orders: ['Order 1', 'Order 2', 'Order 3'],
+                address: '123 Street, City, Country'
+            };
+
+            // Display user profile information
+            displayProfile(userData.username, userData.email, userData.phone, userData.orders, userData.address);
+
+            // Hide login section and show logout section
+            loginSection.style.display = 'none';
+            logoutSection.style.display = 'block';
+        }
+
+        // Function to handle logout
+        function handleLogout(event) {
+            event.preventDefault(); // Prevent default form submission
+            // Clear user profile information
+            profileInfo.innerHTML = '';
+            // Hide logout section and show login section
+            logoutSection.style.display = 'none';
+            loginSection.style.display = 'block';
+        }
+
+        // Event listener for login button click
+        loginBtn.addEventListener('click', handleLogin);
+
+        // Event listener for logout form submission
+        logoutForm.addEventListener('submit', handleLogout);
+    });
+</script>
+{% endblock %}

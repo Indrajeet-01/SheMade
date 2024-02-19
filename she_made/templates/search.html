@@ -71,7 +71,7 @@
 
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6;">
+            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6; margin-bottom: 10px;">
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                     <div class="product__images">
                         {% for image in product.images.all %}
@@ -83,7 +83,7 @@
                         {% endfor %}
                     </div>
                     <div class="name">
-                        <h3 class="product__title">{{ product.name }}</h3>
+                        <h2 class="product__title">{{ product.name }}</h2>
                     </div>
                 </a>
                 <div class="price">

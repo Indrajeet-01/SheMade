@@ -71,6 +71,22 @@
     max-height: 100%;
 }
 
+.quantity button {
+    margin-right: 4px;
+}
+
+.quantity input {
+    outline: none;
+height: 20px;
+width: 25px;
+text-align: center;
+margin-left: 5px;
+font-size: 16px;
+border: none;
+background-color: #BA90C6;
+
+}
+
 /* Form styles */
 form {
     display: inline;
@@ -142,8 +158,20 @@ border-radius: 10px;
                                         {% endif %}
                                     </td>
                                     <td class="price" style="text-align: center;">₹{{ item_data.price }}</td>
-                                    <td class="quantity">{{ item_data.quantity }}</td>
-                                    <td>
+                                    <td class="quantity">
+                                        <form method="post" action="{% url 'update_cart' %}">
+                                            {% csrf_token %}
+                                            <div class="quantity-controls">
+                                                <button type="submit" class="decrease-quantity" data-field="quantity{{ item_id }}"><i class="fa-regular fa-minus"></i></button>
+                                                <input type="number" class="quantity-input" name="quantity" value="{{ item_data.quantity }}" min="1" id="quantity{{ item_id }}" data-item-id="{{ item_id }}">
+                                                <button type="submit" class="increase-quantity" data-field="quantity{{ item_id }}"><i class="fa-regular fa-plus"></i></button>
+                                            </div>
+                                            <!-- No need for an update button -->
+                                            <input type="hidden" name="item_id" value="{{ item_id }}"> <!-- Add this line to include item_id -->
+                                        </form>
+                                    </td>
+                                    
+                                    <td class="total" id="total{{ item_id }}">
                                       {% if item_data.total %}
                                           <h5>{{ item_data.total }}</h5>
                                           {% else %}
@@ -168,9 +196,9 @@ border-radius: 10px;
         </div>
         <div class="lower_sec">
                 <div class="cart_total">
-                    <h3>Cart Totals</h3>
+                    <h2>Cart Totals</h2>
                     
-                    <p id="total" style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{ total}}</p>
+                    <p id="cart-total" style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{ total}}</p>
                     
                 </div>
                 <div class="">
@@ -181,5 +209,67 @@ border-radius: 10px;
         </div>
     </div>
 </section>
+
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const decreaseButtons = document.querySelectorAll('.decrease-quantity');
+    const increaseButtons = document.querySelectorAll('.increase-quantity');
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+
+    decreaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemID = button.getAttribute('data-field').replace('quantity', '');
+            const quantityInput = document.querySelector(`#quantity${itemID}`);
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+                updateTotals(itemID);
+            }
+        });
+    });
+
+    increaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemID = button.getAttribute('data-field').replace('quantity', '');
+            const quantityInput = document.querySelector(`#quantity${itemID}`);
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+            updateTotals(itemID);
+        });
+    });
+
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            // Automatically submit the form when the quantity changes
+            input.closest('form').submit();
+        });
+    });
+
+    function updateTotals(itemID) {
+        const quantityInput = document.querySelector(`#quantity${itemID}`);
+        const row = quantityInput.closest('tr');
+        const price = parseFloat(row.querySelector('.price').textContent.replace('₹', ''));
+        const quantity = parseInt(quantityInput.value);
+        const total = price * quantity;
+        const totalCell = document.querySelector(`#total${itemID}`);
+        totalCell.innerHTML = `<h5>₹${total.toFixed(2)}</h5>`;
+        updateCartTotal();
+    }
+
+    function updateCartTotal() {
+        let total = 0;
+        const totals = document.querySelectorAll('.total');
+        totals.forEach(itemTotal => {
+            total += parseFloat(itemTotal.textContent.replace('₹', ''));
+        });
+        document.getElementById('cart-total').textContent = '₹' + total.toFixed(2);
+    }
+});
+
+
+</script>
 
 {% endblock %}

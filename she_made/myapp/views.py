@@ -24,6 +24,23 @@ def aboutus(request):
     }
     return render(request, 'about_us.html', context)
 
+def security_warranty(request):
+    return render(request, 'support_warranty.html')
+
+def return_policy(request):
+    return render(request, 'return_policy.html')
+
+def faqs(request):
+    return render(request, 'faqs.html')
+
+def term_condition(request):
+    return render(request, 'term_condition.html')
+
+def social_responsibility(request):
+    return render(request, 'social_responsiblity.html')
+
+def bulk_order(request):
+    return render(request, 'bulk_order.html')
 
 def contact(request): 
     print('hey from contact')
@@ -45,6 +62,9 @@ def privacy_policy(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+def userFrofile(request):
+    return render(request, 'user_profile.html')
 
 class ShopView(ListView):
     print('hey from shop')
@@ -208,6 +228,7 @@ def add_to_cart(request, item_id):
                 'price': float(item.price)  # Convert Decimal to float for arithmetic
             }
         request.session.modified = True
+        request.session.save()
         print('item is added')
         return redirect('view_cart')
 
@@ -237,8 +258,46 @@ def remove_from_cart(request):
             if item_id in cart:
                 del cart[item_id]
                 request.session.modified = True
+                request.session.save()
                 return redirect('view_cart')
     return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
+def update_cart(request):
+    print('he from cart update')
+    print(request.method)
+    
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        new_quantity = int(request.POST.get('quantity', 1))
+        print(item_id)
+        print(new_quantity)
+        if 'cart' in request.session:
+            cart = request.session['cart']
+            if item_id in cart:
+                # Get the item data
+                item_data = cart[item_id]
+                # Calculate the price of the item
+                item_price = item_data['price']
+                # Calculate the current total of the item
+                current_total = item_data['quantity'] * item_price
+                # Update the quantity of the item
+                cart[item_id]['quantity'] = new_quantity
+                # Calculate the new total of the item
+                new_total = new_quantity * item_price
+                # Update the cart total
+                cart_total = sum(cart[item]['quantity'] * cart[item]['price'] for item in cart)
+                print(cart_total)
+                request.session['cart_total'] = cart_total
+                # Save the changes to the session
+                request.session.modified = True
+                request.session.save()
+                # Return the updated totals
+                return redirect('view_cart')
+    # If the request is not valid or if there's an error, stay on the cart page
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
 
 def add_to_wishlist(request, item_id):
     if 'wishlist' not in request.session:

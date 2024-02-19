@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+    section {
+        margin: 30px 5% 30px 5%;
+    }
+    h4 {
+        font-size: 24px;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <h1 style="background-color: #BA90C6; text-align: center; font-size: 24px;">FAQs</h1>
+    <h2>ORDERING</h2>
+    <p><b>Q: How do I place an order?</b></p>
+    <pre>
+        Step 1: Pick the product range of your choice.
+        Step 2: Click on SHOP NOW.
+        Step 3: Click on ADD TO BAG on the products you wish to purchase.
+        Step 4: Click on PROCEED TO CHECKOUT
+        Step 5: Fill out your personal details required for the delivery of your order.
+        Step 6: Choose a payment option most convenient to you.
+        Step 7: Confirm & place your order.  
+    </pre>
+    <p>
+        For any further questions, you can call our helpdesk at: <br>
+        <strong>service@forestessentialsindia.com</strong> (For shipment related queries) <br>
+        <strong>care@forestessentialsindia.com</strong> (For product related & other queries ) <br>
+        or chat with us using the Live chat at the bottom of your screen.
+    </p>
+    <p><b>Q: Can I ship the products to an address that is different from my billing address?</b></p>
+    <p>Yes, you can do this by filling in your address as the 'Billing address', and the address you wish to ship it to, as the 'Shipping address'.</p>
+    <p><b>Q: How do I know that my order is confirmed?</b></p>
+    <p>For all pre-paid orders, the confirmation status will be automatically updated in the ‘My Account’ section. If your chosen mode of payment is Cash On Delivery, you will get a call or an email from a Forest Essentials representative, on your registered contact details, asking you to confirm the order details. Once you have confirmed the same, the order will be processed immediately.</p>
+    <p><b>Q: Do I have to have an account to place an order?</b></p>
+    <p>No, you can place an order using guest checkout without having an account. However, we strongly reccomend making an account on our website to make your shopping experience swift and simple. This will also help you enjoy special benefits as well as share ratings and review our products as per your experience.</p>
+    <p><b>Q: Can I order a product that is "Out of Stock"?</b></p>
+    <p>Unfortunately, products listed as "Out of Stock" are not available for immediate sale. However, we can notify you as soon as the product is back in the stock. Simply click on the product, once you are on the product page, you will see an option that says 'Notify Me' and enter your registered email address. We will send you a notification email as soon as the product is back in stock. Remember, this can only be done if you have a Forest Essentials account and are signed in at the same time.</p>
+    <p><b>Q: How safe is it to use my Debit/Credit card or make an online payment on Forest Essentials?</b></p>
+    <p>All transactions at Forest Essentials Online are protected by SSL (Secure Sockets Layer) and Secure Data Encryption using a 1024-bit process. Any information you enter when transacting with Forest Essentials Online is sent in a Secure Socket Layer (SSL) session and is encrypted to protect you against unintentional disclosure to third parties. This is an assurance that we follow the best security practices adopted by major online vendor, where all payments are processed in real-time, for your security and immediate peace of mind.
+        You can tell if your browser is in secure mode at “Checkout”, by looking for the padlock icon at the bottom corner or at the end of the address bar of your browser window.</p>
+    <p><b>Q: Why was my order payment rejected?</b></p>
+    <p>There are various reasons why this may have happened ranging from validity of card/net banking details, insufficient funds in the account to technical difficulties. If you were recently issued a new card, some of the information may have changed. In that case, please confirm your credit card details and try again. Also, check that your name and address match the name and address on your current credit card.</p>
+    <p><b>Q: I cannot complete my registration, what do I need to do?</b></p>
+    <p>Contact us, detailing the problem you have encountered. You can either email us on <strong>service@forestessentialsindia.com</strong> or call us on <strong>8010200666</strong> and our Customer Care will be happy to assist you.</p>
+    <p><b>Q: How do I make changes to my order?</b></p>
+    <p>You can’t modify the order once it has been placed. We suggest you cancel the order and place a new order with your desired changes.</p>
+    <p><b>Q: What if an item is out of stock?</b></p>
+    <p>If an item is out of stock, simply click on the product, once you are on the product page, you will see an option that says 'Notify Me' and enter your registered email address. We will send you a notification email as soon as the product is back in stock. If you are interested in purchasing it immediately, please use the ‘Store Locator’ to find a store near you and call to confirm if they have your desired product available.</p>
+    <p><b>Q: What payment types do you offer?</b></p>
+    <p>For Domestic orders: You can pay for purchases using Cash on Delivery, Debit, Credit card, Net banking methods.</p>
+    <h2>CASH ON DELIVERY</h2>
+    <p><b>Q: What is Cash on Delivery (COD)?</b></p>
+    <p>If you are uncomfortable making online payments, you can use our Cash on Delivery (COD) facility. This facility allows you to pay your invoice amount in cash at the time of actual delivery at your doorstep. You can only make COD payments in Indian Rupees.</p>
+    <p><b>Q: How do I avail of the COD facility?</b></p>
+    <p>COD facility is available on orders of INR. 3,000/- & above. You can use our pin code finder to check if the COD facility is available at your delivery address.</p>
+    <p><b>Q: Is COD available for delivery to all locations in India?</b></p>
+    <p>Due to the limitations of the couriers we use, COD is not yet available for all pin codes in India. During the checkout process, you can use our pin code finder to check if the COD facility is available for your delivery address.</p>
+    <p><b>Q: Would I be charged for availing of the COD option?</b></p>
+    <p>There's no specific charge to avail COD on any order. However, there is a flat shipping charge of INR. 65/- if your total order value is less than INR. 475/-.</p>
+    <h2>SHIPPING AND DELIVERY POLICIES</h2>
+    <p><b>Q: How does the delivery process work?</b></p>
+    <p>All our deliveries are serviced through well-reputed couriers. As soon as your order is dispatched, you will receive an email with your package's tracking number as well as the name of the courier company that is processing your order. You can use the tracking number to track the status of your package on the courier company's website.</p>
+    <p><b>Q: What is the range of locations to which we ship our products?</b></p>
+    <p>We ship across India, except for a few remote locations. All domestic orders of INR 475/- & above qualify for free domestic shipping. However, there is a flat shipping charge of INR. 65/- if your total order value is less INR. 475/-.</p>
+    <p><b>Q: How are the items packaged at shemade</b></p>
+    <p>Each of our products are first bubble wrapped and then placed in a sturdy carton, which is taped and prepared for shipping. Fragile items like spray or glass bottles are safeguarded with an additional layer of bubble wrap. We pride ourselves on the quality of our packaging and wish for you to be completely satisfied with your purchase.</p>
+    <h2>RETURNS, CANCELLATIONS & EXCHANGES</h2>
+    <p><b>Q: What is your Online Return Policy?</b></p>
+    <p>If you are not satisfied with product ordered, or are disappointed with the product or service, we would like to know your feedback in order to be able to serve you better.
+        We strongly believe in the quality of our products and wish for you to be completely satisfied with your purchase. However, in the rare occasion where you may be unsatisfied with a purchase, please see our Returns and Refunds Policy for more information on online returns.</p>
+    <p><b>Q: How do I cancel my order?</b></p>
+    <p>If you wish to cancel your order, you can do so by sending us an email on support@shemade.in. You can also call our Customer Care on 8010200666 (Timings: 9:30 am-5 pm IST), within 24 hours of placing the order.</p>
+    <p><b>Q: How will I get a refund for my cancelled orders and how long will this process take?</b></p>
+    <p>Please refer to our Returns and Refunds Policy to understand if your order qualifies for a return. For pre-paid orders that have not yet been shipped, your order will be cancelled within 24 hours of your request and reflect as per your bank guidelines, which is usually within 10 business days. For all orders that have been delivered, we do not entertain return requests unless the order qualifies, as per our Returns and Refunds Policy. For any such requirements, please call our Customer Care on <strong>8010200666 (Timings: 9:30 am-5 pm IST) Monday to Friday or email us at service@forestessentialsindia.com</strong>.</p>
+    <h2>SHIPPING & DELIVERY</h2>
+    <p><b>Q: By when can I expect delivery of my order?</b></p>
+    <p>While we will endeavour to deliver your order at the earliest, we request you to bear with possible delays due to the restrictions in movement both within India and internationally. Delays are likely to be longer for areas that are sealed as we will only be able to attempt delivery once the locality is unsealed. We appreciate your understanding and are committed to delivering your order as soon as possible.</p>
+    <p><b>Q: What if I receive an incomplete, incorrect or damaged order?</b></p>
+    <p>While we try our best to fulfill your orders correctly, in the best manner possible, for any complaints you may have, with regards to your order, please contact our Customer Care within 7 business days of your order delivery, for prompt resolution. In the extremely rare occasion where you receive a product with tampered/open packaging, please inform our Customer Care within 2 business days of receipt, with supporting images if applicable, so we can best address your concern.</p>
+</section>
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}

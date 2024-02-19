@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="/static/images/logo-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Document</title>
+    <title>shemade.in</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Font Awesome Pro CSS -->
@@ -123,6 +123,56 @@ font-size: 20px;
 .footer_column li, a {
 text-decoration: none;
 }
+
+.hamburger {
+    display: none;
+}
+
+.hamburger .line{
+  width: 50px;
+  height: 5px;
+  background-color: #ecf0f1;
+  display: block;
+  margin: 8px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger:hover{
+  cursor: pointer;
+}
+.hamburger.is-active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media only screen and (max-width: 900px) {
+    .hamburger {
+        display: block;
+    }
+    .hamburger.is-active ~ .navbar-header {
+    display: none;
+  }
+  .hamburger.is-active + nav {
+    height: 400px;
+    background-color: red;
+}
+  
+  /* Show header items when hamburger menu icon is clicked */
+  .hamburger.is-active + .navbar-header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
     </style>
 
     {% block css %}
@@ -133,6 +183,11 @@ text-decoration: none;
 <body>
     <!-- Nav starts here -->
     <nav>
+        <div class="hamburger" id="hamburger-6" >
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </div>
         <div class="navbar-header">
             <div>
                 <a href="{% url 'shop' %}">OUR SHOP</a>
@@ -153,10 +208,17 @@ text-decoration: none;
                 <a href="{% url 'search' %}"><i class="fa-light fa-magnifying-glass"></i></a>
             </div>
             <div>
-                <i class="fa-light fa-user"></i>
+                <a href="{% url 'user_profile' %}"><i class="fa-light fa-user"></i></a>
             </div>
             <div>
-                <a href="{% url 'view_wishlist' %}"><i class="fa-light fa-heart" style="color: black;"></i></a>
+                <a href="{% url 'view_wishlist' %}" style="position: relative;"><small id="cart-length" style="position: absolute;
+                    top: -10px;
+                    right: 15px;
+                    background-color: red;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 3px 6px;
+                    font-size: 12px;">{{ request.session.wishlist|length }}</small><i class="fa-light fa-heart" style="color: black;"></i></a>
             </div>
             <div>
                 <a href="{% url 'view_cart' %}" style="position: relative;"><small id="cart-length" style="position: absolute;
@@ -181,7 +243,7 @@ text-decoration: none;
     <footer class="custom-footer" >
             <div class="footer_01">
                 <div class="footer_column" >
-                        <h1 style="font-family: 'Roboto',Arial, sans-serif;">SheMade</h1>
+                        <h2 style="font-family: 'Roboto',Arial, sans-serif;">SheMade</h2>
                     <div class="subscribe_section">
                         <h3>Subscribe to our e-mail alerts!</h3>
                         <form class="subscribe_form" action="" >
@@ -218,12 +280,12 @@ text-decoration: none;
                     <h3>Help</h3>
                     <div class="footer_container" >
                         <ul >
-                            <li ><a href="" >Support & Waranty</a></li>
-                            <li ><a href="" >Return Policy</a></li>
-                            <li ><a href="" >Service Center</a></li>
-                            <li ><a href="" >FAQs</a></li>
-                            <li ><a href="" >Why buy direct</a></li>
-                            <li ><a href="" >Bulk Orders</a></li>
+                            <li ><a href="{% url 'security_warranty' %}" >Support & Waranty</a></li>
+                            <li ><a href="{% url 'return_policy' %}" >Return Policy</a></li>
+                            <li ><a href="{% url 'term_condition' %}" >Terms & Conditions</a></li>
+                            <li ><a href="{% url 'faqs' %}" >FAQs</a></li>
+                            
+                            
                         </ul>
                     </div>
                 </div>
@@ -232,10 +294,10 @@ text-decoration: none;
                     <div class="footer_container" >
                         <ul >
                             <li ><a href="{% url 'aboutus' %}" >About SheMade</a></li>
-                            <li ><a href="" >News</a></li>
+                            
                             <li ><a href="{% url 'blogs' %}" >Read Our Blog</a></li>
-                            <li ><a href="" >Investor Relations</a></li>
-                            <li ><a href="" >Social Responsibility</a></li>
+                            <li ><a href="{% url 'bulk_order' %}" >Bulk Orders</a></li>
+                            <li ><a href="{% url 'social_responsibility' %}" >Social Responsibility</a></li>
                             <li ><a href="{% url 'privacy_policy' %}" >Privacy & Policy</a></li>
                         </ul>
                     </div>
@@ -246,6 +308,11 @@ text-decoration: none;
     <!-- Footer ends here -->
 
 {% block js %}
+<script>
+    document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('is-active');
+});
+</script>
 <!-- JS code for other pages goes here -->
 {% endblock %}
 
