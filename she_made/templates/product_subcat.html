@@ -3,6 +3,25 @@
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/product.css">
+<style>
+        .wishlist-button {
+        
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        
+        border: none;
+        cursor: pointer;
+    }
+    
+    .fa-heart {
+        color: aqua; font-size: 20px; 
+    }
+    
+    .fa-heart:hover {
+        color: red; /* Change to your desired color */
+    }
+</style>
 {% endblock %}
 
 
@@ -22,6 +41,12 @@
                         <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
                         {% endif %}
                         {% endfor %}
+                        <form method="post" action="{% url 'add_to_wishlist' item_id=product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
                     </div>
                     <div class="name">
                         <h2 class="product__title">{{ product.name }}</h2>

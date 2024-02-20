@@ -246,6 +246,7 @@ def view_cart(request):
     # Calculate the total with two decimal places
     total = sum(item_data['total'] for item_data in cart.values())
     total = "{:.2f}".format(total)  # Format the total with two decimal places
+    print("Cart Total:", total)
     
     request.session['cart_total'] = total
     return render(request, 'cart.html', {'cart': cart, 'total': total})

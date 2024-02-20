@@ -39,7 +39,7 @@
     max-width: 90%;
 }
 
-.row .product_slider {
+.product_slider {
     display: flex;
     justify-content: space-between;
     
@@ -53,7 +53,7 @@
     align-items: center;
     background-color: #f2f5ff;
     border-radius: 20px;
-    padding-left: -40px;
+    
     
 }
 
@@ -63,10 +63,11 @@
 
 .slider_box .btns {
     display: flex;
-    justify-content: space-evenly; /* Align buttons on the same line */
+    
     width: 100%; /* Take up full width */
-    margin-top: 20px;
+    
     padding: 10px;
+    gap: 10px;
 }
 
 .slider_box button {
@@ -103,7 +104,8 @@
 .slider_box img {
     width: 100%; 
     height: 300px;
-    padding: 15px;
+    padding-right: -40px;
+    border-radius: 20px;
 }
 
 .slider_box .name {
@@ -196,7 +198,7 @@ button[type="submit"]:hover {
             <div class="row">
                     <div class="product_slider slider"  >
                         {% for product in fragrances %}
-                        <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}">
+                        <div class="slider_box"   data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}">
                             <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                                 <div class="product__images">
                                     {% for image in product.images.all %}

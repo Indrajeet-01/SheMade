@@ -5,18 +5,24 @@
 {% block css %}
 <style>
   .checkout {
-    margin: 20px 10% 20px 10%;
+    margin: 20px 5% 20px 5%;
     padding: 20px;
   }
 
-  .col-75 {
-    background-color: #BA90C6;
-    padding: 20px;
+  .checkout_form {
+    display: flex;
+    gap: 20px;
   }
 
   .container {
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 3px 6px 4px 6px #888888;
+    width: 75%;
+    
     display: flex;
-    gap: 50px;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .billing-info {
@@ -24,6 +30,40 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  #popup-card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+  #billing_form_popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+
+  #delivery_location, #payment_method_title, #apply_coupon_id {
+    
+    color: rgb(104, 70, 6);
+  }
+
+  #delivery_location:hover, #payment_method_title:hover, #apply_coupon_id:hover {
+    cursor: pointer;
+    
   }
   
   .personal-info {
@@ -59,12 +99,11 @@
   }
   input {
     line-height: 24px;
-    font-size: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+    outline: none;
   }
-  input,textarea {
-    border: none;
-    
-  }
+  
   
   .checkout h1 {
     text-align: center;
@@ -82,7 +121,7 @@
 
   select {
     height: 24px;
-    font-size: 10px;
+    font-size: 16px;
   }
 
   .payment-info {
@@ -92,23 +131,20 @@
     
   }
 
-  .payment-info h3 {
-    margin-bottom: 8%;
-  }
 
-  .card-details{
+  #credit_card_details{
     
     background: #fff;
     color: #555;
     
     padding: 10px;
 }
-.card-details p{
+#credit_card_details p{
     font-size: 18px;
 }
 
 
-.card-details label{
+#credit_card_details label{
     font-size: 18px;
     line-height: 20px;
 }
@@ -142,21 +178,18 @@
     width: 70px;
 }
 
-.card-details input{
+#credit_card_details input{
     border: 1px solid #ccc;
     height: 22px;
     padding: 5px;
     font-size: 10px;
 }
 
-.card-details input::placeholder{
+#credit_card_details input::placeholder{
     color: #ccc;
 }
 
-.proceed-checkout {
-  margin-top: 80px;
-  align-self: flex-end;
-}
+
 
 button {
   padding: 10px 30px; 
@@ -169,7 +202,36 @@ button:hover {
   background-color: #C0DBEA;
 }
 
+.payment-details {
+    display: none;
+}
+
+#upi_details, .payment-details {
+  margin-left: 30px;
+}
+
+
+
+.apply_coupon input, button {
+  outline: none;
+  border: none;
+  height: 40px;
+  border-radius: 5%;
+}
+
+.apply_coupon button {
   
+}
+  .order_summary {
+    width: 25%;
+    height: fit-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    
+    border-radius: 5px;
+    box-shadow: 3px 6px 4px 6px #888888;
+  }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
 @media (max-width: 800px ) {
@@ -202,38 +264,34 @@ button:hover {
 {% block content %}
 <section class="checkout">
     <h1>Checkout</h1>
-
+    <div class="popup-card-overlay" id="popup-card-overlay"></div>
+    
     <div class="row">
       <div class="col-75">
-        
-          <form>
-            
+          <div class="checkout_form">
             <div class="container">
-              <div class="billing-info">
-                <div class="row personal-info">
-                  <h3>Billing Address</h3>
-                  
-                    
-                    
-                      <div>
-                        <label for="name"><i class="fa-regular fa-user"></i>Name<span class="required" style="color: red;">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="your full name" required>
-                      </div>
-                      <div>
-                        <label for="phone"><i class="fa-regular fa-phone"></i>Phone<span class="required" style="color: red;">*</span></label>
-                        <input type="text" name="phone" class="form-control" placeholder="your phone number" required>
-    
-                      </div>
-                      <div>
-                        <label for="email"><i class="fa-regular fa-envelope"></i>Email<span class="required" style="color: red;">*</span></label>
-                        <input type="email" name="email" class="form-control" placeholder="your email" required>
-                      </div>
-                  
-                </div>
+              <p id="delivery_location" style="font-size: 24px;"><strong>1 Fill/Select your address</strong></p>
+              <div id="filled_details" ></div>
+              <div id="billing_form_popup" class="billing-info" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; ">
+                <form class="billing-info" id="billing_form">
+                  <div class="row personal-info">
+                    <div>
+                      <label for="name"><i class="fa-regular fa-user"></i>Name<span class="required" style="color: red;">*</span></label>
+                      <input type="text" name="name" class="form-control" placeholder="your full name" required>
+                    </div>
+                    <div>
+                      <label for="phone"><i class="fa-regular fa-phone"></i>Phone<span class="required" style="color: red;">*</span></label>
+                      <input type="text" name="phone" class="form-control" placeholder="your phone number" required>
+                    </div>
+                    <div>
+                      <label for="email"><i class="fa-regular fa-envelope"></i>Email<span class="required" style="color: red;">*</span></label>
+                      <input type="email" name="email" class="form-control" placeholder="your email" required>
+                    </div>
+                  </div>
                 <div class="billing-address">
                   <div class="form-group col-md-4 ">
                     <label for="inputState"><i class="fa-regular fa-globe"></i>State</label>
-                    <select class="form-control" id="inputState">
+                    <select class="form-control" id="inputState" name="state">
                                         <option value="SelectState" >Select State</option>
                                         <option value="Andra Pradesh">Andra Pradesh</option>
                                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -276,7 +334,7 @@ button:hover {
                   </div>
                   <div class="form-group col-md-4">
                     <label for="inputDistrict"><i class="fa-regular fa-city"></i>District</label>
-                    <select class="form-control" id="inputDistrict">
+                    <select class="form-control" id="inputDistrict" name="district">
                         <option value="">-- select one -- </option>
                     </select>
                   </div>
@@ -292,13 +350,18 @@ button:hover {
                     </div>
                     
                   </div>
+                <button type="submit" onclick="">Use this address</button>
+                </form>
+              </div>
+                <div class="payment-info" >
+                  <p id="payment_method_title" style="font-size: 24px;"><strong>2 Payment method</strong></p>
+                  <form action="" id="payment_form" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
+                    
+                  <div class="payment-option" id="credit_card_option">
+                    <input type="radio" id="credit_card_radio" name="payment_method" value="credit_card">
+                    <label for="credit_card_radio">Credit/Debit Card</label>
                   </div>
-
-                  
-              
-                <div class="payment-info">
-                  <h3>Payment Details</h3>
-                  <div class="card-details">
+                  <div  class="payment-details" id="credit_card_details">
                     <p>Pay using credit or debit card</p>
                     <div class="card-num-field-group">
                     <label>Card Number</label><br>
@@ -320,22 +383,83 @@ button:hover {
                     <label>Card Holder Name</label><br>
                     <input type="text" class="name-field" placeholder="Full Name">
                     </div>
-
                 </div>
-                <div class="proceed-checkout">
-                  <p>Cart Total:<p style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{request.session.cart_total }}</p></p>
-                  <button>Proceed to Checkout</button>
+                <div class="payment-option">
+                  <input type="radio" id="upi_radio" name="payment_method" value="upi">
+                  <label for="upi_radio">Pay using UPI</label>
+                </div>
+              
+                <div class="payment-details" id="upi_details">
+                  <p>Please select your UPI app:</p>
+                  
+                  <div class="payment-option" id="google_pay_option">
+                      <input type="radio" id="google_pay_radio" name="upi_method" value="google_pay">
+                      <label for="google_pay_radio">Google Pay</label>
+                  </div>
+              
+                  <div class="payment-option" id="phone_pe_option">
+                      <input type="radio" id="phone_pe_radio" name="upi_method" value="phone_pe">
+                      <label for="phone_pe_radio">PhonePe</label>
+                  </div>
+                  <!-- Add other UPI payment options similarly -->
+                </div>
+                <div class="payment-details" id="google_pay_details">
+                  <p>Google Pay</p>
+                  <p>Please use your Google Pay app to scan the QR code or enter the UPI ID to make the payment.</p>
+                  <!-- You can provide additional instructions or a QR code here -->
+                </div>
+              
+                <div class="payment-details" id="phone_pe_details">
+                  <p>PhonePe</p>
+                  <p>Please use your PhonePe app to scan the QR code or enter the UPI ID to make the payment.</p>
+                  <!-- You can provide additional instructions or a QR code here -->
+                </div>
+
+                <div class="payment-option" id="cod_option">
+                  <input type="radio" id="cod_radio" name="payment_method" value="cod">
+                  <label for="cod_radio">Cash on Delivery</label>
+                </div>
+                <div class="payment-details" id="cod_details">
+                  Pay on delivery- Cash, UPI and Cards accepted
+                </div>
+                </form>
+                  
+              </div>
+              <div class="checkout_footer">
+                <p id="apply_coupon_id" style="font-size: 24px; "><strong>3 Apply coupon</strong></p>
+                <div class="apply_coupon" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
+                  <input type="text" id="coupon_code" placeholder="Enter coupon code" style="font-size: 14px;">
+                  <button onclick="applyCoupon()">Apply</button>
+                    <!-- Display area for applied coupon -->
+                    
                 </div>
               </div>
-
-
             </div>
-            
-              
-            </form>
-
-
-
+            <div class="order_summary">
+              <p style="font-size: 24px; margin-bottom: 0px; "><strong>Order Summary</strong></p>
+              <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
+                <p>Cart Total:</p>
+                <p><span >₹ </span><span >{{request.session.cart_total }}</span></p>
+              </div>
+              <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
+                <p>Delivery:</p>
+                <p><span>₹ </span>60</p>
+              </div>
+              <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
+                <p>Discount:</p>
+                <p id="discountAmount">₹ 0</p>
+              </div>
+              <div class="proceed-checkout" >
+                <hr>
+                <div class="order_summary_info" style="font-size: 24px; color: orange; font-weight: 400; display: flex; justify-content: space-between; margin: -20px 0px -20px 0px;">
+                  <p>Order Total:</p>
+                  <p><span >₹ </span><span id="cart_total" >{{request.session.cart_total }}</span></p>
+                </div>
+                <hr>
+                <button>Proceed to Checkout</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -354,6 +478,183 @@ button:hover {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    console.log('pop up form opened');
+    // Function to open the billing address popup form
+    document.getElementById("delivery_location").addEventListener("click", function() {
+        document.getElementById("billing_form_popup").style.display = "block";
+        document.getElementById("popup-card-overlay").style.display = "block";
+    });
+
+    // Function to close the billing address popup form
+    function closePopupForm() {
+        document.getElementById("billing_form_popup").style.display = "none";
+        document.getElementById("popup-card-overlay").style.display = "none";
+    }
+
+    // Close the popup form when the overlay is clicked
+    document.getElementById("popup-card-overlay").addEventListener("click", function() {
+        closePopupForm();
+    });
+
+    // Function to handle form submission
+    document.getElementById("billing_form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get form data
+        var formData = new FormData(this);
+        // Display the filled details
+        var details = 
+            "Name: " + formData.get("name") + "<br>" +
+            "Phone: " + formData.get("phone") + "<br>" +
+            "Email: " + formData.get("email") + "<br>" +
+            formData.get("street") + "," +
+            formData.get("district") + ", " +
+            formData.get("state") + "—" +
+            formData.get("pincode");
+            
+        document.getElementById("filled_details").innerHTML = details;
+        document.getElementById("filled_details").style.boxShadow = "1px 3px 2px 3px #888888; padding: 10px"
+        // Close the popup form
+        document.getElementById("billing_form_popup").style.display = "none";
+        document.getElementById("popup-card-overlay").style.display = "none";
+        console.log('Form submitted and popup closed');
+    });
+});
+
+</script>
+
+
+
+<script>
+  $(document).ready(function () {
+      // When user clicks on "Where you want to deliver your order?"
+      $("#delivery_location").click(function () {
+          // Show the billing form
+          $(".billing-info").show();
+      });
+
+      // When user clicks on "How will you pay?"
+      $("#payment_method_title").click(function () {
+          // Check if billing info is filled out before showing payment form
+          if (isBillingInfoFilled()) {
+              // Show the payment form
+              $("#payment_form").show();
+          } else {
+              // Inform the user to fill out billing info first
+              alert("Please fill out the billing information first.");
+          }
+      });
+
+      $('#apply_coupon_id').click(function () {
+        if (isPaymentMethodSelected()) {
+          $('.apply_coupon').show()
+        } else {
+          alert("Please select the payment method first");
+        }
+      })
+
+      // Function to check if billing info is filled out
+      function isBillingInfoFilled() {
+          var billingInfoFilled = true;
+          $("#billing_form input[type='text'], #billing_form input[type='email'], #billing_form textarea").each(function () {
+              if ($(this).val() === "") {
+                  billingInfoFilled = false;
+                  return false; // Exit the loop early if any field is empty
+              }
+          });
+          return billingInfoFilled;
+      }
+
+      function isPaymentMethodSelected() {
+    // Check if any of the payment method radio buttons are checked
+        return $("input[name='payment_method']:checked").length > 0;
+      }
+  });
+</script>
+
+<script>
+window.onload = function() {
+  var deliveryCharge = 60;
+  var cartTotalElement = document.getElementById("cart_total");
+  var cartTotalStr = cartTotalElement.textContent.trim(); // Trim whitespaces
+  var cartTotal = parseFloat(cartTotalStr);
+
+  var newTotal = deliveryCharge + cartTotal
+
+  document.getElementById("cart_total").textContent = newTotal.toFixed(2);
+}
+
+$(document).ready(function(){
+    $('input[type="radio"]').click(function(){
+        var paymentMethod = $(this).val();
+        $(".payment-details").hide();
+        $("#"+paymentMethod+"_details").show();
+    });
+});
+
+var couponApplied = false;
+
+function applyCoupon() {
+
+  if (!couponApplied) {
+
+    // Get the value of the coupon code entered by the user
+    var couponCode = document.getElementById("coupon_code").value;
+console.log("Coupon Code:", couponCode);
+
+var cartTotalElement = document.getElementById("cart_total");
+if (!cartTotalElement) {
+    console.log("Cart total element not found.");
+} else {
+    var cartTotalStr = cartTotalElement.textContent.trim(); // Trim whitespaces
+    console.log("Cart Total String:", cartTotalStr);
+
+    var cartTotal = parseFloat(cartTotalStr);
+    console.log("Type of cartTotal before parseFloat():", typeof(cartTotal));
+
+    // Check if the cart total is a valid number
+    if (isNaN(cartTotal)) {
+        alert("Invalid cart total. Please check your cart.");
+        return;
+    }
+    console.log("Cart Total after parseFloat():", cartTotal);
+}
+
+    // Here, you can implement logic to validate the coupon code and calculate discounts
+    // For demonstration purposes, let's assume the coupon code "DISCOUNT10" gives a 10% discount
+    if (couponCode === "DISCOUNT10") {
+        // Calculate the discount amount
+        var discount = 0.10; // 10%
+        var delivaryCharge = 60
+        var discountAmount = cartTotal * discount;
+        var newTotal = cartTotal - discountAmount + delivaryCharge;
+
+        document.getElementById('discountAmount').innerHTML = '-₹' + discountAmount.toFixed(2)
+
+        document.getElementById('cart_total').innerHTML = newTotal.toFixed(2);
+
+        couponApplied = true;
+
+        // Disable the "Apply coupon" button
+        document.getElementById("apply_coupon_id").disabled = true;
+
+    } else {
+        // Display a message for invalid coupon code
+        document.getElementById("applied_coupon").innerHTML = "Invalid coupon code";
+    }
+
+  } else {
+        // Display a message indicating that the coupon has already been applied
+        document.getElementById("applied_coupon").innerHTML = "Coupon has already been applied";
+    }
+}
+
+
+</script>
 <script src="/static/js/address.js"></script>
 <script src="/static/js/checkout_form.js"></script>
 {% endblock %}
