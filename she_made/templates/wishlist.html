@@ -7,6 +7,13 @@
     .wishlist {
         margin: 30px 5% 30px 5%;
     }
+    
+    .wishlist h1 {
+        color: white;
+        background-color: #436850;
+        text-align: center;
+    }
+
     .wishlist-items {
         display: flex;
         flex-wrap: wrap;
@@ -19,8 +26,25 @@
         border-radius: 5px;
         box-shadow: 3px 6px 4px 6px #888888;
     }
+
+    .wishlist-item h3 {
+        color: #016A70;
+    }
     .wishlist-item a {
         text-decoration: none;
+    }
+
+    .add-to-cart-button {
+        color: white;
+        font-size: 14px;
+        background-color: #739072;
+        padding: 5px 10px 5px 10px; 
+        border-radius: 10px;
+    }
+
+    .add-to-cart-button:hover {
+        color: #739072;
+        background-color: white;
     }
 
     button {
@@ -61,7 +85,7 @@
                             <div class="product-image">
                                 <img src="{{  item_data.image }}" alt="Product Image">
                             </div>
-                            <h2>{{ item_data.name }}</h2>
+                            <h3>{{ item_data.name }}</h3>
                         </a>
                         
                         <div class="product-details">
@@ -73,8 +97,8 @@
                             <div class="add-to-cart-form">
                                 <form method="post" action="{% url 'add_to_cart' item_id=item_data.product_id %}">
                                     {% csrf_token %}
-                                        <button type="submit" class="add-to-cart-button" style="background-color: #82AAE3; padding: 5px 10px 5px 10px; border-radius: 10px;" >
-                                            <span style="color: white;">Add to Cart</span>
+                                        <button type="submit" class="add-to-cart-button"  >
+                                            <span >Add to Cart</span>
                                         </button>
                                 </form>
                             </div>

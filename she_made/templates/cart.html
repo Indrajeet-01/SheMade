@@ -12,8 +12,13 @@
     margin: 10px 5% 30px 5%;
     padding: 10px;
 }
+.cart h1 {
+        color: white;
+        background-color: #436850;
+        text-align: center;
+    }
 .container {
-    background-color: #BA90C6;
+    background-color: #ADBC9F;
 }
 .table {
     width: 100%;
@@ -83,7 +88,7 @@ text-align: center;
 margin-left: 5px;
 font-size: 16px;
 border: none;
-background-color: #BA90C6;
+background-color: #ADBC9F;
 
 }
 
@@ -105,11 +110,13 @@ form {
 cursor: pointer;
 color: white; 
 border: none; 
-background-color: #007bff;
+background-color: #4F6F52;
 border-radius: 10px;
 }
 
-.checkout_btn p:hover {
+.checkout_btn:hover {
+    font-size: 18px;
+    color: #4F6F52;
     background-color: white;
 }
 
@@ -123,7 +130,7 @@ border-radius: 10px;
 {% block content %}
 <section class="cart">
     
-    <h1 class="mb-3 mt-5 bread text-center" style="text-align: center;">Cart</h1>
+    <h1 class="mb-3 mt-5 bread text-center" >Cart</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
@@ -198,12 +205,12 @@ border-radius: 10px;
                 <div class="cart_total">
                     <h2>Cart Totals</h2>
                     
-                    <p id="cart-total" style="color: rgb(19, 148, 47); font-size: 24px;"> ₹ {{ total}}</p>
+                    <p id="cart-total" style="color: #12372A; font-size: 24px;"> ₹ {{ total}}</p>
                     
                 </div>
                 <div class="">
                     {% if request.session.cart|length > 0 %}
-                        <p class="checkout_btn" style="background-color: #C0DBEA; "><a href="{% url 'checkout' %}" style="color: #BA90C6; font-size: 18px;" class="" >Proceed to Checkout</a></p>
+                        <p class="checkout_btn" ><a href="{% url 'checkout' %}"  class="checkout_btn" >Proceed to Checkout</a></p>
                     {% endif %}
                 </div>
         </div>

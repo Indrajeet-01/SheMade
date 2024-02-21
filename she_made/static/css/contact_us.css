@@ -129,24 +129,7 @@ section {
     transform: translateY(-20px);
   }
   
-  .contact-form .input-box input[type="submit"]
-  {
-    width: 100%;
-    background: #00bcd4;
-    color: #FFF;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #00bcd4;
-    transition: 0.5s;
-  }
-  
-  .contact-form .input-box input[type="submit"]:hover
-  {
-    background: #FFF;
-    color: #00bcd4;
-  }
+
   
   @media (max-width: 991px) {
     section {

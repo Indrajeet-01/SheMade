@@ -4,6 +4,27 @@
 {% block css %}
 <link rel="stylesheet" href="/static/css/product.css">
 <style>
+
+    .slider_box {
+        box-shadow: 5px 10px #739072; 
+        height: 400px; 
+        margin-bottom: 10px;
+    }
+
+    .slider_box button {
+        font-size: 16px;
+        background-color: #739072;
+    }
+
+    .slider_box button:hover {
+        color: #739072;
+        background-color: white;
+
+    }
+
+    .name h3 {
+        color: #016A70;
+    }
         .wishlist-button {
         
         position: absolute;
@@ -15,7 +36,7 @@
     }
     
     .fa-heart {
-        color: aqua; font-size: 20px; 
+        color: #739072; font-size: 20px; 
     }
     
     .fa-heart:hover {
@@ -31,7 +52,7 @@
         
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6; height: 400px; margin-bottom: 10px;">
+            <div class="slider_box" >
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
@@ -49,7 +70,7 @@
                         </form>
                     </div>
                     <div class="name">
-                        <h2 class="product__title">{{ product.name }}</h2>
+                        <h3 class="product__title">{{ product.name }}</h3>
                     </div>
                 </a>
                 <div class="price">
@@ -58,7 +79,7 @@
                 <div class="add-to-cart-form">
                     <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
                         {% csrf_token %}
-                            <button type="submit" class="add-to-cart-button" style="background-color: #82AAE3;">
+                            <button type="submit" class="add-to-cart-button" >
                                 Add to Cart
                             </button>
                     </form>

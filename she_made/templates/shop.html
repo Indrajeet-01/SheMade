@@ -16,7 +16,12 @@
     padding: 15px;
     height: fit-content;
     justify-content: center;
-    background-color: #FDF4F5;
+    background-color: transparent;
+}
+
+.shop p {
+    font-size: 20px;
+    color: #12372A;
 }
 
 .filters h5 {
@@ -31,13 +36,46 @@
     margin-bottom: 5px;
 }
 
+.slider_box {
+        box-shadow: 5px 10px #739072; 
+        height: 400px; 
+        margin-bottom: 10px;
+    }
+
+    .slider_box button {
+        font-size: 16px;
+        background-color: #739072;
+    }
+
+    .slider_box button:hover {
+        color: #739072;
+        background-color: white;
+
+    }
+
+    .name h3 {
+        font-weight: 700;
+        color: #016A70;
+    }
+
 .products {
-    flex: 3;
+    flex: 7;
 }
+ .sub_cat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+ }
     .category-filter, .sub-category-filter {
         border: none;
-        background-color: #FDF4F5;
+        color: #739072;
+        background-color: transparent;
         cursor: pointer;
+    }
+
+    .category-filter:hover, .sub-category-filter:hover {
+        color: #12372A;
+        transform: scale(1.3);
     }
 
     .wishlist-button {
@@ -51,8 +89,8 @@
 }
 
 .fa-heart {
-    color: aqua; font-size: 20px; 
-}
+        color: #739072; font-size: 20px; 
+    }
 
 .fa-heart:hover {
     color: red; /* Change to your desired color */
@@ -108,7 +146,7 @@
 
         <div class="sub_cat">
             {% for product in products %}
-            <div class="slider_box" style="box-shadow: 5px 10px #BA90C6; margin-bottom: 10px;" >
+            <div class="slider_box" >
                 <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
@@ -135,7 +173,7 @@
                 <div class="add-to-cart-form">
                     <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
                         {% csrf_token %}
-                            <button type="submit" class="add-to-cart-button" style="background-color: #82AAE3;">
+                            <button type="submit" class="add-to-cart-button" >
                                 Add to Cart
                             </button>
                     </form>

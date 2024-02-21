@@ -13,7 +13,7 @@
     
 .headline {
     color: white;
-    background-color: #BA90C6;
+    background-color: #436850;
     padding-top: 5px;
     padding-bottom: 5px;
     margin-top: 20px;
@@ -28,7 +28,7 @@
     margin-left: 80px;
     margin-right: 80px;
     color: white;
-    background-color: #BA90C6;
+    background-color: #436850;
     padding: 5px 0 5px 5px;
 }
 
@@ -66,16 +66,27 @@
     
     width: 100%; /* Take up full width */
     
-    padding: 10px;
+    padding: 20px;
     gap: 10px;
 }
+
+
+
+    .slider_box button:hover {
+        color: #739072;
+        background-color: white;
+
+    }
+
 
 .slider_box button {
     padding: 10px 30px; 
     cursor: pointer;
     color: white; 
     border: none; 
-    background-color: #b63535;
+    font-size: 16px;
+    background-color: #739072;
+    
 }
 
 .slider_box button button span {
@@ -108,12 +119,14 @@
     border-radius: 20px;
 }
 
-.slider_box .name {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
+.slider_box .name h3 {
+    
+    color: #016A70;
     text-align: center;
     margin-bottom: 10px;
 }
+
+
 
 .slider_box .price {
     font-size: 20px;
@@ -121,13 +134,6 @@
     text-align: center;
 }
 
-button[type="submit"] {
-    transition: background-color 0.3s ease; /* Add transition effect */
-}
-
-button[type="submit"]:hover {
-    background-color: #999; /* Change background color on hover */
-}
 
 .popup-card-overlay {
     position: fixed;
@@ -220,11 +226,11 @@ button[type="submit"]:hover {
                             </div>
                             <div class="btns">
                                 <button class="quick-view-btn" data-target="product1">
-                                    QUICK VIEW
+                                    Quick View
                                 </button>
                                 <form method="post" action="">
                                     <button type="submit">
-                                        <span >ADD TO CART</span>
+                                        <span >Add To Cart</span>
                                     </button>
                                 </form>
                             </div>
@@ -261,11 +267,11 @@ button[type="submit"]:hover {
                         </div>
                         <div class="btns">
                             <button class="quick-view-btn" data-target="product1">
-                                QUICK VIEW
+                                Quick View
                             </button>
                             <form method="post" action="">
                                 <button type="submit">
-                                    <span >ADD TO CART</span>
+                                    <span >Add To Cart</span>
                                 </button>
                             </form>
                         </div>
@@ -302,11 +308,11 @@ button[type="submit"]:hover {
                     </div>
                     <div class="btns">
                         <button class="quick-view-btn" data-target="product1">
-                            QUICK VIEW
+                            Quick View
                         </button>
                         <form method="post" action="">
                             <button type="submit">
-                                <span >ADD TO CART</span>
+                                <span >Add To Cart</span>
                             </button>
                         </form>
                     </div>

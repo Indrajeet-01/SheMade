@@ -17,7 +17,7 @@ width: 280px;
 margin-bottom: 10px;
 display: flex; 
 flex-direction: column; 
-box-shadow: 5px 10px #BA90C6;
+box-shadow: 5px 10px #4F6F52;
 align-items: center;
 background-color: #f2f5ff;
 border-radius: 20px;
@@ -37,11 +37,12 @@ padding: 10px 30px;
 cursor: pointer;
 color: white; 
 border: none; 
-background-color: #BA90C6;
+background-color: #4F6F52;
+margin-bottom: 10px;
 }
 
 .slider_box button button span {
-font-size: 16px;
+font-size: 18px;
 }
 
 .product__images {

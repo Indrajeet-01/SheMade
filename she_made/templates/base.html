@@ -12,22 +12,48 @@
     <!-- Font Awesome Pro CSS -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
 
     <style>
+        
         body {
-    background-color:#C0DBEA ;
+            
+    background-color:#f2f5ff ;
+} 
+
+body h1, h2, h3, h4, h5, a {
+    font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+body p, span , button, th, li {
+    font-family: "Sanchez", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 nav {
+    font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  
+
+}
+
+nav {
+
 display: flex;
 justify-content: space-between;
 align-items: center;
-background-color: #E8A0BF;
+background-color: #e1f0da;
 height: 70px;
 margin-top: 10px;
-font-family: Helvetica, Arial, sans-serif;
+
 padding-left: 10px;
 padding-right: 10px;
 }
@@ -44,13 +70,14 @@ gap: 30px;
 .navbar-header a {
 text-decoration: none;
 color: #1c1c1c;
-font-size: 16px;
-font-weight: 100;
+font-size: 18px;
+font-weight: 700;
+
 }
 
 .logo {
 font-size: 24px;
-font-family: 'Roboto',Arial, sans-serif;
+
 font-weight: 500;
 font-style: bold;
 }
@@ -61,9 +88,20 @@ font-size: 20px;
 }
 
 .custom-footer {
-    background-color: #E8A0BF; 
+    background-color: #E1F0DA; 
     margin-top: 40px;
     
+}
+
+.custom-footer {
+    font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h2 {
+    font-family: "EB Garamond", serif;
 }
 
 .footer_01 {
@@ -217,8 +255,8 @@ text-decoration: none;
                     background-color: red;
                     color: white;
                     border-radius: 50%;
-                    padding: 3px 6px;
-                    font-size: 12px;">{{ request.session.wishlist|length }}</small><i class="fa-light fa-heart" style="color: black;"></i></a>
+                    padding: 2px 4px;
+                    font-size: 14px;">{{ request.session.wishlist|length }}</small><i class="fa-light fa-heart" style="color: black;"></i></a>
             </div>
             <div>
                 <a href="{% url 'view_cart' %}" style="position: relative;"><small id="cart-length" style="position: absolute;
@@ -227,8 +265,8 @@ text-decoration: none;
                     background-color: red;
                     color: white;
                     border-radius: 50%;
-                    padding: 3px 6px;
-                    font-size: 12px;">{{ request.session.cart|length }}</small><i class="fa-light fa-bag-shopping"></i></a>
+                    padding: 2px 4px;
+                    font-size: 14px;">{{ request.session.cart|length }}</small><i class="fa-light fa-bag-shopping"></i></a>
             </div>
         </div>
     </nav>

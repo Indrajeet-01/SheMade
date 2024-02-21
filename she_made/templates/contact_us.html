@@ -4,11 +4,37 @@
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/contact_us.css">
+<style>
+  section {
+    background-color: #ADBC9F;
+    margin: 30px 5% 30px 5%;
+  }
+
+   .input-box button
+  {
+    width: 100%;
+    background: #739072;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #739072;
+    transition: 0.5s;
+  }
+  
+  .contact-form button:hover
+  {
+    color: #739072;
+    background-color: white;
+  }
+  
+</style>
 {% endblock %}
 
 
 {% block content %}
-<section style="background-color: #BA90C6 ; margin: 30px 5% 30px 5%;">
+<section >
     
     <div class="section-header" >
         
@@ -77,7 +103,7 @@
             </div>
             
             <div class="input-box" >
-              <input type="submit" style="background-color: #82AAE3;" value="Send" name="">
+              <button type="submit"  value="Send" name="">Send</button>
             </div>
           </form>
         

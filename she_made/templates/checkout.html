@@ -9,15 +9,34 @@
     padding: 20px;
   }
 
+  .checkout h1 {
+        color: white;
+        background-color: #436850;
+        text-align: center;
+    }
+
   .checkout_form {
     display: flex;
     gap: 20px;
   }
 
+  
+  .checkout button {
+        font-size: 16px;
+        color: white;
+        background-color: #739072;
+    }
+
+    .checkout button:hover {
+        color: #739072;
+        background-color: white;
+
+    }
+
   .container {
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 3px 6px 4px 6px #888888;
+    box-shadow: 3px 6px 4px 6px #739072;
     width: 75%;
     
     display: flex;
@@ -219,9 +238,7 @@ button:hover {
   border-radius: 5%;
 }
 
-.apply_coupon button {
-  
-}
+
   .order_summary {
     width: 25%;
     height: fit-content;
@@ -230,7 +247,7 @@ button:hover {
     flex-direction: column;
     
     border-radius: 5px;
-    box-shadow: 3px 6px 4px 6px #888888;
+    box-shadow: 3px 6px 4px 6px #739072;
   }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
@@ -270,7 +287,7 @@ button:hover {
       <div class="col-75">
           <div class="checkout_form">
             <div class="container">
-              <p id="delivery_location" style="font-size: 24px;"><strong>1 Fill/Select your address</strong></p>
+              <p id="delivery_location" style="font-size: 24px; color: #739072;"><strong>1 Fill/Select your address</strong></p>
               <div id="filled_details" ></div>
               <div id="billing_form_popup" class="billing-info" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; ">
                 <form class="billing-info" id="billing_form">
@@ -354,7 +371,7 @@ button:hover {
                 </form>
               </div>
                 <div class="payment-info" >
-                  <p id="payment_method_title" style="font-size: 24px;"><strong>2 Payment method</strong></p>
+                  <p id="payment_method_title" style="font-size: 24px; color: #739072;"><strong>2 Payment method</strong></p>
                   <form action="" id="payment_form" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
                     
                   <div class="payment-option" id="credit_card_option">
@@ -426,7 +443,7 @@ button:hover {
                   
               </div>
               <div class="checkout_footer">
-                <p id="apply_coupon_id" style="font-size: 24px; "><strong>3 Apply coupon</strong></p>
+                <p id="apply_coupon_id" style="font-size: 24px; color: #739072; "><strong>3 Apply coupon</strong></p>
                 <div class="apply_coupon" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
                   <input type="text" id="coupon_code" placeholder="Enter coupon code" style="font-size: 14px;">
                   <button onclick="applyCoupon()">Apply</button>
