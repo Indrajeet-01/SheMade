@@ -60,6 +60,9 @@ def wishlist(request):
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
 
+def offers(request):
+    return render(request, 'offers.html')
+
 def checkout(request):
     return render(request, 'checkout.html')
 

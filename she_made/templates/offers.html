@@ -3,15 +3,172 @@
 
 
 {% block css %}
+<style>
+    .offers {
+        margin: 30px 15% 30px 15%;
+    }
+
+    .offers h1 {
+    color: white;
+      background-color: #436850;
+      text-align: center;
+      font-size: 28px;
+  }
+  .container {
+    padding: 0 3% 0 3%;
+
+  }
+  .offer {
+    box-shadow: 1px 3px 2px 3px #888888; 
+    padding: 10px;
+    margin-bottom: 25px;
+  }
+  .offer_info {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+
+  .offer_info p {
+    flex: 2;
+  }
+  .offer_code {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    color: white;
+    padding: 0 10px 0 10px;
+    
+  }
+
+  .btn_p:hover {
+    
+  }
+
+  .link_btn {
+    background-color: rgb(176, 122, 52); 
+    color: white; 
+    border: none;
+  }
+  .link_btn:hover {
+    background-color: #888888;
+
+  }
+
+  .offer_code a {
+    color: white;
+    
+    font-size: 16px;
+  }
+
+
+
+
+</style>
 
 {% endblock %}
 
 
 {% block content %}
+<section class="offers">
+    <h1>Offers & Discounts</h1>
+    <p style="text-align: center; ">To avail the offer and discounts, copy the below coupon code and use it in the checkout option. So Shop now</p>
+    <div class="container">
+        <div class="offer">
+            <h2 style="font-weight: 600;">Get upto Rs 750 Off on 3490 and Above</h2>
+            <div class="offer_info">
+                <p>Get upto Rs 750 Off on 3490 and Above.</p>
+                <div class="offer_code" >
+                    <div class="coupon" data-coupon-text="GFS" style="position: relative; flex: 5;">
+                        <p class="textToCopy" style="background-color: rgb(99, 61, 11);  color: white; padding: 10px; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">GFS</p>
+                        <button class="copyButton" style="position: absolute;
+                        top: 23px;
+                        right: 15px;
+                        border: none;
+                        cursor: pointer;
+                        background-color: transparent;
+                        color: white;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        padding: 2px 4px;"><i class="fa-regular fa-copy" ></i></button>
+                    </div>
+                    
+                    <p class="btn_p" style="flex: 2; background-color: rgb(176, 122, 52); color: white; padding: 9px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"><button class="link_btn"  ><a href="{% url 'shop' %}" >Shop Now</a></button></p>
+                </div>
+            </div>
+        </div>
+        <div class="offer">
+            <h2 style="font-weight: 600;">Get Upto 30% Off on 1999 and Above</h2>
+            <div class="offer_info">
+                <p>Get Upto 30% Off on 1999 and Above. Max Discount Rs.2000.</p>
+                <div class="offer_code" >
+                    <div class="coupon" data-coupon-text="HOMES30" style="position: relative; flex: 5;">
+                        <p class="textToCopy" style="background-color: rgb(99, 61, 11);  color: white; padding: 10px; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">HOMES30</p>
+                        <button class="copyButton" style="position: absolute;
+                        top: 23px;
+                        right: 15px;
+                        border: none;
+                        cursor: pointer;
+                        background-color: transparent;
+                        color: white;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        padding: 2px 4px;"><i class="fa-regular fa-copy" ></i></button>
+                    </div>
+                    
+                    <p style="flex: 2; background-color: rgb(176, 122, 52); color: white; padding: 9px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"><button class="link_btn" ><a href="{% url 'shop' %}" >Shop Now</a></button></p>
+                </div>
+            </div>
+        </div>
+        <div class="offer">
+            <h2 style="font-weight: 600;">Up to 600 off on the cart value of 1990</h2>
+            <div class="offer_info">
+                <p>Up to 600 off on the cart value of 1990.</p>
+                <div class="offer_code" >
+                    <div class="coupon" data-coupon-text="FLARE" style="position: relative; flex: 5;">
+                        <p class="textToCopy" style="background-color: rgb(99, 61, 11);  color: white; padding: 10px; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">FLARE</p>
+                        <button class="copyButton" style="position: absolute;
+                        top: 23px;
+                        right: 15px;
+                        border: none;
+                        cursor: pointer;
+                        background-color: transparent;
+                        color: white;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        padding: 2px 4px;"><i class="fa-regular fa-copy" ></i></button>
+                    </div>
+                    
+                    <p style="flex: 2; background-color: rgb(176, 122, 52); color: white; padding: 9px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"><button class="link_btn" ><a href="{% url 'shop' %}" >Shop Now</a></button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 
 
 {% block js %}
+<script>
+
+document.querySelectorAll('.copyButton').forEach(button => {
+    button.addEventListener('click', function() {
+        const couponContainer = this.closest('.coupon');
+        const textToCopy = couponContainer.dataset.couponText;
+        const selection = window.getSelection();
+        const range = document.createRange();
+        const textNode = couponContainer.querySelector('.textToCopy');
+
+        range.selectNodeContents(textNode);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        const successful = document.execCommand('copy');
+        selection.removeAllRanges();
+    });
+});
+
+</script>
 
 {% endblock %}
