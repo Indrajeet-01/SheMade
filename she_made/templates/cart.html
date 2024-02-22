@@ -4,125 +4,85 @@
 {% block css %}
 
 <style>
-    /* Custom CSS for Cart */
 
-/* Table styles */
-.cart {
-    
-    margin: 10px 5% 30px 5%;
-    padding: 10px;
-}
-.cart h1 {
-        color: white;
-        background-color: #436850;
+    .cart {
+        margin: 10px 3% 30px 3%; padding: 20px;
+    }
+
+    .cart h1 {
+        color: white; background-color: #436850; text-align: center; font-size: 24px;
+    }
+
+    .container {
+        background-color: #ADBC9F;
+    }
+
+    .table {
+        width: 100%; max-width: 100%; margin-bottom: 1rem; background-color: transparent; border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 0.75rem; font-size: 20px; text-align: center; border-top: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+        vertical-align: bottom; border-bottom: 2px solid #dee2e6;
+    }
+
+    .cart_item_image {
+        height: 50px; width: 50px;
+    }
+
+    #cart-table-body {
         text-align: center;
     }
-.container {
-    background-color: #ADBC9F;
-}
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
-    
-}
-.table th,
-.table td {
-    padding: 0.75rem;
-    font-size: 20px;
-    text-align: center;
-    border-top: 1px solid #dee2e6;
-}
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-}
-.cart_item_image {
-    height: 50px;
-    width: 50px;
-}
-#cart-table-body {
-    text-align: center;
-}
-.table tbody+tbody {
-    border-top: 2px solid #dee2e6;
-}
 
-.price {
-    text-align: center;
-}
+    .table tbody+tbody {
+        border-top: 2px solid #dee2e6;
+    }
 
+    .price {
+        text-align: center;
+    }
 
-/* Button styles */
-.btn-link {
-    font-weight: 400;
-    color: #007bff;
-    background-color: transparent;
-    border: none;
-}
-.btn-link:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
+    .btn-link {
+        font-weight: 400; color: #007bff; background-color: transparent; border: none;
+    }
 
-/* Image styles */
-.img {
-    display: block;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-}
+    .btn-link:hover {
+        color: #0056b3; text-decoration: underline;
+    }
 
-.quantity button {
-    margin-right: 4px;
-}
+    .img {
+        display: block; width: auto; max-width: 100%; height: auto; max-height: 100%;
+    }
 
-.quantity input {
-    outline: none;
-height: 20px;
-width: 25px;
-text-align: center;
-margin-left: 5px;
-font-size: 16px;
-border: none;
-background-color: #ADBC9F;
+    .quantity button {
+        margin-right: 4px;
+    }
 
-}
+    .quantity input {
+        outline: none; height: 20px; width: 25px; text-align: center; margin-left: 5px; font-size: 16px;
+        border: none; background-color: #ADBC9F;
+    }
 
-/* Form styles */
-form {
-    display: inline;
-}
+    form {
+        display: inline;
+    }
 
+    .lower_sec {
+        display: flex; flex-direction: column; align-items: flex-end; margin-right: 30px;
+    }
 
-.lower_sec {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-right: 30px;
-}
+    .checkout_btn {
+        padding: 10px 30px; cursor: pointer; color: white; border: none; background-color: #4F6F52; border-radius: 10px;
+    }
 
-.checkout_btn {
-    padding: 10px 30px; 
-cursor: pointer;
-color: white; 
-border: none; 
-background-color: #4F6F52;
-border-radius: 10px;
-}
-
-.checkout_btn:hover {
-    font-size: 18px;
-    color: #4F6F52;
-    background-color: white;
-}
+    .checkout_btn:hover {
+        font-size: 18px; color: #4F6F52; background-color: white;
+    }
 
 </style>
-
-
 {% endblock %}
 
 
@@ -130,7 +90,7 @@ border-radius: 10px;
 {% block content %}
 <section class="cart">
     
-    <h1 class="mb-3 mt-5 bread text-center" >Cart</h1>
+    <h1 >Cart</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">

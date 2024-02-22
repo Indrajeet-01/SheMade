@@ -5,249 +5,166 @@
 {% block css %}
 <style>
   .checkout {
-    margin: 20px 5% 20px 5%;
-    padding: 20px;
+    margin: 10px 3% 30px 3%; padding: 20px;
   }
 
   .checkout h1 {
-        color: white;
-        background-color: #436850;
-        text-align: center;
-    }
-
-  .checkout_form {
-    display: flex;
-    gap: 20px;
+    color: white; background-color: #436850; text-align: center; font-size: 24px;
   }
 
-  
+  .checkout_form {
+    display: flex; gap: 20px;
+  }
+
   .checkout button {
-        font-size: 16px;
-        color: white;
-        background-color: #739072;
-    }
+    font-size: 16px; color: white; background-color: #739072;
+  }
 
-    .checkout button:hover {
-        color: #739072;
-        background-color: white;
-
-    }
+  .checkout button:hover {
+    color: #739072; background-color: white;
+  }
 
   .container {
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 3px 6px 4px 6px #739072;
-    width: 75%;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 15px; border-radius: 5px; box-shadow: 3px 6px 4px 6px #739072; width: 75%;
+    display: flex; flex-direction: column; justify-content: space-between;
   }
 
   .billing-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex: 1; display: flex; flex-direction: column; gap: 20px;
   }
 
   #popup-card-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none;
-}
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; display: none;
+  }
 
   #billing_form_popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    z-index: 1000;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    display: none;
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px;
+    z-index: 1000; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); display: none;
   }
 
   #delivery_location, #payment_method_title, #apply_coupon_id {
-    
     color: rgb(104, 70, 6);
   }
 
   #delivery_location:hover, #payment_method_title:hover, #apply_coupon_id:hover {
     cursor: pointer;
-    
   }
   
   .personal-info {
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
   }
 
   .personal-info > div {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
+  }
 
-  }
   .billing-address {
-    
-    flex-direction: column;
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
+    flex-direction: column; display: flex; gap: 20px; justify-content: space-between;
   }
+
   .billing-address > div {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
   }
+
   .address-basic {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
   }
+
   label {
     font-size: 20px;
   }
+
   input {
-    line-height: 24px;
-    font-size: 16px;
-    margin-top: 5px;
-    outline: none;
+    line-height: 24px; font-size: 16px; margin-top: 5px; outline: none;
   }
-  
   
   .checkout h1 {
     text-align: center;
-    
   }
+
   .container i {
     margin-right: 10px;
   }
+
   .street-area {
-    
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
+    display: flex; flex-direction: column; max-width: 50%;
   }
 
   select {
-    height: 24px;
-    font-size: 16px;
+    height: 24px; font-size: 16px;
   }
 
   .payment-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    
+    flex: 1; display: flex; flex-direction: column;
   }
 
-
   #credit_card_details{
-    
-    background: #fff;
-    color: #555;
-    
-    padding: 10px;
-}
-#credit_card_details p{
+    background: #fff; color: #555; padding: 10px;
+  }
+  #credit_card_details p{
     font-size: 18px;
-}
+  }
 
+  #credit_card_details label{
+    font-size: 18px; line-height: 20px;
+  }
 
-#credit_card_details label{
-    font-size: 18px;
-    line-height: 20px;
-}
-
-.card-num-field-group{
+  .card-num-field-group{
     margin-top: 10px;  
-}
+  }
 
-.date-field-group{
+  .date-field-group{
+    margin-top: 10px; display: inline-block;
+  }
+
+  .cvc-field-group{
+    margin-top: 10px; display: inline-block; float: right;
+  }
+
+  .name-field-group{
     margin-top: 10px;
-    display: inline-block;
-}
+  }
 
-.cvc-field-group{
-    margin-top: 10px;
-    display: inline-block;
-    float: right;
-}
-
-
-.name-field-group{
-    margin-top: 10px;
-}
-
-.card-num-field, .name-field{
+  .card-num-field, .name-field{
     width: 260px;
-    
-}
+  }
 
-.date-field, .cvc-field{
+  .date-field, .cvc-field{
     width: 70px;
-}
+  }
 
-#credit_card_details input{
-    border: 1px solid #ccc;
-    height: 22px;
-    padding: 5px;
-    font-size: 10px;
-}
+  #credit_card_details input{
+    border: 1px solid #ccc; height: 22px; padding: 5px; font-size: 10px;
+  }
 
-#credit_card_details input::placeholder{
+  #credit_card_details input::placeholder{
     color: #ccc;
-}
+  }
 
+  button {
+    padding: 10px 30px; cursor: pointer; color: green; border: none; background-color: #FDF4F5;
+  }
 
+  button:hover {
+    background-color: #C0DBEA;
+  }
 
-button {
-  padding: 10px 30px; 
-cursor: pointer;
-color: green; 
-border: none; 
-background-color: #FDF4F5;
-}
-button:hover {
-  background-color: #C0DBEA;
-}
-
-.payment-details {
+  .payment-details {
     display: none;
-}
+  }
 
-#upi_details, .payment-details {
-  margin-left: 30px;
-}
+  #upi_details, .payment-details {
+    margin-left: 30px;
+  }
 
-
-
-.apply_coupon input, button {
-  outline: none;
-  border: none;
-  height: 40px;
-  border-radius: 5%;
-}
-
+  .apply_coupon input, button {
+    outline: none; border: none; height: 40px; border-radius: 5%;
+  }
 
   .order_summary {
-    width: 25%;
-    height: fit-content;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    
-    border-radius: 5px;
-    box-shadow: 3px 6px 4px 6px #739072;
+    width: 25%; height: fit-content; padding: 15px; display: flex; flex-direction: column;
+    border-radius: 5px; box-shadow: 3px 6px 4px 6px #739072;
   }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */

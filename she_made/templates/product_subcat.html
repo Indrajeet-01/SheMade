@@ -5,34 +5,28 @@
 <link rel="stylesheet" href="/static/css/product.css">
 <style>
 
+    .container {
+        margin: 10px 3% 30px 3%; padding: 20px;
+    }
+
     .slider_box {
-        box-shadow: 5px 10px #739072; 
-        height: 400px; 
-        margin-bottom: 10px;
+        box-shadow: 5px 10px #739072; height: 400px; margin-bottom: 10px;
     }
 
     .slider_box button {
-        font-size: 16px;
-        background-color: #739072;
+        font-size: 16px; background-color: #739072;
     }
 
     .slider_box button:hover {
-        color: #739072;
-        background-color: white;
-
+        color: #739072; background-color: white;
     }
 
     .name h3 {
         color: #016A70;
     }
-        .wishlist-button {
-        
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        
-        border: none;
-        cursor: pointer;
+
+    .wishlist-button {
+        position: absolute; top: 10px; right: 10px; border: none; cursor: pointer;
     }
     
     .fa-heart {
@@ -48,7 +42,7 @@
 
 {% block content %}
 <section>
-    <div class="container" style="margin: 30px 5% 0px 5%;">
+    <div class="container" >
         
         <div class="sub_cat">
             {% for product in products %}

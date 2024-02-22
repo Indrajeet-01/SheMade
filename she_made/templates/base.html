@@ -18,208 +18,147 @@
     <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
 
     <style>
-        
         body {
-            
-    background-color:#f2f5ff ;
-} 
+            background-color:#f2f5ff ;
+        } 
 
-body h1, h2, h3, h4, h5, a {
-    font-family: "EB Garamond", serif;
-  font-optical-sizing: auto;
-  
-  font-style: normal;
+        body h1, h2, h3, h4, h5, a {
+            font-family: "EB Garamond", serif; font-optical-sizing: auto; font-style: normal;
+        }
 
-}
+        body p, span , button, th, li {
+            font-family: "Sanchez", serif; font-weight: 400; font-style: normal;
+        }
 
-body p, span , button, th, li {
-    font-family: "Sanchez", serif;
-  font-weight: 400;
-  font-style: normal;
-}
+        nav {
+            font-family: "EB Garamond", serif; font-optical-sizing: auto;
+        }
 
-nav {
-    font-family: "EB Garamond", serif;
-  font-optical-sizing: auto;
-  
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: #e1f0da; height: 70px; margin-top: 10px; padding-left: 10px; padding-right: 10px;
+        }
 
-}
+        .navbar-header {
+            display: flex; justify-content: center; align-items: center; padding: 10px; gap: 30px;
+        }
 
-nav {
+        .navbar-header a {
+            text-decoration: none; color: #1c1c1c; font-size: 18px; font-weight: 700;
+        }
 
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #e1f0da;
-height: 70px;
-margin-top: 10px;
+        .logo {
+            font-size: 28px; font-weight: 500; font-style: bold;
+        }
 
-padding-left: 10px;
-padding-right: 10px;
-}
+        .navbar-header i {
+            font-size: 20px;
+        }
 
-.navbar-header {
+        .custom-footer {
+            background-color: #E1F0DA; margin-top: 40px;
+        }
 
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 10px;
-gap: 30px;
-}
+        .custom-footer {
+            font-family: "EB Garamond", serif; font-optical-sizing: auto; font-weight: 400; font-style: normal;
+        }
 
-.navbar-header a {
-text-decoration: none;
-color: #1c1c1c;
-font-size: 18px;
-font-weight: 700;
+        h2 {
+            font-family: "EB Garamond", serif;
+        }
 
-}
+        .footer_01 {
+            display: flex; justify-content: space-evenly; padding-top: 20px; padding-bottom: 20px;
+        }
 
-.logo {
-font-size: 24px;
+        .subscribe_section {
+            margin-top: -20px;
+        }
 
-font-weight: 500;
-font-style: bold;
-}
+        .subscribe_form {
+            display: flex; flex-direction: column; gap: 10px; margin-top: -10px;
+        }
 
-.navbar-header i {
-font-size: 20px;
+        .subscribe_form input {
+            height: 40px; width: 100pxt; border: none; border-radius: 5px;
+        }
 
-}
+        .subscribe_form button {
+            font-size: 20px; width: fit-content; background-color: inherit; border: none; cursor: pointer;
+        }
 
-.custom-footer {
-    background-color: #E1F0DA; 
-    margin-top: 40px;
-    
-}
+        .footer_container {
+            display: flex; margin-top: -20px; margin-left: -40px;
+        }
 
-.custom-footer {
-    font-family: "EB Garamond", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
+        .footer_container ul {
+            list-style-type: none;
+        }
 
-h2 {
-    font-family: "EB Garamond", serif;
-}
+        .footer_container li {
+            margin-bottom: 10px;
+        }
 
-.footer_01 {
-    display: flex; 
-    justify-content: space-evenly; 
-    padding-top: 20px; 
-    padding-bottom: 20px;
-}
+        .footer_container a {
+            text-decoration: none; color: black;
+        }
 
-.subscribe_section {
-    margin-top: -20px;
-}
+        .footer_column li, a {
+            text-decoration: none;
+        }
 
-.subscribe_form {
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-    margin-top: -10px;
-}
+        .footer_column h3 {
+            font-weight: 700;
+        }
 
-.subscribe_form input {
-    height: 40px; 
-    width: 100pxt; 
-    border: none; 
-    border-radius: 5px;
-}
+        .hamburger {
+            display: none;
+        }
 
-.subscribe_form button {
-    font-size: 20px; 
-    width: fit-content; 
-    background-color: inherit; 
-    border: none; 
-    cursor: pointer;
-}
+        .hamburger .line{
+            width: 50px; height: 5px; background-color: #ecf0f1; display: block; margin: 8px auto; 
+            -webkit-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
+        }
 
+        .hamburger:hover{
+            cursor: pointer;
+        }
 
-.footer_container {
-    display: flex; 
-    margin-top: -20px; 
-    margin-left: -40px;
-}
+        .hamburger.is-active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
 
-.footer_container ul {
-    list-style-type: none;
-}
+        .hamburger.is-active span:nth-child(2) {
+            opacity: 0;
+        }
 
-.footer_container li {
-    margin-bottom: 10px;
-}
+        .hamburger.is-active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
 
-.footer_container a {
-    text-decoration: none; 
-    color: black;
-}
+        @media only screen and (max-width: 900px) {
+            .hamburger {
+                display: block;
+            }
+            .hamburger.is-active ~ .navbar-header {
+                display: none;
+            }
+            .hamburger.is-active + nav {
+                height: 400px;
+                background-color: red;
+            }
 
-
-.footer_column li, a {
-text-decoration: none;
-}
-.footer_column h3 {
-    font-weight: 700;
-}
-
-.hamburger {
-    display: none;
-}
-
-.hamburger .line{
-  width: 50px;
-  height: 5px;
-  background-color: #ecf0f1;
-  display: block;
-  margin: 8px auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.hamburger:hover{
-  cursor: pointer;
-}
-.hamburger.is-active span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.hamburger.is-active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.is-active span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-@media only screen and (max-width: 900px) {
-    .hamburger {
-        display: block;
+        .hamburger.is-active + .navbar-header {
+            display: flex; flex-direction: column;
+        }
     }
-    .hamburger.is-active ~ .navbar-header {
-    display: none;
-  }
-  .hamburger.is-active + nav {
-    height: 400px;
-    background-color: red;
-}
-  
-  /* Show header items when hamburger menu icon is clicked */
-  .hamburger.is-active + .navbar-header {
-    display: flex;
-    flex-direction: column;
-  }
-}
 
     </style>
-
     {% block css %}
+
     <!-- css for other pages goes here -->
     {% endblock %}
-    
+
 </head>
 <body>
     <!-- Nav starts here -->
@@ -228,7 +167,7 @@ text-decoration: none;
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
-          </div>
+        </div>
         <div class="navbar-header">
             <div>
                 <a href="{% url 'shop' %}">OUR SHOP</a>
