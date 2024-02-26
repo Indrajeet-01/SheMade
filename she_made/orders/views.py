@@ -19,8 +19,11 @@ class CheckoutView(View):
                 address_instance = address_form.save()
                 cart = request.session.get('cart', {})
                 total = request.session.get('cart_total', 0)
-
-                order = Order(address=address_instance, order_total=total, payment_method=payment_method)
+                delivery_charge = request.POST.get('delivery_charge', 0)  # Assuming delivery charge is an integer
+                discount_amount = request.POST.get('discount_amount', 0)  # Assuming discount amount is an integer
+                
+                order_total = request.POST.get('order_total')
+                order = Order(address=address_instance, order_total=order_total, delivery_charge=delivery_charge, discount_amount=discount_amount, payment_method=payment_method)
                 order.save()
 
                 # Save order items from session to the database
@@ -66,24 +69,4 @@ class CheckoutView(View):
                 # Return JSON response with validation errors for both address and payment form
                 return JsonResponse({'status': 'error', 'errors': {'address': address_form.errors, 'payment': payment_form.errors}})
 
-def calculate_order_total(request):
-    # Retrieve cart items from session
-    cart = request.session.get('cart', {})
-    
-    # Calculate total order amount based on cart items
-    total = 0
-    for item_id, item_data in cart.items():
-        quantity = item_data['quantity']
-        # Fetch the order item from the database using item_id
-        order_item = ProductItem.objects.get(id=item_id)
-        # Access the product item associated with the order item
-        
-        # Calculate subtotal for each item (price * quantity)
-        subtotal = order_item.price * quantity
-        # Add subtotal to the total order amount
-        total += subtotal
-    
-    # Add delivery charge or any other additional charges if applicable
-    total += 60  # Assuming a flat delivery charge of ₹60
-    
-    return total
+

@@ -378,19 +378,22 @@
                 <p>Cart Total:</p>
                 <p><span >₹ </span><span >{{request.session.cart_total }}</span></p>
               </div>
+              <input type="hidden" name="delivery_charge" id="delivaryAmountInput">
               <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
                 <p>Delivery:</p>
                 <p><span>₹ </span>60</p>
               </div>
+              <input type="hidden" name="discount_amount" id="discountAmountInput">
               <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
                 <p>Discount:</p>
                 <p id="discountAmount">₹ 0</p>
               </div>
               <div class="proceed-checkout" >
                 <hr>
+                <input type="hidden" name="order_total" id="orderTotalInput">
                 <div class="order_summary_info" style="font-size: 24px; color: orange; font-weight: 400; display: flex; justify-content: space-between; margin: -20px 0px -20px 0px;">
                   <p>Order Total:</p>
-                  <p><span >₹ </span><span id="cart_total" >{{request.session.cart_total }}</span></p>
+                  <p><span >₹ </span><span id="order_total" >{{request.session.cart_total }}</span></p>
                 </div>
                 <hr>
                 <button type="submit">Proceed to Checkout</button>
@@ -451,8 +454,6 @@ document.getElementById("use_this_address_button").addEventListener("click", fun
         pincode: document.getElementsByName("pincode")[0].value,
         street: document.getElementsByName("street")[0].value
     };
-
-    
 
     // Display the filled details
     var details =
@@ -528,13 +529,15 @@ document.getElementById("use_this_address_button").addEventListener("click", fun
 <script>
 window.onload = function() {
   var deliveryCharge = 60;
-  var cartTotalElement = document.getElementById("cart_total");
+  var cartTotalElement = document.getElementById("order_total");
   var cartTotalStr = cartTotalElement.textContent.trim(); // Trim whitespaces
   var cartTotal = parseFloat(cartTotalStr);
 
   var newTotal = deliveryCharge + cartTotal
 
-  document.getElementById("cart_total").textContent = newTotal.toFixed(2);
+  document.getElementById('delivaryAmountInput').value = deliveryCharge.toFixed(2)
+
+  document.getElementById("order_total").textContent = newTotal.toFixed(2);
 }
 
 $(document).ready(function(){
@@ -555,7 +558,7 @@ function applyCoupon() {
     var couponCode = document.getElementById("coupon_code").value;
 console.log("Coupon Code:", couponCode);
 
-var cartTotalElement = document.getElementById("cart_total");
+var cartTotalElement = document.getElementById("order_total");
 if (!cartTotalElement) {
     console.log("Cart total element not found.");
 } else {
@@ -578,13 +581,19 @@ if (!cartTotalElement) {
     if (couponCode === "DISCOUNT10") {
         // Calculate the discount amount
         var discount = 0.10; // 10%
-        var delivaryCharge = 60
+        
         var discountAmount = cartTotal * discount;
-        var newTotal = cartTotal - discountAmount + delivaryCharge;
+        var newTotal = cartTotal - discountAmount 
+
+        
+
+        document.getElementById('discountAmountInput').value = discountAmount.toFixed(2)
 
         document.getElementById('discountAmount').innerHTML = '-₹' + discountAmount.toFixed(2)
 
-        document.getElementById('cart_total').innerHTML = newTotal.toFixed(2);
+        document.getElementById('order_total').innerHTML = newTotal.toFixed(2);
+
+        document.getElementById('orderTotalInput').value = newTotal.toFixed(2);
 
         couponApplied = true;
 

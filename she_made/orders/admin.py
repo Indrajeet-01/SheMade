@@ -8,6 +8,7 @@ class OrderItemInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'address', 'order_total', 'created_at']
+    list_display_links = ['id', 'address']
     inlines = [OrderItemInline]
 
 admin.site.register(OrderItem)
