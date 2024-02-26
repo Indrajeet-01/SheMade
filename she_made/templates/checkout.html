@@ -202,12 +202,14 @@
     
     <div class="row">
       <div class="col-75">
-          <div class="checkout_form">
+          <form class="checkout_form" method='POST' action='{% url "checkout_order" %}'>
+            {% csrf_token %}
             <div class="container">
               <p id="delivery_location" style="font-size: 24px; color: #739072;"><strong>1 Fill/Select your address</strong></p>
               <div id="filled_details" ></div>
               <div id="billing_form_popup" class="billing-info" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; ">
-                <form class="billing-info" id="billing_form">
+                <div  class="billing-info" id="billing_form">
+                  
                   <div class="row personal-info">
                     <div>
                       <label for="name"><i class="fa-regular fa-user"></i>Name<span class="required" style="color: red;">*</span></label>
@@ -284,16 +286,16 @@
                     </div>
                     
                   </div>
-                <button type="submit" onclick="">Use this address</button>
-                </form>
+                <button type="button" onclick="" id="use_this_address_button">Use this address</button>
+                </div>
               </div>
                 <div class="payment-info" >
-                  <p id="payment_method_title" style="font-size: 24px; color: #739072;"><strong>2 Payment method</strong></p>
-                  <form action="" id="payment_form" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
+                  <label id="payment_method_title" for="payment_method" style="font-size: 24px; color: #739072;"><strong>2 Payment method</strong></label>
+                  <div  id="payment_form" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
                     
                   <div class="payment-option" id="credit_card_option">
-                    <input type="radio" id="credit_card_radio" name="payment_method" value="credit_card">
-                    <label for="credit_card_radio">Credit/Debit Card</label>
+                    <input type="radio" id="card" name="payment_method" value="card">
+                    <label for="card">Credit/Debit Card</label>
                   </div>
                   <div  class="payment-details" id="credit_card_details">
                     <p>Pay using credit or debit card</p>
@@ -319,8 +321,8 @@
                     </div>
                 </div>
                 <div class="payment-option">
-                  <input type="radio" id="upi_radio" name="payment_method" value="upi">
-                  <label for="upi_radio">Pay using UPI</label>
+                  <input type="radio" id="upi" name="payment_method" value="upi">
+                  <label for="upi">Pay using UPI</label>
                 </div>
               
                 <div class="payment-details" id="upi_details">
@@ -350,26 +352,27 @@
                 </div>
 
                 <div class="payment-option" id="cod_option">
-                  <input type="radio" id="cod_radio" name="payment_method" value="cod">
-                  <label for="cod_radio">Cash on Delivery</label>
+                  <input type="radio" id="cash_on_delivery" name="payment_method" value="cash_on_delivery">
+                  <label for="cash_on_delivery">Cash on Delivery</label>
                 </div>
                 <div class="payment-details" id="cod_details">
                   Pay on delivery- Cash, UPI and Cards accepted
                 </div>
-                </form>
+                </div>
                   
               </div>
               <div class="checkout_footer">
                 <p id="apply_coupon_id" style="font-size: 24px; color: #739072; "><strong>3 Apply coupon</strong></p>
                 <div class="apply_coupon" style="display: none; box-shadow: 1px 3px 2px 3px #888888; padding: 10px">
                   <input type="text" id="coupon_code" placeholder="Enter coupon code" style="font-size: 14px;">
-                  <button onclick="applyCoupon()">Apply</button>
-                    <!-- Display area for applied coupon -->
+                  <button type="button" onclick="applyCoupon()">Apply</button>
+                    
                     
                 </div>
               </div>
             </div>
-            <div class="order_summary">
+            <div class="order_summary" >
+              
               <p style="font-size: 24px; margin-bottom: 0px; "><strong>Order Summary</strong></p>
               <div class="order_summary_info" style=" display: flex; justify-content: space-between; margin-bottom: -20px;">
                 <p>Cart Total:</p>
@@ -390,13 +393,13 @@
                   <p><span >₹ </span><span id="cart_total" >{{request.session.cart_total }}</span></p>
                 </div>
                 <hr>
-                <button>Proceed to Checkout</button>
+                <button type="submit">Proceed to Checkout</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-      </div>
     </div>
+    
     
 
 </section>
@@ -435,28 +438,40 @@ document.addEventListener("DOMContentLoaded", function() {
         closePopupForm();
     });
 
-    // Function to handle form submission
-    document.getElementById("billing_form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-        // Get form data
-        var formData = new FormData(this);
-        // Display the filled details
-        var details = 
-            "Name: " + formData.get("name") + "<br>" +
-            "Phone: " + formData.get("phone") + "<br>" +
-            "Email: " + formData.get("email") + "<br>" +
-            formData.get("street") + "," +
-            formData.get("district") + ", " +
-            formData.get("state") + "—" +
-            formData.get("pincode");
-            
-        document.getElementById("filled_details").innerHTML = details;
-        document.getElementById("filled_details").style.boxShadow = "1px 3px 2px 3px #888888; padding: 10px"
-        // Close the popup form
-        document.getElementById("billing_form_popup").style.display = "none";
-        document.getElementById("popup-card-overlay").style.display = "none";
-        console.log('Form submitted and popup closed');
-    });
+    // Function to handle button click
+document.getElementById("use_this_address_button").addEventListener("click", function() {
+  console.log('button is called')
+    // Get form data
+    var formData = {
+        name: document.getElementsByName("name")[0].value,
+        phone: document.getElementsByName("phone")[0].value,
+        email: document.getElementsByName("email")[0].value,
+        state: document.getElementById("inputState").value,
+        district: document.getElementById("inputDistrict").value,
+        pincode: document.getElementsByName("pincode")[0].value,
+        street: document.getElementsByName("street")[0].value
+    };
+
+    
+
+    // Display the filled details
+    var details =
+        "Name: " + formData.name + "<br>" +
+        "Phone: " + formData.phone + "<br>" +
+        "Email: " + formData.email + "<br>" +
+        "Street/Area: " + formData.street + "<br>" +
+        "District: " + formData.district + "<br>" +
+        "State: " + formData.state + "<br>" +
+        "Pincode: " + formData.pincode;
+
+    document.getElementById("filled_details").innerHTML = details;
+    document.getElementById("filled_details").style.boxShadow = "1px 3px 2px 3px #888888; padding: 10px";
+    
+    // Close the popup form
+    document.getElementById("billing_form_popup").style.display = "none";
+    document.getElementById("popup-card-overlay").style.display = "none";
+});
+
 });
 
 </script>
@@ -590,5 +605,5 @@ if (!cartTotalElement) {
 
 </script>
 <script src="/static/js/address.js"></script>
-<script src="/static/js/checkout_form.js"></script>
+<!-- <script src="/static/js/checkout_form.js"></script> -->
 {% endblock %}

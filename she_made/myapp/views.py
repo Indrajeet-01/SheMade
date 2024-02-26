@@ -252,6 +252,7 @@ def view_cart(request):
     print("Cart Total:", total)
     
     request.session['cart_total'] = total
+    print(cart)
     return render(request, 'cart.html', {'cart': cart, 'total': total})
 
 def remove_from_cart(request):

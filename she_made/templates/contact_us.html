@@ -70,24 +70,24 @@
         </div>
         
         <div class="contact-form">
-          <form action="" id="contact-form">
+          <form action="{% url 'create_contact' %}" id="contact-form" method="post" >
             <h2>Send Message</h2>
             <div class="input-box">
-              <input type="text" required="true" name="">
+              <input type="text" required="true" name="name" >
               <span>Full Name</span>
             </div>
             
             <div class="input-box">
-              <input type="email" required="true" name="">
+              <input type="email" required="true" name="email">
               <span>Email</span>
             </div>
             <div class="input-box">
-                <input type="number" required="true" name="">
+                <input type="tel" required="true" name="phone" pattern="[0-9]{10}">
                 <span>Contact No.</span>
               </div>
             
             <div class="input-box">
-              <textarea required="true" name=""></textarea>
+              <textarea required="true" name="message"></textarea>
               <span>Type your Message...</span>
             </div>
             
