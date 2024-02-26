@@ -4,6 +4,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/contact_us.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css">
 <style>
   section {
     background-color: #ADBC9F; margin: 10px 8% 30px 8%;
@@ -73,22 +74,22 @@
           <form action="{% url 'create_contact' %}" id="contact-form" method="post" >
             <h2>Send Message</h2>
             <div class="input-box">
-              <input type="text" required="true" name="name" >
-              <span>Full Name</span>
+              <input type="text" required="true" name="name" placeholder="Full Name">
+              
             </div>
             
             <div class="input-box">
-              <input type="email" required="true" name="email">
-              <span>Email</span>
+              <input type="email" required="true" name="email" placeholder="Email">
+              
             </div>
             <div class="input-box">
-                <input type="tel" required="true" name="phone" pattern="[0-9]{10}">
-                <span>Contact No.</span>
+                <input type="tel" required="true" name="phone" pattern="[0-9]{10}" placeholder="Contact No.">
+                
               </div>
             
             <div class="input-box">
-              <textarea required="true" name="message"></textarea>
-              <span>Type your Message...</span>
+              <textarea required="true" name="message" placeholder="Type your Message..."></textarea>
+              
             </div>
             
             <div class="input-box" >
@@ -101,4 +102,36 @@
     </div>
   </section>
   
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.js"></script>
+
+
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+  Swal.fire({
+                    icon: 'success',
+                    title: 'We will contact you ASAP.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                }).then(() => {
+    // Redirect to the index page after 5 seconds
+    window.location.href = '/'; // Replace '/' with the appropriate URL of your index page
+  });
+</script>
+{% endif %}
+{% if message.tags == 'error' %}
+<script>
+  Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ message }}',
+            confirmButtonText: 'OK'
+        });
+</script>
+{% endif %}
+{% endfor %}
+
 {% endblock %}

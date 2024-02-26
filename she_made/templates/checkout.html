@@ -3,6 +3,7 @@
 
 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css">
 <style>
   .checkout {
     margin: 10px 3% 30px 3%; padding: 20px;
@@ -165,6 +166,10 @@
   .order_summary {
     width: 25%; height: fit-content; padding: 15px; display: flex; flex-direction: column;
     border-radius: 5px; box-shadow: 3px 6px 4px 6px #739072;
+  }
+
+  .unclickable {
+    pointer-events: none; opacity: 0.5;
   }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
@@ -420,6 +425,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -523,12 +529,16 @@ document.getElementById("use_this_address_button").addEventListener("click", fun
     // Check if any of the payment method radio buttons are checked
         return $("input[name='payment_method']:checked").length > 0;
       }
+
+
+
   });
 </script>
 
 <script>
 window.onload = function() {
   var deliveryCharge = 60;
+  var discountAmount = 0
   var cartTotalElement = document.getElementById("order_total");
   var cartTotalStr = cartTotalElement.textContent.trim(); // Trim whitespaces
   var cartTotal = parseFloat(cartTotalStr);
@@ -537,7 +547,11 @@ window.onload = function() {
 
   document.getElementById('delivaryAmountInput').value = deliveryCharge.toFixed(2)
 
+  document.getElementById('discountAmountInput').value = discountAmount.toFixed(2);
+
   document.getElementById("order_total").textContent = newTotal.toFixed(2);
+
+  document.getElementById('orderTotalInput').value = newTotal.toFixed(2);
 }
 
 $(document).ready(function(){
@@ -582,7 +596,7 @@ if (!cartTotalElement) {
         // Calculate the discount amount
         var discount = 0.10; // 10%
         
-        var discountAmount = cartTotal * discount;
+        discountAmount = cartTotal * discount;
         var newTotal = cartTotal - discountAmount 
 
         
@@ -609,10 +623,40 @@ if (!cartTotalElement) {
         // Display a message indicating that the coupon has already been applied
         document.getElementById("applied_coupon").innerHTML = "Coupon has already been applied";
     }
+
+    
 }
 
 
 </script>
+
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <script>
+      Swal.fire({
+                        icon: 'success',
+                        title: 'Order Placed successfully',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    }).then(() => {
+        // Redirect to the index page after 5 seconds
+        window.location.href = '/'; // Replace '/' with the appropriate URL of your index page
+      });
+    </script>
+    {% endif %}
+    {% if message.tags == 'error' %}
+    <script>
+      Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ message }}',
+                confirmButtonText: 'OK'
+            });
+    </script>
+    {% endif %}
+  {% endfor %}
+
+
 <script src="/static/js/address.js"></script>
 <!-- <script src="/static/js/checkout_form.js"></script> -->
 {% endblock %}

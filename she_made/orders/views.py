@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import AddressForm, PaymentDetailsForm
 from .models import Order, OrderItem, PaymentDetails, PhoneVerification
 from products.models import ProductItem
+from django.http import HttpResponseRedirect
 
 from django.http import JsonResponse
 
@@ -36,10 +37,11 @@ class CheckoutView(View):
                 request.session['cart'] = {}
 
                 messages.success(request, "Order placed successfully!")
-                return JsonResponse({'status': 'success', 'message': 'Order placed successfully!'})
+                return render(request, 'checkout.html', {'messages': messages.get_messages(request)})
             else:
+                messages.error(request, "Please fill all the details properly")
+                return render(request, 'checkout.html', {'messages': messages.get_messages(request)})
                 # Return JSON response with validation errors for address
-                return JsonResponse({'status': 'error', 'errors': {'address': address_form.errors}})
 
         else:
             # For other payment methods, proceed with both address and payment form validation
@@ -64,7 +66,7 @@ class CheckoutView(View):
                 request.session['cart'] = {}
 
                 messages.success(request, "Order placed successfully!")
-                return JsonResponse({'status': 'success', 'message': 'Order placed successfully!'})
+                return JsonResponse({'status': 'success', 'message': 'Order placed successfully!', 'order_id': order.id})
             else:
                 # Return JSON response with validation errors for both address and payment form
                 return JsonResponse({'status': 'error', 'errors': {'address': address_form.errors, 'payment': payment_form.errors}})
