@@ -8,3 +8,10 @@ class Contact(models.Model):
     message = models.TextField(blank=True)
     def __str__(self):
         return self.name
+    
+
+class Subscribe(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email 

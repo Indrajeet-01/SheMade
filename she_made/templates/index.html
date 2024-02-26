@@ -155,7 +155,8 @@
                                 <button class="quick-view-btn" data-target="product1">
                                     Quick View
                                 </button>
-                                <form method="post" action="">
+                                <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                                    {% csrf_token %}
                                     <button type="submit">
                                         <span >Add To Cart</span>
                                     </button>
@@ -196,7 +197,8 @@
                             <button class="quick-view-btn" data-target="product1">
                                 Quick View
                             </button>
-                            <form method="post" action="">
+                            <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                                {% csrf_token %}
                                 <button type="submit">
                                     <span >Add To Cart</span>
                                 </button>
@@ -237,7 +239,8 @@
                         <button class="quick-view-btn" data-target="product1">
                             Quick View
                         </button>
-                        <form method="post" action="">
+                        <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                            {% csrf_token %}
                             <button type="submit">
                                 <span >Add To Cart</span>
                             </button>

@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css">
+
     <style>
         body {
             background-color:#f2f5ff ;
@@ -226,8 +228,9 @@
                         <h2 style="font-family: 'Roboto',Arial, sans-serif;">SheMade</h2>
                     <div class="subscribe_section">
                         <h3>Subscribe to our e-mail alerts!</h3>
-                        <form class="subscribe_form" action="" >
-                            <input placeholder="enter your email" type="email" >
+                        <form class="subscribe_form" action="{% url 'subscribe_us' %}" method="post" >
+                            {% csrf_token %}
+                            <input placeholder="enter your email" type="email" name="email" >
                             <button><i class="fa-light fa-circle-arrow-right"></i></button>
                         </form>
                     </div>
@@ -288,6 +291,36 @@
     <!-- Footer ends here -->
 
 {% block js %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.js"></script>
+
+
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+  Swal.fire({
+                    icon: 'success',
+                    title: 'You are subscribed to us.',
+                    showConfirmButton: false,
+                    timer: 600,
+                }).then(() => {
+                    window.location.href = '/';
+  });
+</script>
+{% endif %}
+{% if message.tags == 'error' %}
+<script>
+  Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ message }}',
+            confirmButtonText: 'OK'
+        });
+</script>
+{% endif %}
+{% endfor %}
+
+
 <script>
     document.querySelector('.hamburger').addEventListener('click', function() {
   this.classList.toggle('is-active');

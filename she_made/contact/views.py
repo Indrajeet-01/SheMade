@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .forms import ContactForm
+from .forms import ContactForm, SubscribeForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -23,3 +23,23 @@ class ContactView(APIView):
                 return render(request, 'contact_us.html', {'messages': messages.get_messages(request)})
         except Exception as e:
             return Response({'error': f'Failed to send contact. Error: {str(e)}'})
+        
+
+class SubscribeView(APIView):
+    permission_classes = (permissions.AllowAny, )
+
+    def post(self, request):
+        try:
+            subscribe_email = self.request.data
+            
+            subscribe_form = SubscribeForm(subscribe_email)
+            if subscribe_form.is_valid():
+                subscribe_instance = subscribe_form.save()
+                messages.success(request, 'Now, You are subscribed to us.')
+                return render(request, 'base.html', {'messages': messages.get_messages(request)} )
+            else:
+                messages.error(request, 'Please fill the correct details.')
+                return render(request, 'base.html', {'messages': messages.get_messages(request)} )
+
+        except Exception as e:
+            return Response({'error': f'Failed to subscribe. Error: {str(e)}'})
