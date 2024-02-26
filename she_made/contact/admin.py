@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact
+from .models import Contact, Subscribe
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'phone', 'email', 'message')
@@ -8,5 +8,11 @@ class ContactAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(Contact, ContactAdmin)
+
+class SubscribeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'email')
+    list_per_page = 25
+
+admin.site.register(Subscribe, SubscribeAdmin)
 
 # Register your models here.
