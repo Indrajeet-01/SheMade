@@ -47,7 +47,7 @@
         <div class="sub_cat">
             {% for product in products %}
             <div class="slider_box" >
-                <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
+                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}

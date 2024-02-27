@@ -5,8 +5,11 @@
 {% block css %}
 <link rel="stylesheet" href="/static/css/image_slider.css">
 <style>
+    section {
+        margin: 10px 3% 30px 3%;
+    }
     .product-detail {
-        display: flex; margin: 10px 3% 30px 3%; gap: 30px; position: relative; padding: 20px;
+        display: flex;  gap: 30px; position: relative; padding: 20px;
     }
     .images {
         flex: 1; margin-top: 30px; position: sticky;
@@ -81,6 +84,35 @@ font-size: 25px; position: absolute; top: 50%; left: 50%; transform:translate(-5
 .ingredients, .direction {
 margin-top: 40px;
 }
+
+.product_about_2, .product_about_3 {
+    display: flex;
+    
+}
+
+.about_head {
+    text-align: center;
+}
+
+.col_1 {
+    flex: 1;
+}
+
+.col_2 {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.row_1, .row_2 {
+    padding: 20px;
+}
+
+.product_about_3 strong {
+    font-style: bold;
+}
+
+
+
 </style>
 {% endblock %}
 
@@ -113,13 +145,13 @@ margin-top: 40px;
         </div>
 
         <div class="product_info" >
-            <h1>{{ product.description }}</h1>
+            <h1>{{ product.name }}</h1>
             <div class="size" >
                 <p >SIZE : {{ product.content}}</p>
 
             </div>
             <div class="price" style="position: relative; margin-top: 30px;">
-                <span style="position: relative; top: -0.6em; margin-right: 0.1em;">₹ </span><span style="font-size: 30px;">{{ product.price}}</span>
+                <strong style="position: relative; top: -0.6em; margin-right: 0.1em;">₹ </strong><strong style="font-size: 30px;">{{ product.price}}</strong>
                 <p style="margin-top: -5px;">(MRP Inclusive of all Taxes)</p>
             </div>
             
@@ -169,22 +201,91 @@ margin-top: 40px;
                 
             </div>
             <hr/>
-            <div class="ingredients" style="margin-top: 40px;">
-                <h3>Ingredients</h3>
-                <p >
-                    {{ product.ingredients}}
-                </p>
 
+        </div>
+    </div>
+    <h2 class="about_head">About</h2>
+    <div class="product_about_2">
+        <div class="col_1">
+            <div class="row_1">
+                <h2>Benefits</h2>
+                <ul>
+                    {% for benefit in product.get_benefits %}
+                        <li>{{benefit}}</li>
+                    {% endfor %}
+                </ul>
+    
             </div>
-            <div class="direction" style="margin-top: 40px;">
-                <h3>How to Use ?</h3>
-                <p >
-                    {{ product.direction}}
-                </p>
-
+            <hr>
+            <div class="row_1">
+                <h2>Key Ingredeits</h2>
+                <ul>
+                    {% for ingredient in product.get_key_ingredients %}
+                        <li>{{ingredient}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col_2">
+            <div class="row_1">
+                <h2>Directions for use</h2>
+                <ul>
+                    {% for direction in product.get_directions %}
+                        <li>{{direction}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+            <div class="row_1">
+                <h2>Safety warnings</h2>
+                <ul>
+                    {% for warning in product.get_key_note %}
+                        <li>{{warning}}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
+    <hr>
+    <h2 class="about_head">Specifications</h2>
+    <div class="product_about_3">
+        <div class="col_1">
+            
+            <div class="row_1">
+                <p><strong>Product Type:</strong> {{product.product_type}}</p>
+                <p><strong>Net Quantity:</strong> {{product.content}}</p>
+                <p><strong>Gender:</strong> {{product.gender}}</p>
+            </div>
+            <hr>
+            <div class="row_2">
+                <p><strong>Handicrafted By:</strong> Shemade</p>
+                <p><strong>Packed By:</strong> Shemade (MILESTONE ACHIEVERS PRIVATE LIMITED)</p>
+            </div>
+        </div>
+        <div class="col_2">
+            <div class="row_1">
+                <p><strong>Country of Origin:</strong> {{product.country_of_origin}}</p>
+                <p><strong>Shelf life:</strong> {{product.life}}</p>
+                <p><strong>Expiry:</strong> {{product.expiry}}</p>
+            </div>
+            <hr>
+            <div class="row_2">
+                <p><strong>Marketed By:</strong> MILESTONE ACHIEVERS PRIVATE LIMITED</p>
+                <p><strong>Customer care support:</strong> support@shemade.in , 9971090940</p>
+            </div>
+        </div>
+    </div>
+    <h2 class="about_head">FAQs</h2>
+    <div class="product_about_4">
+        <ul>
+            {% for faq in product.get_faqs %}
+                <li><pre>{{faq}}</pre></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
 </section>
 {% endblock %}
 

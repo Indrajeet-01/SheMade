@@ -53,7 +53,7 @@ urlpatterns = [
 
     # for product handling
     path('<str:sub_category>/', subcategory_products, name='subcategory_products'),
-    path('<int:product_id>/<str:product_description>/', product_detail, name='product_detail'),
+    path('<int:product_id>/<str:product_name>/', product_detail, name='product_detail'),
     
     # user cart handling pages
     path('add_to_cart/<int:item_id>/', add_to_cart, name='add_to_cart'),

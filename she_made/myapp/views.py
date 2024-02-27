@@ -128,18 +128,18 @@ class ProductListView(generics.ListAPIView):
         }
         return render(request, 'index.html', context)
     
-def product_detail(request, product_id, product_description):
+def product_detail(request, product_id, product_name):
     print('hey from product detail')
     # Retrieve the product from the database
     product = get_object_or_404(ProductItem, id=product_id)
 
     # Modify the product description to replace spaces with hyphens
-    modified_description = slugify(product_description)
+    modified_name = slugify(product_name)
 
     # Pass the product and modified description to the template
     context = {
         'product': product,
-        'modified_description': modified_description
+        'modified_description': modified_name
     }
 
     # Render the template with the product details
