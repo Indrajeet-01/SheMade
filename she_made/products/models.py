@@ -34,9 +34,7 @@ class ProductItem(models.Model):
     eco_friendly = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=255, blank=True)
     country_of_origin = models.CharField(max_length=255, blank=True)
-    handcrafted_by = models.CharField(max_length=255, blank=True)
-    packed_by = models.CharField(max_length=255, blank=True)
-    marketed_by = models.CharField(max_length=255, blank=True)
+    
     product_type = models.CharField(max_length=255, blank=True)
     weight = models.CharField(max_length=255, blank=True)
     expiry = models.CharField(max_length=255, blank=True)
@@ -49,8 +47,7 @@ class ProductItem(models.Model):
     stock = models.IntegerField( blank=True)
     life = models.CharField(max_length=255, blank=True)
 
-    ingredients = models.TextField(blank=True, null=True)
-    direction_to_use = models.TextField(blank=True, null=True)
+    
     images = models.ManyToManyField('Image', related_name='product_items', blank=True)
 
     
@@ -71,6 +68,12 @@ class ProductItem(models.Model):
         self.directions = '#'.join(directions)
     def get_directions(self):
         return self.directions.split('#') if self.directions else []
+    
+    who_can_use = models.TextField(blank=True, null=True)
+    def set_who_can_use(self, who_can_use):
+        self.directions = '#'.join(who_can_use)
+    def get_who_can_use(self):
+        return self.who_can_use.split('#') if self.who_can_use else []
     
     key_notes = models.TextField(blank=True, null=True)
     def set_key_notes(self, key_notes):

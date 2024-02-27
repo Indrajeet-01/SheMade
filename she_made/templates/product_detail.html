@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static%}
+{% load custom_filters %}
 
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/image_slider.css">
+<link rel="stylesheet" href="/static/css/product.css">
 <style>
     section {
         margin: 10px 3% 30px 3%;
@@ -111,6 +113,35 @@ margin-top: 40px;
     font-style: bold;
 }
 
+.similar_products {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.slider_box {
+height: 500px;
+width: 280px;
+margin-bottom: 10px;
+display: flex; 
+flex-direction: column;
+justify-content: space-between;
+box-shadow: 5px 10px #4F6F52;
+align-items: center;
+background-color: #f2f5ff;
+border-radius: 20px;
+
+}
+
+.wishlist-button {
+    position: absolute; top: 10px; right: 10px; border: none; cursor: pointer;
+}
+
+.fa-heart {
+    color: #739072; font-size: 20px; 
+}
+
+.fa-heart:hover {
+    color: red; /* Change to your desired color */
+}
 
 
 </style>
@@ -204,24 +235,34 @@ margin-top: 40px;
 
         </div>
     </div>
+    <hr>
     <h2 class="about_head">About</h2>
+    <hr>
     <div class="product_about_2">
         <div class="col_1">
             <div class="row_1">
                 <h2>Benefits</h2>
                 <ul>
                     {% for benefit in product.get_benefits %}
-                        <li>{{benefit}}</li>
+                        {% if benefit %}
+                            {% with benefit|split_at_colon as parts %}
+                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
+                            {% endwith %}
+                        {% endif %}
                     {% endfor %}
                 </ul>
-    
+                
             </div>
             <hr>
             <div class="row_1">
                 <h2>Key Ingredeits</h2>
                 <ul>
                     {% for ingredient in product.get_key_ingredients %}
-                        <li>{{ingredient}}</li>
+                        {% if ingredient %}
+                            {% with ingredient|split_at_colon as parts %}
+                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
+                            {% endwith %}
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
@@ -229,17 +270,29 @@ margin-top: 40px;
         <div class="col_2">
             <div class="row_1">
                 <h2>Directions for use</h2>
+                {% if product.sub_category == "dhuni" %}
                 <ul>
                     {% for direction in product.get_directions %}
-                        <li>{{direction}}</li>
+                        {% if direction %}
+                            <li>
+                                <strong>{{ direction|slice:":8" }}</strong>{{ direction|slice:"8:" }}
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
+                {% else  %}
+                <ul>
+                    {% for direction in product.get_directions %}
+                            <li>{{direction}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
             <hr>
             <div class="row_1">
                 <h2>Safety warnings</h2>
                 <ul>
-                    {% for warning in product.get_key_note %}
+                    {% for warning in product.get_safety_warnings %}
                         <li>{{warning}}</li>
                     {% endfor %}
                 </ul>
@@ -248,9 +301,10 @@ margin-top: 40px;
     </div>
     <hr>
     <h2 class="about_head">Specifications</h2>
+    <hr>
     <div class="product_about_3">
         <div class="col_1">
-            
+            <strong></strong>
             <div class="row_1">
                 <p><strong>Product Type:</strong> {{product.product_type}}</p>
                 <p><strong>Net Quantity:</strong> {{product.content}}</p>
@@ -275,7 +329,9 @@ margin-top: 40px;
             </div>
         </div>
     </div>
+    <hr>
     <h2 class="about_head">FAQs</h2>
+    <hr>
     <div class="product_about_4">
         <ul>
             {% for faq in product.get_faqs %}
@@ -283,6 +339,49 @@ margin-top: 40px;
             {% endfor %}
         </ul>
 
+    </div>
+    <hr>
+    <h2 class="about_head">Similar Products</h2>
+    <hr>
+    <div class="similar_products">
+        <div class="sub_cat">
+            {% for related_product in related_products %}
+            <div class="slider_box" >
+                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                    <div class="product__images" >
+                        {% for image in related_product.images.all %}
+                        {% if forloop.first %}
+                        <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
+                        {% elif forloop.last %}
+                        <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
+                        {% endif %}
+                        {% endfor %}
+                        <form method="post" action="{% url 'add_to_wishlist' item_id=product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="name">
+                        <h3 class="product__title">{{ related_product.name }}</h3>
+                    </div>
+                </a>
+                <div class="price">
+                    <span style="font-size: 20px;">₹ {{ related_product.price }}</span>
+                </div>
+                <div class="add-to-cart-form">
+                    <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                        {% csrf_token %}
+                            <button type="submit" class="add-to-cart-button" >
+                                Add to Cart
+                            </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
     </div>
 
 

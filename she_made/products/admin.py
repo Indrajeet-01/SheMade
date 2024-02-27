@@ -3,7 +3,7 @@ from .models import ProductItem, Image
 
 @admin.register(ProductItem)
 class ProductItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'stock', 'display_image_urls')
+    list_display = ('name', 'category', 'sub_category', 'price', 'stock', 'display_image_urls')
     list_filter = ('category', 'sub_category')
     search_fields = ('name', 'description', 'category', 'sub_category')
 

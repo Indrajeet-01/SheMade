@@ -16,7 +16,8 @@ height: 400px;
 width: 280px;
 margin-bottom: 10px;
 display: flex; 
-flex-direction: column; 
+flex-direction: column;
+justify-content: space-between;
 box-shadow: 5px 10px #4F6F52;
 align-items: center;
 background-color: #f2f5ff;
@@ -29,7 +30,6 @@ border-radius: 20px;
 .slider_box a {
 text-decoration: none;
 }
-
 
 
 .slider_box button {
@@ -89,3 +89,4 @@ transition: background-color 0.3s ease; /* Add transition effect */
 button[type="submit"]:hover {
 background-color: #999; /* Change background color on hover */
 }
+
