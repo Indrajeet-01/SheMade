@@ -29,12 +29,10 @@
         margin-bottom: 5px;
     }
 
-    .slider_box {
-        box-shadow: 5px 10px #739072; height: 400px; margin-bottom: 10px;
-    }
+    
 
     .slider_box button {
-        font-size: 16px; background-color: #739072;
+        font-size: 16px; background-color: #739072; align-self: flex-end;
     }
 
     .slider_box button:hover {
@@ -90,6 +88,7 @@
                 <li><button class="category-filter" data-category="fragrances">Fragrances</button></li>
                 <li><button class="category-filter" data-category="body_bath">Body Bath</button></li>
                 <li><button class="category-filter" data-category="skin">Skin</button></li>
+                <li><button class="category-filter" data-category="candles">Candles</button></li>
             </ul>
         </div>
         <div class="by_subcat">
@@ -105,8 +104,9 @@
                 <li><button class="sub-category-filter" data-category="conditioner">Conditioner</button></li>
                 <li><button class="sub-category-filter" data-category="facetoner">FaceToner</button></li>
                 <li><button class="sub-category-filter" data-category="aleo_gel">Aleo_Gel</button></li>
-                <li><button class="sub-category-filter" data-category="lip_care">Lip_Care</button></li>
+                <li><button class="sub-category-filter" data-category="serum">Serum</button></li>
                 <li><button class="sub-category-filter" data-category="scrubs">Scrubs</button></li>
+                <li><button class="sub-category-filter" data-category="lotion">Lotion</button></li>
             </ul>
         </div>
         
@@ -124,7 +124,7 @@
         <div class="sub_cat">
             {% for product in products %}
             <div class="slider_box" >
-                <a href="{% url 'product_detail' product.id product.description %}" class="cover-link">
+                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}

@@ -5,6 +5,7 @@ class ProductItem(models.Model):
         ('fragrances', 'Fragrances'),
         ('body_bath', 'Body Bath'),
         ('skin', 'Skin'),
+        ('candles', 'Candles')
     ]
     
     SUB_CATEGORY_CHOICES = [
@@ -12,6 +13,7 @@ class ProductItem(models.Model):
             ('dhuni', 'Dhuni'),
             ('perfumes', 'Perfumes'),
             ('attars', 'Attars'),
+            
         ]),
         ('body_bath', [
             ('soaps', 'Soaps'),
@@ -19,12 +21,17 @@ class ProductItem(models.Model):
             ('facewash', 'Face Wash'),
             ('shampoo', 'Shampoo'),
             ('conditioner', 'Conditioner'),
+            ('lotion', 'Lotion'),
         ]),
         ('skin', [
             ('facetoner', 'Face Toner'),
             ('aleo_gel', 'Aleo Gel'),
             ('lip_care', 'Lip Care'),
             ('scrubs', 'Scrubs'),
+            ('serum', 'Serum'),
+        ]),
+        ('candles', [
+            ('candle', 'Candle'),
         ]),
     ]
     
@@ -36,7 +43,7 @@ class ProductItem(models.Model):
     country_of_origin = models.CharField(max_length=255, blank=True)
     
     product_type = models.CharField(max_length=255, blank=True)
-    weight = models.CharField(max_length=255, blank=True)
+    weight = models.CharField(max_length=255, blank=True,)
     expiry = models.CharField(max_length=255, blank=True)
     
     description = models.TextField(blank=True, null=True)

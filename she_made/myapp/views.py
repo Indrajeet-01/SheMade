@@ -139,7 +139,7 @@ def product_detail(request, product_id, product_name):
     related_products = ProductItem.objects.filter(sub_category=product.sub_category).exclude(id=product_id)[:5]
 
     # Pass the product and modified description to the template
-    context = {
+    context = { 
         'product': product,
         'modified_description': modified_name,
         'related_products': related_products

@@ -11,13 +11,13 @@
         margin: 10px 3% 30px 3%;
     }
     .product-detail {
-        display: flex;  gap: 30px; position: relative; padding: 20px;
+        display: flex;  gap: 30px; position: relative; padding: 20px; margin-bottom: 50px;
     }
     .images {
-        flex: 1; margin-top: 30px; position: sticky;
+        flex: 1; margin-top: 10px; position: sticky;
     }
     .product_info {
-        flex: 1; margin: 20px 20px 0 0 ;
+        flex: 1; margin: 10px 20px 0 0 ;
     }
     .product_info h1 {
         color: #016A70;
@@ -89,7 +89,7 @@ margin-top: 40px;
 
 .product_about_2, .product_about_3 {
     display: flex;
-    
+    flex-direction: column;
 }
 
 .about_head {
@@ -97,16 +97,22 @@ margin-top: 40px;
 }
 
 .col_1 {
-    flex: 1;
+    display: flex;
+    
 }
 
 .col_2 {
-    flex: 1;
-    margin-left: 20px;
+    display: flex;
+    
+    
 }
 
 .row_1, .row_2 {
+    flex: 1;
     padding: 20px;
+}
+.row_2 {
+    margin-left: 20px;
 }
 
 .product_about_3 strong {
@@ -235,42 +241,29 @@ border-radius: 20px;
 
         </div>
     </div>
+    
     <hr>
-    <h2 class="about_head">About</h2>
+    <h2 class="about_head">More Details</h2>
     <hr>
     <div class="product_about_2">
         <div class="col_1">
             <div class="row_1">
-                <h2>Benefits</h2>
+                <h3>Benefits</h3>
                 <ul>
                     {% for benefit in product.get_benefits %}
                         {% if benefit %}
                             {% with benefit|split_at_colon as parts %}
-                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
+                                <li>{% if parts.1 %}<strong>{{ parts.0 }}:</strong>{{ parts.1 }}{% else %}{{ parts.0 }}{% endif %}</li>
                             {% endwith %}
                         {% endif %}
                     {% endfor %}
                 </ul>
                 
             </div>
-            <hr>
+            
             <div class="row_1">
-                <h2>Key Ingredeits</h2>
-                <ul>
-                    {% for ingredient in product.get_key_ingredients %}
-                        {% if ingredient %}
-                            {% with ingredient|split_at_colon as parts %}
-                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
-                            {% endwith %}
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="col_2">
-            <div class="row_1">
-                <h2>Directions for use</h2>
-                {% if product.sub_category == "dhuni" %}
+                <h3>Directions for use</h3>
+                {% if product.sub_category|in_list:"dhuni,facewash,shampoo" %}
                 <ul>
                     {% for direction in product.get_directions %}
                         {% if direction %}
@@ -288,9 +281,23 @@ border-radius: 20px;
                 </ul>
                 {% endif %}
             </div>
-            <hr>
+        </div>
+        <div class="col_2">
             <div class="row_1">
-                <h2>Safety warnings</h2>
+                <h3>Key Ingredeits</h3>
+                <ul>
+                    {% for ingredient in product.get_key_ingredients %}
+                        {% if ingredient %}
+                            {% with ingredient|split_at_colon as parts %}
+                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
+                            {% endwith %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="row_1">
+                <h3>Safety warnings</h3>
                 <ul>
                     {% for warning in product.get_safety_warnings %}
                         <li>{{warning}}</li>
@@ -301,28 +308,31 @@ border-radius: 20px;
     </div>
     <hr>
     <h2 class="about_head">Specifications</h2>
-    <hr>
+    
     <div class="product_about_3">
         <div class="col_1">
             <strong></strong>
             <div class="row_1">
                 <p><strong>Product Type:</strong> {{product.product_type}}</p>
                 <p><strong>Net Quantity:</strong> {{product.content}}</p>
-                <p><strong>Gender:</strong> {{product.gender}}</p>
+                
+                {% if not product.sub_category == "dhuni" %} 
+                    <p><strong>Gender:</strong> {{product.gender}}</p>
+                {% endif %}
             </div>
-            <hr>
+            
             <div class="row_2">
-                <p><strong>Handicrafted By:</strong> Shemade</p>
-                <p><strong>Packed By:</strong> Shemade (MILESTONE ACHIEVERS PRIVATE LIMITED)</p>
-            </div>
-        </div>
-        <div class="col_2">
-            <div class="row_1">
                 <p><strong>Country of Origin:</strong> {{product.country_of_origin}}</p>
                 <p><strong>Shelf life:</strong> {{product.life}}</p>
                 <p><strong>Expiry:</strong> {{product.expiry}}</p>
             </div>
-            <hr>
+        </div>
+        <div class="col_2">
+            <div class="row_1">
+                <p><strong>Handicrafted By:</strong> Shemade</p>
+                <p><strong>Packed By:</strong> Shemade (MILESTONE ACHIEVERS PRIVATE LIMITED)</p>
+            </div>
+            
             <div class="row_2">
                 <p><strong>Marketed By:</strong> MILESTONE ACHIEVERS PRIVATE LIMITED</p>
                 <p><strong>Customer care support:</strong> support@shemade.in , 9971090940</p>
@@ -331,18 +341,21 @@ border-radius: 20px;
     </div>
     <hr>
     <h2 class="about_head">FAQs</h2>
-    <hr>
+    
     <div class="product_about_4">
-        <ul>
+        <ol>
             {% for faq in product.get_faqs %}
-                <li><pre>{{faq}}</pre></li>
+                <li>
+                    <h2>{{ faq|split_at_question_mark|first }}</h2>
+                    <pre>{{ faq|split_at_question_mark|last }}</pre>
+                </li>
             {% endfor %}
-        </ul>
+        </ol>
 
     </div>
     <hr>
     <h2 class="about_head">Similar Products</h2>
-    <hr>
+    
     <div class="similar_products">
         <div class="sub_cat">
             {% for related_product in related_products %}
