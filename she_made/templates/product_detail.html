@@ -261,7 +261,7 @@ border-radius: 20px;
                 
             </div>
             
-            <div class="row_1">
+            <div class="row_2">
                 <h3>Directions for use</h3>
                 {% if product.sub_category|in_list:"dhuni,facewash,shampoo" %}
                 <ul>
@@ -270,6 +270,21 @@ border-radius: 20px;
                             <li>
                                 <strong>{{ direction|slice:":8" }}</strong>{{ direction|slice:"8:" }}
                             </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% elif product.sub_category|in_list:"body_hair oil" %}
+                <ul>
+                    {% for direction in product.get_directions %}
+                        {% if direction %}
+                        {% with direction|split_at_colon as parts %}
+                            <li>{% if parts.1 %}<strong>{{ parts.0 }}:</strong>
+                                <pre>
+                                    {{ parts.1 }}{% else %}{{ parts.0 }}
+                                </pre>
+                                {% endif %}
+                            </li>
+                        {% endwith %}
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -289,14 +304,14 @@ border-radius: 20px;
                     {% for ingredient in product.get_key_ingredients %}
                         {% if ingredient %}
                             {% with ingredient|split_at_colon as parts %}
-                                <li><strong>{{ parts.0 }}:</strong>{% if parts.1 %}{{ parts.1 }}{% endif %}</li>
+                                <li>{% if parts.1 %}<strong>{{ parts.0 }}:</strong>{{ parts.1 }}{% else %}{{ parts.0 }}{% endif %}</li>
                             {% endwith %}
                         {% endif %}
                     {% endfor %}
                 </ul>
             </div>
             
-            <div class="row_1">
+            <div class="row_2">
                 <h3>Safety warnings</h3>
                 <ul>
                     {% for warning in product.get_safety_warnings %}
@@ -360,7 +375,7 @@ border-radius: 20px;
         <div class="sub_cat">
             {% for related_product in related_products %}
             <div class="slider_box" >
-                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                <a href="{% url 'product_detail' related_product.id related_product.name|replace_spaces_with_plus %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in related_product.images.all %}
                         {% if forloop.first %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 
 {% block css %}
@@ -132,7 +133,7 @@
                     <div class="product_slider slider"  >
                         {% for product in fragrances %}
                         <div class="slider_box"   data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}">
-                            <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                            <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
                                 <div class="product__images">
                                     {% for image in product.images.all %}
                                         {% if forloop.first %}
@@ -174,7 +175,7 @@
                 <div class="product_slider slider" >
                     {% for product in body_bath %}
                     <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
-                        <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                        <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
                             <div class="product__images">
                                 {% for image in product.images.all %}
                                     {% if forloop.first %}
@@ -216,7 +217,7 @@
             <div class="product_slider slider" >
                 {% for product in skin %}
                 <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
-                    <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                    <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
                         <div class="product__images">
                             {% for image in product.images.all %}
                                 {% if forloop.first %}

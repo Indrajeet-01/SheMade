@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import subcategory_products, aboutus,offers,  blogs, contact,search_view, add_to_cart, view_cart, add_to_wishlist, view_wishlist, remove_from_wishlist, cart, remove_from_cart,product_detail,ShopView, ProductListView, privacy_policy, checkout, userFrofile, security_warranty, return_policy, faqs, term_condition, social_responsibility, bulk_order, update_cart
+from .views import subcategory_products, aboutus,offers,  blogs, contact,search_view, add_to_cart, view_cart, add_to_wishlist, view_wishlist, remove_from_wishlist, cart, remove_from_cart,product_detail,ShopView, ProductListView, privacy_policy, checkout, userFrofile, security_warranty, return_policy, faqs, term_condition, social_responsibility, bulk_order, update_cart, dummy
 
 urlpatterns = [
     # for home page
@@ -27,6 +27,8 @@ urlpatterns = [
     path('blogs/', blogs, name='blogs'),
 
     path('contact-us/', contact, name='contact'),
+
+    path('dummy/', dummy, name='dummy'),
 
     path('cart/', view_cart, name='view_cart'),
 

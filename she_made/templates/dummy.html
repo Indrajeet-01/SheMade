@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+
+section {
+    margin: 10px 3% 30px 3%;
+}
+.sub_cat {
+    display: flex; flex-wrap: wrap; gap: 20px;
+}
+.sub_cat h1 {
+    font-size: 28px;
+}
+.sub_cat h2 {
+    font-size: 26px;
+}
+.sub_cat h3 {
+    font-size: 24px;
+}
+.sub_cat h4 {
+    font-size: 22px;
+}
+.sub_cat h5 {
+    font-size: 20px;
+}
+.sub_cat h6 {
+    font-size: 18px;
+}
+.sub_cat p {
+    font-size: 16px;
+}
+.wishlist-button {
+    position: absolute; top: 10px; right: 10px; border: none; cursor: pointer;
+}
+.fa-heart {
+    color: #739072; font-size: 20px; 
+}
+.fa-heart:hover {
+    color: red; 
+}
+.slider_box {
+    height: 470px; width: 280px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: space-between;
+    align-items: center; background-color: transparent;
+}
+.slider_box:hover {
+    
+}
+.slider_box a {
+text-decoration: none;
+}
+.slider_box button {
+    padding: 8px 25px; cursor: pointer; color: white; border: none; background-color: #1e3b0c;border-radius: 13px; margin-bottom: 10px;
+}
+
+.slider_box button:hover {
+    color: #1e3b0c; background-color: white; box-shadow: 0 4px 8px 0 #1e3b0c, 0 6px 20px 0 #1e3b0c;
+}
+
+.add-to-cart-button {
+    font-weight: 650; font-size: 16px;
+}
+
+.product__images {
+position: relative;
+overflow: hidden;
+
+}
+
+.larger-image {
+position: absolute;
+top: 0;
+left: 0;
+opacity: 0;
+transition: opacity 1s ease-in-out;
+transform: scale(1.3); /* adjust the scale factor as needed */
+}
+
+.cover-link:hover .larger-image {
+opacity: 1;
+}
+
+.slider_box img {
+width: 100%; 
+height: 250px;
+border-radius: 20px;
+}
+
+.slider_box .name {
+font-size: 24px;
+color: black;
+text-align: center;
+margin-bottom: 10px;
+}
+
+.slider_box .content span {
+    font-size: 16px;
+}
+
+.slider_box .price span {
+    font-size: 16px;
+margin-bottom: 10px;
+text-align: center;
+}
+
+
+
+
+</style>
+
+{% endblock %}
+
+
+{% block content %} 
+<section>
+    
+        <h1>Heading 1</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus consequatur architecto laudantium, amet libero quidem quae dignissimos corrupti obcaecati? Cupiditate perferendis vero iste ea recusandae veniam ratione repellendus, expedita nostrum.</p>
+        <h2>Heading 2</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero corrupti tempore voluptates amet aspernatur, illum ea. Asperiores voluptates, quibusdam nostrum saepe nihil illo sequi, ut qui dignissimos culpa recusandae! Consequatur?</p>
+        <h3>Heading 3</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque recusandae laborum placeat nesciunt eaque quisquam repudiandae cum. Sunt, aut impedit fugit rerum modi temporibus voluptatum corporis ratione, iste quas aspernatur.</p>
+        <h4>Heading 4</h4>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
+        <h5>Heading 5</h5>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
+        <h6>Heading 6</h6>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
+        
+        <div class="sub_cat">
+            <div class="slider_box" >
+                <a href="" class="cover-link">
+                    <div class="product__images" >
+                        
+                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
+                        
+                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
+        
+                        <form method="post" action="">
+                            
+                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="name">
+                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
+                    </div>
+                </a>
+                <div class="content">
+                    <span>Size: <span >100 ml</span></span>
+                </div>
+                <div class="price">
+                    <span style="font-size: 20px;">₹ 499</span>
+                </div>
+                <div class="add-to-cart-form">
+                    <form method="post" action="">
+                        
+                            <button type="submit" class="add-to-cart-button" >
+                                Add to Cart
+                            </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="slider_box" >
+                <a href="" class="cover-link">
+                    <div class="product__images" >
+                        
+                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
+                        
+                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
+        
+                        <form method="post" action="">
+                            
+                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="name">
+                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
+                    </div>
+                </a>
+                <div class="content">
+                    <span>Size: <span >100 ml</span></span>
+                </div>
+                <div class="price">
+                    <span style="font-size: 20px;">₹ 499</span>
+                </div>
+                <div class="add-to-cart-form">
+                    <form method="post" action="">
+                        
+                            <button type="submit" class="add-to-cart-button" >
+                                Add to Cart
+                            </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="slider_box" >
+                <a href="" class="cover-link">
+                    <div class="product__images" >
+                        
+                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
+                        
+                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
+        
+                        <form method="post" action="">
+                            
+                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="name">
+                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
+                    </div>
+                </a>
+                <div class="content">
+                    <span>Size: <span >100 ml</span></span>
+                </div>
+                <div class="price">
+                    <span style="font-size: 20px;">₹ 499</span>
+                </div>
+                <div class="add-to-cart-form">
+                    <form method="post" action="">
+                        
+                            <button type="submit" class="add-to-cart-button" >
+                                Add to Cart
+                            </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+</section> 
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/product.css">
@@ -47,7 +48,7 @@
         <div class="sub_cat">
             {% for product in products %}
             <div class="slider_box" >
-                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}
@@ -66,7 +67,11 @@
                     <div class="name">
                         <h3 class="product__title">{{ product.name }}</h3>
                     </div>
+                    
                 </a>
+                <div class="content">
+                    <span>Size: <span >{{ product.content }}</span></span>
+                </div>
                 <div class="price">
                     <span style="font-size: 20px;">₹ {{ product.price }}</span>
                 </div>

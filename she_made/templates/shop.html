@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static%}
+{% load custom_filters %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/product.css">
@@ -105,7 +106,7 @@
                 <li><button class="sub-category-filter" data-category="facetoner">FaceToner</button></li>
                 <li><button class="sub-category-filter" data-category="aleo_gel">Aleo_Gel</button></li>
                 <li><button class="sub-category-filter" data-category="serum">Serum</button></li>
-                <li><button class="sub-category-filter" data-category="scrubs">Scrubs</button></li>
+                <li><button class="sub-category-filter" data-category="body_hair oil">Body_Hair Oil</button></li>
                 <li><button class="sub-category-filter" data-category="lotion">Lotion</button></li>
             </ul>
         </div>
@@ -124,7 +125,7 @@
         <div class="sub_cat">
             {% for product in products %}
             <div class="slider_box" >
-                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
                     <div class="product__images" >
                         {% for image in product.images.all %}
                         {% if forloop.first %}
@@ -144,6 +145,9 @@
                         <h3 class="product__title">{{ product.name }}</h3>
                     </div>
                 </a>
+                <div class="content">
+                    <span>Size: <span >{{ product.content }}</span></span>
+                </div>
                 <div class="price">
                     <span style="font-size: 20px;">₹ {{ product.price }}</span>
                 </div>
@@ -165,8 +169,7 @@
         
         <input type="hidden" name="filter.p.category" value="{{ category }}">
         <input type="hidden" name="filter.p.sub_category" value="{{ sub_category }}">
-        <input type="hidden" name="filter.p.min_price" value="{{ min_price }}">
-        <input type="hidden" name="filter.p.max_price" value="{{ max_price }}">
+        
         <input type="hidden" name="sort_by" value="{{ sort_by }}">
     </form>
 

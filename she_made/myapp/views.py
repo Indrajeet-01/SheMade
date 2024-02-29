@@ -24,6 +24,11 @@ def aboutus(request):
     }
     return render(request, 'about_us.html', context)
 
+def dummy(request):
+    print('hey from dummy') 
+    
+    return render(request, 'dummy.html')
+
 def security_warranty(request):
     return render(request, 'support_warranty.html')
 
@@ -80,20 +85,14 @@ class ShopView(ListView):
         queryset = self.get_queryset()
         category = request.GET.get('filter.p.category')
         sub_category = request.GET.get('filter.p.sub_category')
-        min_price = request.GET.get('filter.p.min_price')
-        max_price = request.GET.get('filter.p.max_price')
+        
         sort_by = self.request.GET.get('sort_by')
 
         if category:
             queryset = queryset.filter(category=category)
         if sub_category:
             queryset = queryset.filter(sub_category=sub_category)
-        if min_price:
-            min_price = decimal.Decimal(min_price)
-            queryset = queryset.filter(price__gte=min_price)
-        if max_price:
-            max_price = decimal.Decimal(max_price)
-            queryset = queryset.filter(price__lte=max_price)
+        
         if sort_by == 'low_to_high':
             queryset = queryset.order_by('price')
         elif sort_by == 'high_to_low':

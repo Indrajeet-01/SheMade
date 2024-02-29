@@ -22,12 +22,12 @@ class ProductItem(models.Model):
             ('shampoo', 'Shampoo'),
             ('conditioner', 'Conditioner'),
             ('lotion', 'Lotion'),
-        ]),
+        ]), 
         ('skin', [
             ('facetoner', 'Face Toner'),
             ('aleo_gel', 'Aleo Gel'),
-            ('lip_care', 'Lip Care'),
-            ('scrubs', 'Scrubs'),
+            ('lip care', 'Lip Care'), 
+            ('body_hair oil', 'Body Hair Oil'),
             ('serum', 'Serum'),
         ]),
         ('candles', [
@@ -36,6 +36,7 @@ class ProductItem(models.Model):
     ]
     
     name = models.CharField(max_length=255)
+    url_name = models.CharField(max_length =255, blank=True)
     generic_name = models.CharField(max_length=255, blank=True)
     quality_assurance = models.CharField(max_length=255, blank=True)
     eco_friendly = models.CharField(max_length=255, blank=True)

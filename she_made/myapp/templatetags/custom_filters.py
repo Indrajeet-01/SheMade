@@ -17,3 +17,7 @@ def split_at_question_mark(value):
 @register.filter(name='in_list')
 def in_list(value, arg):
     return value in arg
+
+@register.filter(name='replace_spaces_with_plus') 
+def replace_spaces_with_plus(value):
+    return value.replace(' ', '+')  
