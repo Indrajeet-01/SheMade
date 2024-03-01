@@ -15,6 +15,7 @@ from fuzzywuzzy import fuzz
 from django.db.models import F
 from rest_framework.pagination import PageNumberPagination
 from django.views.generic import TemplateView
+from django.contrib import messages
 
 
 def aboutus(request):
@@ -111,7 +112,8 @@ class ProductListView(generics.ListAPIView):
         queryset = ProductItem.objects.filter(
             Q(category='Fragrances') |
             Q(category='body_bath') |
-            Q(category='SKIN')
+            Q(category='SKIN') |
+            Q(category='Candles')
         )
         return queryset
 
@@ -120,10 +122,12 @@ class ProductListView(generics.ListAPIView):
         perfumes = queryset.filter(category='Fragrances')
         body_bath = queryset.filter(category='body_bath')
         skin = queryset.filter(category='SKIN')
+        candles = queryset.filter(category='Candles')
         context = {
             'fragrances': perfumes,
             'body_bath': body_bath,
-            'skin': skin
+            'skin': skin,
+            'candles' : candles
         }
         return render(request, 'index.html', context)
     

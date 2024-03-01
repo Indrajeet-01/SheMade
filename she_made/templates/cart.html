@@ -10,7 +10,7 @@
     }
 
     .cart h1 {
-        color: white; background-color: #436850; text-align: center; font-size: 24px;
+        color: white; background-color: #436850; text-align: center; 
     }
 
     .container {
@@ -75,11 +75,11 @@
     }
 
     .checkout_btn {
-        padding: 10px 30px; cursor: pointer; color: white; border: none; background-color: #4F6F52; border-radius: 10px;
+        padding: 8px 25px; cursor: pointer; color: white; border: none; background-color: #1e3b0c;border-radius: 13px; align-items: flex-end; font-weight: 650; font-size: 16px;
     }
 
     .checkout_btn:hover {
-        font-size: 18px; color: #4F6F52; background-color: white;
+        color: #1e3b0c; background-color: white; box-shadow: 0 4px 8px 0 #1e3b0c, 0 6px 20px 0 #1e3b0c;
     }
 
 </style>
@@ -168,9 +168,9 @@
                     <p id="cart-total" style="color: #12372A; font-size: 24px;"> ₹ {{ total}}</p>
                     
                 </div>
-                <div class="">
+                <div class="checkout_btns" style="margin-bottom: 20px;">
                     {% if request.session.cart|length > 0 %}
-                        <p class="checkout_btn" ><a href="{% url 'checkout' %}"  class="checkout_btn" >Proceed to Checkout</a></p>
+                        <a href="{% url 'checkout' %}"  class="checkout_btn" >Proceed to Checkout</a>
                     {% endif %}
                 </div>
         </div>

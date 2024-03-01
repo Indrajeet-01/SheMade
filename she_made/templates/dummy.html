@@ -3,7 +3,10 @@
 
 
 {% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.css">
+<link rel="stylesheet" href="/static/css/product.css">
 <style>
+    
 
 section {
     margin: 10px 3% 30px 3%;
@@ -11,102 +14,72 @@ section {
 .sub_cat {
     display: flex; flex-wrap: wrap; gap: 20px;
 }
-.sub_cat h1 {
-    font-size: 28px;
+
+</style>
+<style>
+    .slide-container{
+  
+  width: 100%;
+  
 }
-.sub_cat h2 {
-    font-size: 26px;
+#slide-content{
+  margin: 0 40px;
+  overflow: hidden;
+  
 }
-.sub_cat h3 {
-    font-size: 24px;
+.slider_01, .slider_02 {
+    position: relative;
 }
-.sub_cat h4 {
-    font-size: 22px;
+/* Adjust the position of swiper buttons for slider 1 */
+.slider_01 .swiper-button-prev-1,
+.slider_01 .swiper-button-next-1,
+.slider_01 .swiper-pagination-1 {
+    position: absolute;
+    z-index: 10;
 }
-.sub_cat h5 {
-    font-size: 20px;
+.slider_01 .swiper-button-prev-1 {
+    left: 10px;
 }
-.sub_cat h6 {
-    font-size: 18px;
+.slider_01 .swiper-button-next-1 {
+    right: 10px;
 }
-.sub_cat p {
-    font-size: 16px;
-}
-.wishlist-button {
-    position: absolute; top: 10px; right: 10px; border: none; cursor: pointer;
-}
-.fa-heart {
-    color: #739072; font-size: 20px; 
-}
-.fa-heart:hover {
-    color: red; 
-}
-.slider_box {
-    height: 470px; width: 280px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: space-between;
-    align-items: center; background-color: transparent;
-}
-.slider_box:hover {
-    
-}
-.slider_box a {
-text-decoration: none;
-}
-.slider_box button {
-    padding: 8px 25px; cursor: pointer; color: white; border: none; background-color: #1e3b0c;border-radius: 13px; margin-bottom: 10px;
+.slider_01 .swiper-pagination-1 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.slider_box button:hover {
-    color: #1e3b0c; background-color: white; box-shadow: 0 4px 8px 0 #1e3b0c, 0 6px 20px 0 #1e3b0c;
+/* Adjust the position of swiper buttons for slider 2 */
+.slider_02 .swiper-button-prev-2,
+.slider_02 .swiper-button-next-2,
+.slider_02 .swiper-pagination-2 {
+    position: absolute;
+    z-index: 10;
 }
-
-.add-to-cart-button {
-    font-weight: 650; font-size: 16px;
+.slider_02 .swiper-button-prev-2 {
+    left: 10px;
 }
-
-.product__images {
-position: relative;
-overflow: hidden;
-
+.slider_02 .swiper-button-next-2 {
+    right: 10px;
 }
-
-.larger-image {
-position: absolute;
-top: 0;
-left: 0;
-opacity: 0;
-transition: opacity 1s ease-in-out;
-transform: scale(1.3); /* adjust the scale factor as needed */
-}
-
-.cover-link:hover .larger-image {
-opacity: 1;
-}
-
-.slider_box img {
-width: 100%; 
-height: 250px;
-border-radius: 20px;
-}
-
-.slider_box .name {
-font-size: 24px;
-color: black;
-text-align: center;
-margin-bottom: 10px;
-}
-
-.slider_box .content span {
-    font-size: 16px;
-}
-
-.slider_box .price span {
-    font-size: 16px;
-margin-bottom: 10px;
-text-align: center;
+.slider_02 .swiper-pagination-2 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
 
+
+
+@media screen and (max-width: 768px) {
+  .slide-content{
+    margin: 0 10px;
+  }
+  .swiper-navBtn{
+    display: none;
+  }
+}
 
 </style>
 
@@ -115,127 +88,362 @@ text-align: center;
 
 {% block content %} 
 <section>
-    
-        <h1>Heading 1</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus consequatur architecto laudantium, amet libero quidem quae dignissimos corrupti obcaecati? Cupiditate perferendis vero iste ea recusandae veniam ratione repellendus, expedita nostrum.</p>
-        <h2>Heading 2</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero corrupti tempore voluptates amet aspernatur, illum ea. Asperiores voluptates, quibusdam nostrum saepe nihil illo sequi, ut qui dignissimos culpa recusandae! Consequatur?</p>
-        <h3>Heading 3</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque recusandae laborum placeat nesciunt eaque quisquam repudiandae cum. Sunt, aut impedit fugit rerum modi temporibus voluptatum corporis ratione, iste quas aspernatur.</p>
-        <h4>Heading 4</h4>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
-        <h5>Heading 5</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
-        <h6>Heading 6</h6>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus qui corrupti nam fugiat ea aut ex sapiente eveniet adipisci placeat! Mollitia quos ea autem? Perferendis exercitationem quibusdam natus cupiditate nulla?</p>
-        
-        <div class="sub_cat">
-            <div class="slider_box" >
-                <a href="" class="cover-link">
-                    <div class="product__images" >
+
+
+        <div class="slider_01">
+            <div class="slide-container swiper">
+                <div id="slide-content-1" class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
                         
-                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
-                        
-                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
-        
-                        <form method="post" action="">
-                            
-                            <button type="submit" class="wishlist-button" style="background: transparent;">
-                                <i class="fa-solid fa-heart"></i>
-                            </button>
-                        </form>
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+                       
+
                     </div>
-                    <div class="name">
-                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
-                    </div>
-                </a>
-                <div class="content">
-                    <span>Size: <span >100 ml</span></span>
-                </div>
-                <div class="price">
-                    <span style="font-size: 20px;">₹ 499</span>
-                </div>
-                <div class="add-to-cart-form">
-                    <form method="post" action="">
-                        
-                            <button type="submit" class="add-to-cart-button" >
-                                Add to Cart
-                            </button>
-                    </form>
                 </div>
             </div>
-
-            <div class="slider_box" >
-                <a href="" class="cover-link">
-                    <div class="product__images" >
-                        
-                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
-                        
-                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
-        
-                        <form method="post" action="">
-                            
-                            <button type="submit" class="wishlist-button" style="background: transparent;">
-                                <i class="fa-solid fa-heart"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="name">
-                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
-                    </div>
-                </a>
-                <div class="content">
-                    <span>Size: <span >100 ml</span></span>
-                </div>
-                <div class="price">
-                    <span style="font-size: 20px;">₹ 499</span>
-                </div>
-                <div class="add-to-cart-form">
-                    <form method="post" action="">
-                        
-                            <button type="submit" class="add-to-cart-button" >
-                                Add to Cart
-                            </button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="slider_box" >
-                <a href="" class="cover-link">
-                    <div class="product__images" >
-                        
-                        <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image">
-                        
-                        <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image">
-        
-                        <form method="post" action="">
-                            
-                            <button type="submit" class="wishlist-button" style="background: transparent;">
-                                <i class="fa-solid fa-heart"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="name">
-                        <h3 class="product__title">Goat Milk Lotion: Nourish and Revitalize</h3>
-                    </div>
-                </a>
-                <div class="content">
-                    <span>Size: <span >100 ml</span></span>
-                </div>
-                <div class="price">
-                    <span style="font-size: 20px;">₹ 499</span>
-                </div>
-                <div class="add-to-cart-form">
-                    <form method="post" action="">
-                        
-                            <button type="submit" class="add-to-cart-button" >
-                                Add to Cart
-                            </button>
-                    </form>
-                </div>
-            </div>
-
+            <div class="swiper-button-next swiper-navBtn swiper-button-next-1"></div>
+            <div class="swiper-button-prev swiper-navBtn swiper-button-prev-1"></div>
+            <div class="swiper-pagination swiper-pagination-1"></div>
         </div>
+
+
+        <div class="slider_02">
+            <div class="slide-container swiper">
+                <div id="slide-content-2" class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
+                        
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next swiper-navBtn swiper-button-next-2"></div>
+            <div class="swiper-button-prev swiper-navBtn swiper-button-prev-2"></div>
+            <div class="swiper-pagination swiper-pagination-2"></div>
+        </div>
+
+        <div class="slider_01">
+            <div class="slide-container swiper">
+                <div id="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
+                        
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card swiper-slide slider_box"  >
+                            <a href="" class="cover-link">
+                            <div class="image-content product__images">
+                                
+                                <img src="/static/images/banner01.jpg" alt="Product Image" class="default-image card-img">
+                                
+                                <img src="/static/images/banner02.jpg" alt="Product Image" class="larger-image card-img">
+                                 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">product 1</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> 400ml</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ 500</span>
+                            </div>
+                            <div class="add-to-cart-form">
+                                <form method="post" action="">
+                                    
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div id="swiper-pagination"></div>
+        </div>
+
 
 
 </section> 
@@ -246,5 +454,70 @@ text-align: center;
 
 
 {% block js %}
+
+
+
+<script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script>
+<script>
+var swiper1 = new Swiper("#slide-content-1", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-1",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-1",
+        prevEl: ".swiper-button-prev-1",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+var swiper2 = new Swiper("#slide-content-2", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-2",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-2",
+        prevEl: ".swiper-button-prev-2",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+
+</script>
 
 {% endblock %}

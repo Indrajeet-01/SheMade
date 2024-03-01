@@ -10,20 +10,14 @@
   }
 
   .checkout h1 {
-    color: white; background-color: #436850; text-align: center; font-size: 24px;
+    color: white; background-color: #436850; text-align: center; 
   }
 
   .checkout_form {
     display: flex; gap: 20px;
   }
 
-  .checkout button {
-    font-size: 16px; color: white; background-color: #739072;
-  }
-
-  .checkout button:hover {
-    color: #739072; background-color: white;
-  }
+  
 
   .container {
     padding: 15px; border-radius: 5px; box-shadow: 3px 6px 4px 6px #739072; width: 75%;
@@ -143,13 +137,14 @@
     color: #ccc;
   }
 
-  button {
-    padding: 10px 30px; cursor: pointer; color: green; border: none; background-color: #FDF4F5;
+  .confirm_order_btm {
+    padding: 8px 25px; cursor: pointer; color: white; border: none; background-color: #1e3b0c;border-radius: 13px; align-items: flex-end; font-weight: 650; font-size: 16px;
+  }
+  .confirm_order_btm:hover {
+    color: #1e3b0c; background-color: white; box-shadow: 0 4px 8px 0 #1e3b0c, 0 6px 20px 0 #1e3b0c;
   }
 
-  button:hover {
-    background-color: #C0DBEA;
-  }
+  
 
   .payment-details {
     display: none;
@@ -401,7 +396,7 @@
                   <p><span >₹ </span><span id="order_total" >{{request.session.cart_total }}</span></p>
                 </div>
                 <hr>
-                <button type="submit">Proceed to Checkout</button>
+                <button type="submit" class="confirm_order_btm">Proceed to Checkout</button>
               </div>
             </div>
           </form>

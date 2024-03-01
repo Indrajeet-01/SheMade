@@ -10,33 +10,6 @@
         margin: 10px 3% 30px 3%; padding: 20px;
     }
 
-    .slider_box {
-        box-shadow: 5px 10px #739072; height: 470px; margin-bottom: 10px;
-    }
-
-    .slider_box button {
-        font-size: 16px; background-color: #739072;
-    }
-
-    .slider_box button:hover {
-        color: #739072; background-color: white;
-    }
-
-    .name h3 {
-        color: #016A70;
-    }
-
-    .wishlist-button {
-        position: absolute; top: 10px; right: 10px; border: none; cursor: pointer;
-    }
-    
-    .fa-heart {
-        color: #739072; font-size: 20px; 
-    }
-    
-    .fa-heart:hover {
-        color: red; /* Change to your desired color */
-    }
 </style>
 {% endblock %}
 
@@ -59,7 +32,7 @@
                         {% endfor %}
                         <form method="post" action="{% url 'add_to_wishlist' item_id=product.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="wishlist-button" style="background: transparent;">
+                            <button type="submit" class="wishlist-button" >
                                 <i class="fa-solid fa-heart"></i>
                             </button>
                         </form>
@@ -73,7 +46,7 @@
                     <span>Size: <span >{{ product.content }}</span></span>
                 </div>
                 <div class="price">
-                    <span style="font-size: 20px;">₹ {{ product.price }}</span>
+                    <span>₹ {{ product.price }}</span>
                 </div>
                 <div class="add-to-cart-form">
                     <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">

@@ -127,7 +127,7 @@
 
 .about-us-info h2 {
   color: white;
-  font-size: 40pt;
+  font-size: 26px;
   text-align: right;
 }
 
@@ -139,7 +139,7 @@
 
 .about-us-info p {
   color: white;
-  font-size: 14pt;
+  font-size: 16px;
   text-align: right;
 }
 
@@ -389,7 +389,7 @@ background-color:#bd0000;
 position:relative;
 color:#222222;
 font-weight:700;
-font-size:36px;
+font-size:26px;
 line-height:1.2em;
 margin-top:35px;
 }
@@ -563,9 +563,9 @@ padding:30px 15px 0px 110px;
 .team-block .inner-box .lower-content h3{
 position:relative;
 color:#bd0000;
-font-size:18px;
+font-size:24px;
 font-weight:700;
-line-height:1.3em;
+line-height:1.1em;
 }
 
 .team-block .inner-box .lower-content h3 a{

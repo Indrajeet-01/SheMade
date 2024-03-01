@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.css">
+<link rel="stylesheet" href="/static/css/product.css">
 
 <style>
     
@@ -21,67 +21,16 @@
     }
 
     .product_cat {
-        margin-left: 80px; margin-right: 80px; color: white; background-color: #436850; padding: 5px 0 5px 5px;
+         margin-left: 5%; margin-right: 5%; color: white; background-color: #436850; padding: 5px 0 5px 5px;
     }
 
-    .row {
-        position: relative; margin-left: 80px; margin-right: 80px; max-width: 90%;
-    }
-
-    .product_slider {
-        display: flex; justify-content: space-between;
-    }
-
-    .slider_box {
-        display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-color: #f2f5ff;
-        border-radius: 20px;
-    }
-
-    .slider_box a {
-        text-decoration: none;
-    }
+    
 
     .slider_box .btns {
-        display: flex; width: 100%; padding: 20px; gap: 10px;
-    }
-
-    .slider_box button:hover {
-        color: #739072; background-color: white;
-    }
-
-    .slider_box button {
-        padding: 10px 30px; cursor: pointer; color: white; border: none; font-size: 16px; background-color: #739072;
-    }
-
-    .slider_box button button span {
-        font-size: 16px;
-    }
-
-    .product__images {
-        position: relative; overflow: hidden;
-    }
-
-    .larger-image {
-        position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; transform: scale(1.3); 
-    }
-
-    .cover-link:hover .larger-image {
-        opacity: 1;
-    }
-
-    .slider_box img {
-        width: 100%; height: 300px; padding-right: -40px; border-radius: 20px;
-    }
-
-    .slider_box .name h3 {
-        font-weight: 700; color: #016A70; text-align: center; margin-bottom: 10px;
+        display: flex; width: 90%;  gap: 4px; margin-bottom: 20px;
     }
 
 
-
-    .slider_box .price {
-        font-size: 20px; margin-bottom: 10px; text-align: center;
-    }
 
     .popup-card-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; display: none;
@@ -110,6 +59,106 @@
     }
 
 </style>
+<style>
+     .slide-container{
+  margin-bottom: 20px;
+  width: 90%;
+  
+}
+#slide-content{
+  margin: 0 40px;
+  overflow: hidden;
+  
+}
+.slider_01, .slider_02, .slider_03, .slider_04 {
+    position: relative;
+}
+/* Adjust the position of swiper buttons for slider 1 */
+.slider_01 .swiper-button-prev-1,
+.slider_01 .swiper-button-next-1,
+.slider_01 .swiper-pagination-1 {
+    position: absolute;
+    z-index: 10;
+}
+.slider_01 .swiper-button-prev-1 {
+    left: 3%;
+}
+.slider_01 .swiper-button-next-1 {
+    right: 3%;
+}
+.slider_01 .swiper-pagination-1 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Adjust the position of swiper buttons for slider 2 */
+.slider_02 .swiper-button-prev-2,
+.slider_02 .swiper-button-next-2,
+.slider_02 .swiper-pagination-2 {
+    position: absolute;
+    z-index: 10;
+}
+.slider_02 .swiper-button-prev-2 {
+    left: 3%;
+}
+.slider_02 .swiper-button-next-2 {
+    right: 3%;
+}
+.slider_02 .swiper-pagination-2 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider_03 .swiper-button-prev-3,
+.slider_03 .swiper-button-next-3,
+.slider_03 .swiper-pagination-3 {
+    position: absolute;
+    z-index: 10;
+}
+.slider_03 .swiper-button-prev-3 {
+    left: 3%;
+}
+.slider_03 .swiper-button-next-3 {
+    right: 3%;
+}
+.slider_03 .swiper-pagination-3 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Adjust the position of swiper buttons for slider 2 */
+.slider_04 .swiper-button-prev-4,
+.slider_04 .swiper-button-next-4,
+.slider_04 .swiper-pagination-4 {
+    position: absolute;
+    z-index: 10;
+}
+.slider_04 .swiper-button-prev-4 {
+    left: 3%;
+}
+.slider_04 .swiper-button-next-4 {
+    right: 3%;
+}
+.slider_04 .swiper-pagination-4 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+@media screen and (max-width: 768px) {
+  .slide-content{
+    margin: 0 10px;
+  }
+  .swiper-navBtn{
+    display: none;
+  }
+}
+
+</style>
 {% endblock %}
 
 
@@ -129,28 +178,152 @@
             <h2 class="product_cat">FRAGRANCES</h2>
             <div class="popup-card-overlay" id="popup-card-overlay"></div>
 
-            <div class="row">
-                    <div class="product_slider slider"  >
-                        {% for product in fragrances %}
-                        <div class="slider_box"   data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}">
-                            <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
-                                <div class="product__images">
+            <div class="slider_01">
+                <div class="slide-container swiper">
+                    <div id="slide-content-1" class="slide-content">
+                        <div class="card-wrapper swiper-wrapper">
+                            {% for product in fragrances %}
+                            <div class="card swiper-slide slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
+                                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                                <div class="image-content product__images">
                                     {% for image in product.images.all %}
-                                        {% if forloop.first %}
-                                            <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
-                                        {% elif forloop.last %}
-                                            <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
-                                        {% endif %}
-                                    {% endfor %}   
-                                </div>                               
-                                <div class="name">
-                                    <h3 class="product__title" >{{ product.name}}</h3>
+                                            {% if forloop.first %}
+                                    <img src="{{ image.image_url }}" alt="Product Image" class="default-image card-img">
+                                    {% elif forloop.last %}
+                                    <img src="{{ image.image_url }}" alt="Product Image" class="larger-image card-img">
+                                    {% endif %}
+                                        {% endfor %} 
+                                    <form method="post" action="">
+                                        <button type="submit" class="wishlist-button" style="background: transparent;">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </button>
+                                    </form>
                                 </div>
+                                <div class="name">
+                                    <h3 class="product__title">{{ product.name}}</h3>
+                                </div>
+                                </a>
+                                <div class="content">
+                                    <span> {{ product.content}}</span>
+                                </div>
+                                <div class="price">
+                                    <span style="font-size: 20px;">₹ {{ product.price}}</span>
+                                </div>
+                                <div class="btns">
+                                    <button class="quick-view-btn" data-target="product1">
+                                        Quick View
+                                    </button>
+                                    <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                                        {% csrf_token %}
+                                        
+                                            <button type="submit" class="add-to-cart-button" >
+                                                Add to Cart
+                                            </button>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next swiper-navBtn swiper-button-next-1"></div>
+                <div class="swiper-button-prev swiper-navBtn swiper-button-prev-1"></div>
+                <div class="swiper-pagination swiper-pagination-1"></div>
+            </div>
+    
+
+            <h2 class="product_cat">BODY & BATH</h2>
+            <div class="popup-card-overlay" id="popup-card-overlay"></div>
+
+            <div class="slider_02">
+                <div class="slide-container swiper">
+                    <div id="slide-content-2" class="slide-content">
+                        <div class="card-wrapper swiper-wrapper">
+                            {% for product in body_bath %}
+                            <div class="card swiper-slide slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
+                                <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                                <div class="image-content product__images">
+                                    {% for image in product.images.all %}
+                                            {% if forloop.first %}
+                                    <img src="{{ image.image_url }}" alt="Product Image" class="default-image card-img">
+                                    {% elif forloop.last %}
+                                    <img src="{{ image.image_url }}" alt="Product Image" class="larger-image card-img">
+                                    {% endif %}
+                                        {% endfor %} 
+                                    <form method="post" action="">
+                                        <button type="submit" class="wishlist-button" style="background: transparent;">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="name">
+                                    <h3 class="product__title">{{ product.name}}</h3>
+                                </div>
+                                </a>
+                                <div class="content">
+                                    <span> {{ product.content}}</span>
+                                </div>
+                                <div class="price">
+                                    <span style="font-size: 20px;">₹ {{ product.price}}</span>
+                                </div>
+                                <div class="btns">
+                                    <button class="quick-view-btn" data-target="product1">
+                                        Quick View
+                                    </button>
+                                    <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                                        {% csrf_token %}
+                                        
+                                            <button type="submit" class="add-to-cart-button" >
+                                                Add to Cart
+                                            </button>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next swiper-navBtn swiper-button-next-2"></div>
+                <div class="swiper-button-prev swiper-navBtn swiper-button-prev-2"></div>
+                <div class="swiper-pagination swiper-pagination-2"></div>
+            </div>
+    
+
+        <h2 class="product_cat">SKIN</h2>
+        <div class="popup-card-overlay" id="popup-card-overlay"></div>
+
+        <div class="slider_03">
+            <div class="slide-container swiper">
+                <div id="slide-content-3" class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
+                        {% for product in skin %}
+                        <div class="card swiper-slide slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
+                            <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                            <div class="image-content product__images">
+                                {% for image in product.images.all %}
+                                        {% if forloop.first %}
+                                <img src="{{ image.image_url }}" alt="Product Image" class="default-image card-img">
+                                {% elif forloop.last %}
+                                <img src="{{ image.image_url }}" alt="Product Image" class="larger-image card-img">
+                                {% endif %}
+                                    {% endfor %} 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">{{ product.name}}</h3>
+                            </div>
                             </a>
+                            <div class="content">
+                                <span> {{ product.content}}</span>
+                            </div>
                             <div class="price">
-                                <span >
-                                    ₹ {{ product.price}}
-                                </span>
+                                <span style="font-size: 20px;">₹ {{ product.price}}</span>
                             </div>
                             <div class="btns">
                                 <button class="quick-view-btn" data-target="product1">
@@ -158,99 +331,80 @@
                                 </button>
                                 <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
                                     {% csrf_token %}
-                                    <button type="submit">
-                                        <span >Add To Cart</span>
-                                    </button>
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
                                 </form>
                             </div>
                         </div>
                         {% endfor %}
-                    </div>
-            </div>
 
-            <h2 class="product_cat">BODY & BATH</h2>
-            <div class="popup-card-overlay" id="popup-card-overlay"></div>
-
-            <div class="row ">
-                <div class="product_slider slider" >
-                    {% for product in body_bath %}
-                    <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
-                        <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
-                            <div class="product__images">
-                                {% for image in product.images.all %}
-                                    {% if forloop.first %}
-                                        <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
-                                    {% elif forloop.last %}
-                                        <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
-                                    {% endif %}
-                                {% endfor %}   
-                            </div>                                 
-                            <div class="name">
-                                <h3 class="product__title" >{{ product.name}}</h3>
-                            </div>
-                        </a>
-                        <div class="price">
-                            <span >
-                                ₹ {{ product.price}}
-                            </span>
-                        </div>
-                        <div class="btns">
-                            <button class="quick-view-btn" data-target="product1">
-                                Quick View
-                            </button>
-                            <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
-                                {% csrf_token %}
-                                <button type="submit">
-                                    <span >Add To Cart</span>
-                                </button>
-                            </form>
-                        </div>
                     </div>
-                    {% endfor %}
                 </div>
+            </div>
+            <div class="swiper-button-next swiper-navBtn swiper-button-next-3"></div>
+            <div class="swiper-button-prev swiper-navBtn swiper-button-prev-3"></div>
+            <div class="swiper-pagination swiper-pagination-3"></div>
         </div>
 
-        <h2 class="product_cat">SKIN</h2>
+        <h2 class="product_cat">CANDLES</h2>
         <div class="popup-card-overlay" id="popup-card-overlay"></div>
 
-        <div class="row ">
-            <div class="product_slider slider" >
-                {% for product in skin %}
-                <div class="slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
-                    <a href="{% url 'product_detail' product.id product.name|replace_spaces_with_plus %}" class="cover-link">
-                        <div class="product__images">
-                            {% for image in product.images.all %}
-                                {% if forloop.first %}
-                                    <img src="{{ image.image_url }}" alt="Product Image" class="default-image">
+        <div class="slider_04">
+            <div class="slide-container swiper">
+                <div id="slide-content-4" class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
+                        {% for product in candles %}
+                        <div class="card swiper-slide slider_box" data-title="{{ product.name }}" data-price="{{ product.price }}" data-description="{{ product.description }}" data-content="{{ product.content }}" data-stock="{{ product.stock }}" data-life="{{ product.life }}" data-ingredients="{{ product.ingredients }}" data-direction="{{ product.direction_to_use }}" >
+                            <a href="{% url 'product_detail' product.id product.name %}" class="cover-link">
+                            <div class="image-content product__images">
+                                {% for image in product.images.all %}
+                                        {% if forloop.first %}
+                                <img src="{{ image.image_url }}" alt="Product Image" class="default-image card-img">
                                 {% elif forloop.last %}
-                                    <img src="{{ image.image_url }}" alt="Product Image" class="larger-image">
+                                <img src="{{ image.image_url }}" alt="Product Image" class="larger-image card-img">
                                 {% endif %}
-                            {% endfor %}   
-                        </div>                                
-                        <div class="name">
-                            <h3 class="product__title" >{{ product.name}}</h3>
+                                    {% endfor %} 
+                                <form method="post" action="">
+                                    <button type="submit" class="wishlist-button" style="background: transparent;">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="name">
+                                <h3 class="product__title">{{ product.name}}</h3>
+                            </div>
+                            </a>
+                            <div class="content">
+                                <span> {{ product.content}}</span>
+                            </div>
+                            <div class="price">
+                                <span style="font-size: 20px;">₹ {{ product.price}}</span>
+                            </div>
+                            <div class="btns">
+                                <button class="quick-view-btn" data-target="product1">
+                                    Quick View
+                                </button>
+                                <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
+                                    {% csrf_token %}
+                                    
+                                        <button type="submit" class="add-to-cart-button" >
+                                            Add to Cart
+                                        </button>
+                                </form>
+                            </div>
                         </div>
-                    </a>
-                    <div class="price">
-                        <span >
-                            ₹ {{ product.price}}
-                        </span>
-                    </div>
-                    <div class="btns">
-                        <button class="quick-view-btn" data-target="product1">
-                            Quick View
-                        </button>
-                        <form method="post" action="{% url 'add_to_cart' item_id=product.id %}">
-                            {% csrf_token %}
-                            <button type="submit">
-                                <span >Add To Cart</span>
-                            </button>
-                        </form>
+                        {% endfor %}
+
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            <div class="swiper-button-next swiper-navBtn swiper-button-next-4"></div>
+            <div class="swiper-button-prev swiper-navBtn swiper-button-prev-4"></div>
+            <div class="swiper-pagination swiper-pagination-4"></div>
         </div>
+
 
             <div class="popup-card" id="popup-card">
     <div class="popup-card-content">
@@ -323,16 +477,139 @@
         });
     });
     
-    </script>
+</script>
+
+<script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script>
+<script>
+ var swiper1 = new Swiper("#slide-content-1", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-1",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-1",
+        prevEl: ".swiper-button-prev-1",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+var swiper2 = new Swiper("#slide-content-2", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-2",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-2",
+        prevEl: ".swiper-button-prev-2",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+var swiper3 = new Swiper("#slide-content-3", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-3",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-3",
+        prevEl: ".swiper-button-prev-3",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+var swiper4 = new Swiper("#slide-content-4", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+        el: ".swiper-pagination-4",
+        clickable: true,
+        dynamicBullets: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-4",
+        prevEl: ".swiper-button-prev-4",
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+
+
+</script>
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" ></script>
+    
     
     <script src="/static/js/banner.js"></script>
-    <script src="/static/js/slider.js"></script>
+    <!-- <script src="/static/js/slider.js"></script> -->
 {% endblock %}
 
 
